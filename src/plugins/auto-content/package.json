@@ -15,7 +15,7 @@
     "joplin-turndown": "^4.0.30",
     "joplin-turndown-plugin-gfm": "^1.0.12",
     "rehype-parse": "7.0.1",
-    "strapi-utils": "^3.6.11",
+    "@strapi/utils": "^5.1.1",
     "unified": "9.2.2",
     "unist-util-remove": "2.1.0",
     "@strapi/icons": "^2.0.0-rc.11",

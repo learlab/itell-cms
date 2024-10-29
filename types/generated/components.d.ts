@@ -1,70 +1,63 @@
-import type { Struct, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface QuizzesMultipleChoiceQuestion extends Struct.ComponentSchema {
-  collectionName: 'components_quizzes_multiple_choice_questions';
+export interface PageChunk extends Struct.ComponentSchema {
+  collectionName: 'components_page_chunks';
   info: {
-    displayName: 'MultipleChoiceQuestion';
-    icon: 'bulletList';
     description: '';
+    displayName: 'Chunk';
   };
   attributes: {
-    Question: Schema.Attribute.Text & Schema.Attribute.Required;
-    Answers: Schema.Attribute.Component<'quizzes.multiple-choice-option', true>;
-  };
-}
-
-export interface QuizzesMultipleChoiceOption extends Struct.ComponentSchema {
-  collectionName: 'components_quizzes_multiple_choice_options';
-  info: {
-    displayName: 'MultipleChoiceOption';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    Text: Schema.Attribute.Text & Schema.Attribute.Required;
-    IsCorrect: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-  };
-}
-
-export interface PageVideo extends Struct.ComponentSchema {
-  collectionName: 'components_page_videos';
-  info: {
-    displayName: 'Video';
-    description: '';
-  };
-  attributes: {
-    Header: Schema.Attribute.String & Schema.Attribute.Required;
-    URL: Schema.Attribute.String & Schema.Attribute.Required;
-    StartTime: Schema.Attribute.Integer;
-    EndTime: Schema.Attribute.Integer;
-    Description: Schema.Attribute.Text;
-    CleanText: Schema.Attribute.Text;
-    MDX: Schema.Attribute.Text;
-    QuestionAnswerResponse: Schema.Attribute.Text &
-      Schema.Attribute.CustomField<'plugin::auto-content.question'>;
-    KeyPhrase: Schema.Attribute.Text &
-      Schema.Attribute.CustomField<'plugin::auto-content.keyPhrase'>;
-    Question: Schema.Attribute.Text &
-      Schema.Attribute.CustomField<'plugin::auto-content.generatedQuestion'>;
+    CleanText: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
     ConstructedResponse: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.constructedResponse'>;
+    Header: Schema.Attribute.String & Schema.Attribute.Required;
+    HeaderLevel: Schema.Attribute.Enumeration<['H2', 'H3', 'H4']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'H2'>;
+    KeyPhrase: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.keyPhrase'>;
+    MD: Schema.Attribute.Text;
+    MDX: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
+    Question: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.generatedQuestion'>;
+    QuestionAnswerResponse: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.question'>;
+    ShowHeader: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
     Slug: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.slug'>;
+    Text: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
   };
 }
 
 export interface PagePlainChunk extends Struct.ComponentSchema {
   collectionName: 'components_page_plain_chunks';
   info: {
+    description: '';
     displayName: 'Plain-Chunk';
     icon: 'dashboard';
-    description: '';
   };
   attributes: {
     CleanText: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
+    Header: Schema.Attribute.String & Schema.Attribute.Required;
+    HeaderLevel: Schema.Attribute.Enumeration<['H2', 'H3', 'H4']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'H2'>;
+    MD: Schema.Attribute.Text;
     MDX: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
+    ShowHeader: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    Slug: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.slug'>;
     Text: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -73,65 +66,72 @@ export interface PagePlainChunk extends Struct.ComponentSchema {
           preset: 'standard';
         }
       >;
-    Slug: Schema.Attribute.Text &
-      Schema.Attribute.CustomField<'plugin::auto-content.slug'>;
-    Header: Schema.Attribute.String & Schema.Attribute.Required;
-    ShowHeader: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    HeaderLevel: Schema.Attribute.Enumeration<['H2', 'H3', 'H4']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'H2'>;
-    MD: Schema.Attribute.Text;
   };
 }
 
-export interface PageChunk extends Struct.ComponentSchema {
-  collectionName: 'components_page_chunks';
+export interface PageVideo extends Struct.ComponentSchema {
+  collectionName: 'components_page_videos';
   info: {
-    displayName: 'Chunk';
     description: '';
+    displayName: 'Video';
   };
   attributes: {
-    QuestionAnswerResponse: Schema.Attribute.Text &
-      Schema.Attribute.CustomField<'plugin::auto-content.question'>;
-    CleanText: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
-    MDX: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
-    KeyPhrase: Schema.Attribute.Text &
-      Schema.Attribute.CustomField<'plugin::auto-content.keyPhrase'>;
+    CleanText: Schema.Attribute.Text;
     ConstructedResponse: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.constructedResponse'>;
+    Description: Schema.Attribute.Text;
+    EndTime: Schema.Attribute.Integer;
+    Header: Schema.Attribute.String & Schema.Attribute.Required;
+    KeyPhrase: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.keyPhrase'>;
+    MDX: Schema.Attribute.Text;
     Question: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.generatedQuestion'>;
-    Text: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'standard';
-        }
-      >;
+    QuestionAnswerResponse: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.question'>;
     Slug: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.slug'>;
-    Header: Schema.Attribute.String & Schema.Attribute.Required;
-    ShowHeader: Schema.Attribute.Boolean &
+    StartTime: Schema.Attribute.Integer;
+    URL: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface QuizzesMultipleChoiceOption extends Struct.ComponentSchema {
+  collectionName: 'components_quizzes_multiple_choice_options';
+  info: {
+    description: '';
+    displayName: 'MultipleChoiceOption';
+    icon: 'bulletList';
+  };
+  attributes: {
+    IsCorrect: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    HeaderLevel: Schema.Attribute.Enumeration<['H2', 'H3', 'H4']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'H2'>;
-    MD: Schema.Attribute.Text;
+      Schema.Attribute.DefaultTo<false>;
+    Text: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface QuizzesMultipleChoiceQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_quizzes_multiple_choice_questions';
+  info: {
+    description: '';
+    displayName: 'MultipleChoiceQuestion';
+    icon: 'bulletList';
+  };
+  attributes: {
+    Answers: Schema.Attribute.Component<'quizzes.multiple-choice-option', true>;
+    Question: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'quizzes.multiple-choice-question': QuizzesMultipleChoiceQuestion;
-      'quizzes.multiple-choice-option': QuizzesMultipleChoiceOption;
-      'page.video': PageVideo;
-      'page.plain-chunk': PagePlainChunk;
       'page.chunk': PageChunk;
+      'page.plain-chunk': PagePlainChunk;
+      'page.video': PageVideo;
+      'quizzes.multiple-choice-option': QuizzesMultipleChoiceOption;
+      'quizzes.multiple-choice-question': QuizzesMultipleChoiceQuestion;
     }
   }
 }

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-28T23:16:54.143Z"
+    "x-generation-date": "2024-10-29T21:50:03.755Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -5667,6 +5667,14 @@
                         "$ref": "#/components/schemas/PagePlainChunkComponent"
                       }
                     ]
+                  },
+                  "discriminator": {
+                    "propertyName": "__component",
+                    "mapping": {
+                      "page.video": "#/components/schemas/PageVideoComponent",
+                      "page.chunk": "#/components/schemas/PageChunkComponent",
+                      "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+                    }
                   }
                 },
                 "Slug": {
@@ -5703,6 +5711,12 @@
                             "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                           }
                         ]
+                      },
+                      "discriminator": {
+                        "propertyName": "__component",
+                        "mapping": {
+                          "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+                        }
                       }
                     },
                     "QuizType": {
@@ -6481,7 +6495,10 @@
             "type": "number"
           },
           "__component": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "page.video"
+            ]
           },
           "Header": {
             "type": "string"
@@ -6528,7 +6545,10 @@
             "type": "number"
           },
           "__component": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "page.chunk"
+            ]
           },
           "QuestionAnswerResponse": {
             "type": "string"
@@ -6580,7 +6600,10 @@
             "type": "number"
           },
           "__component": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "page.plain-chunk"
+            ]
           },
           "CleanText": {
             "type": "string"
@@ -6634,7 +6657,10 @@
             "type": "number"
           },
           "__component": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "quizzes.multiple-choice-question"
+            ]
           },
           "Question": {
             "type": "string"
@@ -7256,6 +7282,14 @@
                               "$ref": "#/components/schemas/PagePlainChunkComponent"
                             }
                           ]
+                        },
+                        "discriminator": {
+                          "propertyName": "__component",
+                          "mapping": {
+                            "page.video": "#/components/schemas/PageVideoComponent",
+                            "page.chunk": "#/components/schemas/PageChunkComponent",
+                            "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+                          }
                         }
                       },
                       "Slug": {
@@ -7292,6 +7326,12 @@
                                   "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                                 }
                               ]
+                            },
+                            "discriminator": {
+                              "propertyName": "__component",
+                              "mapping": {
+                                "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+                              }
                             }
                           },
                           "QuizType": {
@@ -8062,6 +8102,14 @@
                       "$ref": "#/components/schemas/PagePlainChunkComponent"
                     }
                   ]
+                },
+                "discriminator": {
+                  "propertyName": "__component",
+                  "mapping": {
+                    "page.video": "#/components/schemas/PageVideoComponent",
+                    "page.chunk": "#/components/schemas/PageChunkComponent",
+                    "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+                  }
                 }
               },
               "Slug": {
@@ -8192,6 +8240,14 @@
                   "$ref": "#/components/schemas/PagePlainChunkComponent"
                 }
               ]
+            },
+            "discriminator": {
+              "propertyName": "__component",
+              "mapping": {
+                "page.video": "#/components/schemas/PageVideoComponent",
+                "page.chunk": "#/components/schemas/PageChunkComponent",
+                "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+              }
             }
           },
           "Slug": {
@@ -8235,6 +8291,14 @@
                           "$ref": "#/components/schemas/PagePlainChunkComponent"
                         }
                       ]
+                    },
+                    "discriminator": {
+                      "propertyName": "__component",
+                      "mapping": {
+                        "page.video": "#/components/schemas/PageVideoComponent",
+                        "page.chunk": "#/components/schemas/PageChunkComponent",
+                        "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+                      }
                     }
                   },
                   "Slug": {
@@ -8875,6 +8939,12 @@
                       "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                     }
                   ]
+                },
+                "discriminator": {
+                  "propertyName": "__component",
+                  "mapping": {
+                    "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+                  }
                 }
               },
               "QuizType": {
@@ -9057,6 +9127,12 @@
                       "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                     }
                   ]
+                },
+                "discriminator": {
+                  "propertyName": "__component",
+                  "mapping": {
+                    "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+                  }
                 }
               },
               "QuizType": {
@@ -9160,6 +9236,14 @@
                       "$ref": "#/components/schemas/PagePlainChunkComponent"
                     }
                   ]
+                },
+                "discriminator": {
+                  "propertyName": "__component",
+                  "mapping": {
+                    "page.video": "#/components/schemas/PageVideoComponent",
+                    "page.chunk": "#/components/schemas/PageChunkComponent",
+                    "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+                  }
                 }
               },
               "Slug": {
@@ -9196,6 +9280,12 @@
                           "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                         }
                       ]
+                    },
+                    "discriminator": {
+                      "propertyName": "__component",
+                      "mapping": {
+                        "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+                      }
                     }
                   },
                   "QuizType": {
@@ -9879,6 +9969,12 @@
                   "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                 }
               ]
+            },
+            "discriminator": {
+              "propertyName": "__component",
+              "mapping": {
+                "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+              }
             }
           },
           "QuizType": {
@@ -10137,6 +10233,14 @@
                               "$ref": "#/components/schemas/PagePlainChunkComponent"
                             }
                           ]
+                        },
+                        "discriminator": {
+                          "propertyName": "__component",
+                          "mapping": {
+                            "page.video": "#/components/schemas/PageVideoComponent",
+                            "page.chunk": "#/components/schemas/PageChunkComponent",
+                            "page.plain-chunk": "#/components/schemas/PagePlainChunkComponent"
+                          }
                         }
                       },
                       "Slug": {
@@ -10173,6 +10277,12 @@
                                   "$ref": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
                                 }
                               ]
+                            },
+                            "discriminator": {
+                              "propertyName": "__component",
+                              "mapping": {
+                                "quizzes.multiple-choice-question": "#/components/schemas/QuizzesMultipleChoiceQuestionComponent"
+                              }
                             }
                           },
                           "QuizType": {

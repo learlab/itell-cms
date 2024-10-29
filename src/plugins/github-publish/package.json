@@ -11,7 +11,7 @@
   "dependencies": {
     "@strapi/admin": "^5.1.1",
     "@strapi/design-system": "^2.0.0-rc.11",
-    "@strapi/strapi": "5.0.2",
+    "@strapi/strapi": "5.1.1",
     "prop-types": "^15.7.2",
     "react-intl": "^6.4.1"
   },

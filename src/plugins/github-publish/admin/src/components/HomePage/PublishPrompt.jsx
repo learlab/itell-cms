@@ -18,20 +18,22 @@ const PublishPrompt = ({
   handleCancel,
   handlePublish,
 }) => (
-  <Dialog onClose={handleCancel} title={title} isOpen={isOpen}>
-    <Dialog.Footer>
-      <Dialog.Cancel>
-        <Button variant="tertiary" onClick={handleCancel}>
-          {cancelLabel}
-        </Button>
-      </Dialog.Cancel>
-      <Dialog.Action>
-        <Button startIcon={<Upload />} onClick={handlePublish}>
-          {publishLabel}
-        </Button>
-      </Dialog.Action>
-    </Dialog.Footer>
-  </Dialog>
+  <Dialog.Root onClose={handleCancel} title={title} isOpen={isOpen}>
+    <Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Cancel>
+          <Button variant="tertiary" onClick={handleCancel}>
+            {cancelLabel}
+          </Button>
+        </Dialog.Cancel>
+        <Dialog.Action>
+          <Button startIcon={<Upload />} onClick={handlePublish}>
+            {publishLabel}
+          </Button>
+        </Dialog.Action>
+      </Dialog.Footer>
+    </Dialog.Content>
+  </Dialog.Root>
 );
 
 PublishPrompt.propTypes = {
