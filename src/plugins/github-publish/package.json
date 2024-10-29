@@ -9,7 +9,11 @@
     "displayName": "Github Publish"
   },
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "@strapi/admin": "^5.1.1",
+    "@strapi/design-system": "^2.0.0-rc.11",
+    "@strapi/strapi": "5.0.2",
+    "prop-types": "^15.7.2",
+    "react-intl": "^6.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

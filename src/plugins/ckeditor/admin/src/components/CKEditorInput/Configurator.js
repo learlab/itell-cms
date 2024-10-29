@@ -7,8 +7,6 @@ import {Warning} from "./plugins/Warning/Warning";
 import {Accordion} from "./plugins/Accordion/Accordion";
 import {CodingSandbox} from "./plugins/CodingSandbox/CodingSandbox";
 import {StaticCode} from "./plugins/StaticCode/StaticCode";
-import { katexRender } from "./plugins/Katex/Katex";
-// import {Math} from './plugins/Math/math';
 
 const {
   Alignment,
@@ -163,18 +161,6 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
           }
         }
       }
-    },
-    math: {
-      engine: (equation, element, display) => {
-        katexRender(equation, element, display)
-      },
-      outputType: 'span', // 'script' will not render properly b/c unsafe
-      enablePreview: false, // Enable preview view
-      katexRenderOptions: {
-        macros: {
-          "\\neq": "\\mathrel{\\char`≠}",
-        },
-      },
     },
   },
 };

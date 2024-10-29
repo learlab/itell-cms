@@ -1,5 +1,33 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface QuizzesMultipleChoiceQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_quizzes_multiple_choice_questions';
+  info: {
+    displayName: 'MultipleChoiceQuestion';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    Question: Schema.Attribute.Text & Schema.Attribute.Required;
+    Answers: Schema.Attribute.Component<'quizzes.multiple-choice-option', true>;
+  };
+}
+
+export interface QuizzesMultipleChoiceOption extends Struct.ComponentSchema {
+  collectionName: 'components_quizzes_multiple_choice_options';
+  info: {
+    displayName: 'MultipleChoiceOption';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    Text: Schema.Attribute.Text & Schema.Attribute.Required;
+    IsCorrect: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface PageVideo extends Struct.ComponentSchema {
   collectionName: 'components_page_videos';
   info: {
@@ -96,42 +124,14 @@ export interface PageChunk extends Struct.ComponentSchema {
   };
 }
 
-export interface QuizzesMultipleChoiceQuestion extends Struct.ComponentSchema {
-  collectionName: 'components_quizzes_multiple_choice_questions';
-  info: {
-    displayName: 'MultipleChoiceQuestion';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    Question: Schema.Attribute.Text & Schema.Attribute.Required;
-    Answers: Schema.Attribute.Component<'quizzes.multiple-choice-option', true>;
-  };
-}
-
-export interface QuizzesMultipleChoiceOption extends Struct.ComponentSchema {
-  collectionName: 'components_quizzes_multiple_choice_options';
-  info: {
-    displayName: 'MultipleChoiceOption';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    Text: Schema.Attribute.Text & Schema.Attribute.Required;
-    IsCorrect: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'quizzes.multiple-choice-question': QuizzesMultipleChoiceQuestion;
+      'quizzes.multiple-choice-option': QuizzesMultipleChoiceOption;
       'page.video': PageVideo;
       'page.plain-chunk': PagePlainChunk;
       'page.chunk': PageChunk;
-      'quizzes.multiple-choice-question': QuizzesMultipleChoiceQuestion;
-      'quizzes.multiple-choice-option': QuizzesMultipleChoiceOption;
     }
   }
 }

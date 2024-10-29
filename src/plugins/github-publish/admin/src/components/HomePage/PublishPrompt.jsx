@@ -18,7 +18,7 @@ const PublishPrompt = ({
   handleCancel,
   handlePublish,
 }) => (
-  <Dialog body = {dialogBody} onClose={handleCancel} title={title} isOpen={isOpen}>
+  <Dialog onClose={handleCancel} title={title} isOpen={isOpen}>
     <Dialog.Footer>
       <Dialog.Cancel>
         <Button variant="tertiary" onClick={handleCancel}>
@@ -31,7 +31,6 @@ const PublishPrompt = ({
         </Button>
       </Dialog.Action>
     </Dialog.Footer>
-
   </Dialog>
 );
 

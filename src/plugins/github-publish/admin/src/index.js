@@ -19,15 +19,14 @@ export default {
     app.registerPlugin({ id: pluginId, name });
   },
   async registerTrads({ locales }) {
-
     const importedTrads = await Promise.all(
       locales.map((locale) => {
         return import(
           /* webpackChunkName: "translation-[request]" */ `./translations/${locale}.json`
-        )
+          )
           .then(({ default: data }) => {
             return {
-              data: `${pluginId}.${id}`,
+              data: prefixPluginTranslations(data, pluginId),
               locale,
             };
           })
@@ -37,11 +36,22 @@ export default {
               locale,
             };
           });
-      }),
+      })
     );
 
     return Promise.resolve(importedTrads);
   },
 };
+
+const prefixPluginTranslations = (trad, pluginId) => {
+  if (!pluginId) {
+    throw new TypeError("pluginId can't be empty");
+  }
+  return Object.keys(trad).reduce((acc, current) => {
+    acc[`${pluginId}.${current}`] = trad[current];
+    return acc;
+  }, {});
+};
+
 
 
