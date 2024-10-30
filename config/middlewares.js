@@ -6,7 +6,7 @@ module.exports = ({ env }) => [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          "connect-src": ["'self'", "https:", 'http:'],
+          "connect-src": ["'self'", "https:", 'http:',],
           upgradeInsecureRequests: null,
           "default-src": ["'self'"],
           "img-src": [
@@ -23,6 +23,7 @@ module.exports = ({ env }) => [
             "market-assets.strapi.io",
             env("SUPABASE_URL"),
           ],
+          "script-src":["'self'","'unsafe-inline'"]
         },
       },
     },
