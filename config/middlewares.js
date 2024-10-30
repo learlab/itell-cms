@@ -6,8 +6,8 @@ module.exports = ({ env }) => [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          "connect-src": ["'self'", "https:", 'http:'],
-          upgradeInsecureRequests: null,
+          "connect-src": ["'self'", "https:", "http:", "http://localhost:1337", "https://strapi-blue.onrender.com"],
+          "upgradeInsecureRequests": null,
           "default-src": ["'self'"],
           "img-src": [
             "'self'",
@@ -23,7 +23,8 @@ module.exports = ({ env }) => [
             "market-assets.strapi.io",
             env("SUPABASE_URL"),
           ],
-          'script-src': ['https://cdn.ckeditor.com']
+          "script-src": ["'self'", "'unsafe-inline'", "https://cdn.ckeditor.com", "http://localhost:1337"],
+          "style-src": ["'self'", "'unsafe-inline'"],
         },
       },
     },
