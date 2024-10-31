@@ -7,6 +7,7 @@ import {Warning} from "./plugins/Warning/Warning";
 import {Accordion} from "./plugins/Accordion/Accordion";
 import {CodingSandbox} from "./plugins/CodingSandbox/CodingSandbox";
 import {StaticCode} from "./plugins/StaticCode/StaticCode";
+import { HLJSCodeBlock } from "./plugins/HLJSCodeBlock/hljscodeblock";
 
 const {
   Alignment,
@@ -57,7 +58,7 @@ const {
   TableCaption,
   WordCount,
   Highlight,
-  SourceEditing
+  SourceEditing,
 } = window.CKEDITOR;
 
 const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
@@ -97,9 +98,9 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       Callout,
       Warning,
       Accordion,
-      // Math,
       CodingSandbox,
-      StaticCode
+      StaticCode,
+      HLJSCodeBlock
     ],
 
     toolbar: {
@@ -114,9 +115,9 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
         '|',
         'bulletedList', 'numberedList', 'outdent', 'indent',
         '-',
-        'Info', 'Callout', 'Warning', 'Accordion', 'Math', 'CodingSandbox', 'StaticCode',
+        'Info', 'Callout', 'Warning', 'Accordion', 'CodingSandbox', 'StaticCode',
         '|',
-        'sourceEditing', 'htmlEmbed',
+        'sourceEditing', 'htmlEmbed'
       ],
       shouldNotGroupWhenFull: true
     },
