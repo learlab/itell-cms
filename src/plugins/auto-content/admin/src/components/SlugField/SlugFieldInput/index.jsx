@@ -15,6 +15,8 @@ const Index = ({
    required = true,
    hint = '',
    placeholder,
+   onChange,
+
 }) => {
   const [dynamicZone, index, fieldName] = name.split(".");
 

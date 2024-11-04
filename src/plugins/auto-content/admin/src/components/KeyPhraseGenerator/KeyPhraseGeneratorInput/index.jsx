@@ -18,6 +18,7 @@ const Index = ({
    required = true,
    hint = '',
    placeholder,
+   onChange,
  }) => {
   const { form } = useContentManagerContext();
   const { initialValues, values } = form;
