@@ -220,12 +220,16 @@ const Index = ({
             onChange({
               target: { name, value: e.target.value, type: attribute.type },
             })}
-          disabled
         >
           {value}
         </Textarea>
         <Field.Hint />
         <Field.Error />
+      </Flex>
+      <Flex direction="column" alignItems="stretch" gap={1}>
+        <Button fullWidth onClick={() => generateKeyPhrase()}>
+          Extract key phrases from text
+        </Button>
       </Flex>
     </Field.Root>
   );

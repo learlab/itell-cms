@@ -60,7 +60,6 @@ const Index = ({
             onChange({
               target: { name, value: e.target.value, type: attribute.type },
             })}
-          disabled
         >
           {value}
         </Textarea>
