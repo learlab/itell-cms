@@ -188,7 +188,6 @@ async function makeChapters(textId) {
     cache: "no-store",
   });
   const newTextData = await data.json();
-  console.log(newTextData)
   const chapterList = newTextData["data"]["Chapters"];
   let chapterPath;
   for (let i = 0; i < chapterList.length; ++i) {
