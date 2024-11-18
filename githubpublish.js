@@ -3,6 +3,13 @@ const fs = require("fs");
 let hasModules = true;
 let hasChapters = true;
 
+const URL = "https://strapi-blue.onrender.com/api/";
+const pagesQuery = "?populate[Pages][populate][0]=Content";
+const chaptersQuery =
+  "?populate[0]=Chapters&populate[1]=Chapters.Pages&populate[2]=Chapters.Pages.Content";
+const modulesQuery =
+  "?populate[0]=Modules&populate[1]=Modules.Chapters.Pages&populate[2]=Modules.Chapters.Pages.Content";
+
 function getTextID() {
   if (process.argv.length === 2) {
     console.error("Expected at least one argument!");
@@ -12,10 +19,9 @@ function getTextID() {
 }
 
 async function getTextData(textID) {
-  const res = await fetch(
-    `https://itell-strapi-um5h.onrender.com/api/texts/${textID}?populate=*`,
-    { cache: "no-store" },
-  );
+  const res = await fetch(`${URL}texts/${textID}?populate=*`, {
+    cache: "no-store",
+  });
 
   let data = await res.json();
 
@@ -23,7 +29,7 @@ async function getTextData(textID) {
     process.exit(1);
   }
 
-  return data["data"]["attributes"];
+  return data["data"];
 }
 
 function makeDir(path) {
@@ -36,22 +42,12 @@ function makeDir(path) {
   }
 }
 
-async function entryPages(textData, startingPath) {
-  for (let i = 0; i < textData.length; ++i) {
-    let page = textData[i];
+async function entryPages(pages, startingPath) {
+  for (let i = 0; i < pages.length; ++i) {
+    let pageData = pages[i];
 
     let path = startingPath;
     let stream;
-
-    const res = await fetch(
-      "https://itell-strapi-um5h.onrender.com/api/pages?filters[Slug][$eq]=" +
-        textData[i]["attributes"]["Slug"] +
-        "&populate=*",
-      { cache: "no-store" },
-    );
-    let data = await res.json();
-
-    let pageData = data["data"][0]["attributes"];
 
     if (hasChapters) {
       if (i !== 0) {
@@ -66,7 +62,7 @@ async function entryPages(textData, startingPath) {
             "\nsummary: " +
             pageData["HasSummary"] +
             "\nquiz: " +
-            (pageData["Quiz"]["data"] !== null) +
+            (pageData["Quiz"] !== null) +
             "\nreference_summary: " +
             pageData["ReferenceSummary"] +
             "\n---\n",
@@ -83,7 +79,7 @@ async function entryPages(textData, startingPath) {
             "\nsummary: " +
             pageData["HasSummary"] +
             "\nquiz: " +
-            (pageData["Quiz"]["data"] !== null) +
+            (pageData["Quiz"] !== null) +
             "\n---\n",
         );
       }
@@ -99,7 +95,7 @@ async function entryPages(textData, startingPath) {
           "\nsummary: " +
           pageData["HasSummary"] +
           "\nquiz: " +
-          (pageData["Quiz"]["data"] !== null) +
+          (pageData["Quiz"] !== null) +
           "\n---\n",
       );
     }
@@ -151,28 +147,26 @@ async function entryPages(textData, startingPath) {
         }
         stream.write("\n\n</section>\n\n");
       } else if (curChunk["__component"] === "page.video") {
+        // fill in later
       }
     }
     stream.end();
   }
 }
 
-async function makeModules(textData) {
-  let newTextData = textData["Modules"]["data"];
-  for (let i = 0; i < newTextData.length; ++i) {
+async function makeModules(textId) {
+  const data = await fetch(`${URL}texts/${textId}${modulesQuery}`, {
+    cache: "no-store",
+  });
+  const newTextData = await data.json();
+  const moduleInformation = newTextData["data"]["Modules"];
+  for (let i = 0; i < moduleInformation.length; ++i) {
     makeDir("./output/module-" + (i + 1));
-    let res = await fetch(
-      "https://itell-strapi-um5h.onrender.com/api/modules?filters[Slug][$eq]=" +
-        textData["modules"]["data"][i]["attributes"]["Slug"] +
-        "&populate=chapters",
-      { cache: "no-store" },
-    );
-    let data = await res.json();
 
-    let modulesData = data["data"]["attributes"]["Chapters"]["data"];
+    let chaptersData = moduleInformation[i]["Chapters"];
     let chapterPath;
-    for (let j = 0; j < modulesData.length; ++j) {
-      if (modulesData[j]["attributes"]["ChapterNumber"] == null) {
+    for (let j = 0; j < chaptersData.length; ++j) {
+      if (chaptersData[j]["ChapterNumber"] == null) {
         chapterPath =
           "./output/module-" + (i + 1) + "/chapter-" + (j + 1) + "/";
       } else {
@@ -180,62 +174,47 @@ async function makeModules(textData) {
           "./output/module-" +
           (i + 1) +
           "/chapter-" +
-          modulesData[j]["attributes"]["ChapterNumber"] +
+          chaptersData[j]["ChapterNumber"] +
           "/";
       }
       makeDir(chapterPath);
-      let chapterSlug = modulesData[j]["attributes"]["Slug"];
-
-      res = await fetch(
-        "https://itell-strapi-um5h.onrender.com/api/chapters?filters[Slug][$eq]=" +
-          chapterSlug +
-          "&populate=pages",
-        { cache: "no-store" },
-      );
-      data = await res.json();
-
-      let chapterData = data["data"]["attributes"]["pages"]["data"];
-      await entryPages(chapterData, chapterPath);
+      await entryPages(chaptersData[j]["Pages"], chapterPath);
     }
   }
 }
 
-async function makeChapters(textData) {
-  let newTextData = textData["Chapters"]["data"];
+async function makeChapters(textId) {
+  const data = await fetch(`${URL}texts/${textId}${chaptersQuery}`, {
+    cache: "no-store",
+  });
+  const newTextData = await data.json();
+  console.log(newTextData)
+  const chapterList = newTextData["data"]["Chapters"];
   let chapterPath;
-  for (let i = 0; i < newTextData.length; ++i) {
-    if (newTextData[i]["attributes"]["ChapterNumber"] == null) {
+  for (let i = 0; i < chapterList.length; ++i) {
+    if (chapterList[i]["ChapterNumber"] == null) {
       chapterPath = "./output/chapter-" + (i + 1) + "/";
     } else {
       chapterPath =
         "./output/chapter-" +
-        newTextData[i]["attributes"]["ChapterNumber"] +
+        chapterList[i]["ChapterNumber"] +
         "/";
     }
     makeDir(chapterPath);
-    let chapterSlug = newTextData[i]["attributes"]["Slug"];
+    let pages = chapterList[i]["Pages"];
 
-    const res = await fetch(
-      "https://itell-strapi-um5h.onrender.com/api/chapters?filters[Slug][$eq]=" +
-        chapterSlug +
-        "&populate=*",
-      { cache: "no-store" },
-    );
-    let data = await res.json();
-
-    if (data["data"][0]["attributes"]["Pages"]) {
-      let chapterData = data["data"][0]["attributes"]["Pages"]["data"];
-      await entryPages(chapterData, chapterPath);
+    if (pages) {
+      await entryPages(pages, chapterPath);
     }
   }
 }
 
 async function run() {
-  let textID = getTextID();
-  let textData = await getTextData(textID);
+  let textId = getTextID();
+  let textData = await getTextData(textId);
 
-  hasChapters = textData["Chapters"]["data"].length > 0;
-  hasModules = textData["Modules"]["data"].length > 0;
+  hasChapters = textData["Chapters"].length > 0;
+  hasModules = textData["Modules"].length > 0;
 
   if (!fs.existsSync("./output/")) {
     fs.mkdir("./output/", (err) => {
@@ -246,11 +225,16 @@ async function run() {
   }
 
   if (hasModules) {
-    await makeModules(textData);
+    await makeModules(textId);
   } else if (hasChapters) {
-    await makeChapters(textData);
+    await makeChapters(textId);
   } else {
-    await entryPages(textData["Pages"]["data"], "output/");
+    const res = await fetch(`${URL}texts/${textId}${pagesQuery}`, {
+      cache: "no-store",
+    });
+    let data = await res.json();
+    const pages = data["data"]["Pages"];
+    await entryPages(pages, "output/");
   }
 }
 
