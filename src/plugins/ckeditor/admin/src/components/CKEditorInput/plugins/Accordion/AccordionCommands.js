@@ -6,10 +6,9 @@ import {
   setAccordionItemIsOpen,
 } from "./AccordionUtils";
 
-const Command = window.CKEditor5.core.Command;
-const findOptimalInsertionRange =
-  window.CKEditor5.widget.findOptimalInsertionRange;
-const uid = window.CKEditor5.utils.uid;
+const { Command } = window.CKEDITOR;
+const { findOptimalInsertionRange } = window.CKEDITOR;
+const { uid } = window.CKEDITOR;
 
 /**
  * Represents a command which is executed when the accordion toolbar button is

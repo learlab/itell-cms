@@ -1,4 +1,4 @@
-const Command = window.CKEditor5.core.Command;
+const {Command} = window.CKEDITOR;
 
 export default class InsertStaticCodeCommand extends Command {
   execute(language) {

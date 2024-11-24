@@ -1,5 +1,3 @@
-import { prefixPluginTranslations } from "@strapi/helper-plugin";
-
 import pluginPkg from "../../package.json";
 import PluginIcon from "./components/PluginIcon";
 import pluginId from "./pluginId";
@@ -12,7 +10,7 @@ export default {
       to: `/plugins/${pluginId}`,
       icon: PluginIcon,
       intlLabel: {
-        id: `${pluginId}.plugin.name`,
+        id: `${pluginId}::plugin.name`,
         defaultMessage: displayName,
       },
       Component: async () =>
@@ -25,7 +23,7 @@ export default {
       locales.map((locale) => {
         return import(
           /* webpackChunkName: "translation-[request]" */ `./translations/${locale}.json`
-        )
+          )
           .then(({ default: data }) => {
             return {
               data: prefixPluginTranslations(data, pluginId),
@@ -38,9 +36,22 @@ export default {
               locale,
             };
           });
-      }),
+      })
     );
 
     return Promise.resolve(importedTrads);
   },
 };
+
+const prefixPluginTranslations = (trad, pluginId) => {
+  if (!pluginId) {
+    throw new TypeError("pluginId can't be empty");
+  }
+  return Object.keys(trad).reduce((acc, current) => {
+    acc[`${pluginId}.${current}`] = trad[current];
+    return acc;
+  }, {});
+};
+
+
+

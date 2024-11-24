@@ -16,6 +16,6 @@ export const style = css`
     --ck-color-button-default-active-background: rgb(33, 33, 52);
   }
   .ck-word-count {
-    color: rgb(165, 165, 186);
+    color: rgb(165, 165, 186)
   }
 `;

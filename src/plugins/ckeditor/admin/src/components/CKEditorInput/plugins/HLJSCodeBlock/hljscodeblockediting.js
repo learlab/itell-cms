@@ -12,9 +12,8 @@ import {
   dataViewToModelCodeBlockInsertion,
 } from "./converters";
 import hljs from "highlight.js";
-const DEFAULT_ELEMENT = "paragraph";
-const Plugin = window.CKEditor5.core.Plugin;
-const ShiftEnter = window.CKEditor5.enter.ShiftEnter;
+const {Plugin} = window.CKEDITOR;
+const {ShiftEnter} = window.CKEDITOR;
 
 export default class HLJSCodeBlockEditing extends Plugin {
   static get pluginName() {

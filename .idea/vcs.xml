@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/plugins/ckeditor/admin/src/components/CKEditorInput/plugins/ckeditor5-info" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/plugins/ckeditor/ckeditor5-info" vcs="Git" />
   </component>
 </project>

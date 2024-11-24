@@ -1,8 +1,9 @@
 import InfoEditing from "./InfoEditing.js";
 import InfoUI from "./InfoUI.js";
 
-const Plugin = window.CKEditor5.core.Plugin;
-export default class Info extends Plugin {
+const { Plugin } = window.CKEDITOR;
+
+export class Info extends Plugin {
   static get requires() {
     return [InfoEditing, InfoUI];
   }

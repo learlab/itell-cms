@@ -1,4 +1,4 @@
-const first = window.CKEditor5.utils.first;
+const {first} = window.CKEDITOR;
 
 export function getNormalizedAndLocalizedLanguageDefinitions(editor) {
   const t = editor.t;

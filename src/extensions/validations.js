@@ -1,16 +1,18 @@
 "use strict";
-const { ApplicationError } = require("@strapi/utils/dist/errors");
+const { errors } = require('@strapi/utils');
+const { ApplicationError } = errors;
 const yup = require("yup");
 
 function validateKeyPhraseField(event) {
   const { data } = event.params;
-  const schema = yup.array().of(yup.string());
-  const keyphrase_string = data.KeyPhrase ? data.KeyPhrase : "[]";
+  const keyphrase_string = data.KeyPhrase ? data.KeyPhrase : "";
   try {
-    schema.validateSync(keyphrase_string);
-  } catch (ValidationError) {
+    if(keyphrase_string.length > 0 && keyphrase_string.search(/^((\w| |\n|-)+,)+((\w| |\n-)+)$/g) === -1){
+      throw new Error('Invalid Keyphrase format');
+    }
+  } catch {
     throw new ApplicationError(
-      `Header: ${data.Header}\nKeyphrase Parsing Error: ${keyphrase_string}`,
+      `Keyphrase Parsing Error: ${keyphrase_string}`,
     );
   }
 }

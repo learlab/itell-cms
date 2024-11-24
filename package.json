@@ -17,16 +17,21 @@
     "./src/plugins/github-publish"
   ],
   "dependencies": {
-    "@strapi/plugin-documentation": "^4.13.6",
-    "@strapi/plugin-i18n": "4.13.6",
-    "@strapi/plugin-users-permissions": "4.13.6",
-    "@strapi/strapi": "4.13.6",
-    "better-sqlite3": "8.6.0",
+    "@strapi/email": "5.1.1",
+    "@strapi/icons": "^2.0.0-rc.11",
+    "@strapi/plugin-documentation": "5.1.1",
+    "@strapi/plugin-users-permissions": "5.1.1",
+    "@strapi/strapi": "5.1.1",
+    "@strapi/utils": "^5.1.1",
+    "better-sqlite3": "^11.5.0",
     "pg": "^8.11.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "sharp": "^0.33.5",
     "slugify": "^1.6.6",
-    "strapi-plugin-populate-deep": "^3.0.1",
-    "strapi-plugin-preview-button": "^2.2.2",
-    "strapi-provider-upload-supabase": "^1.0.0"
+    "strapi-provider-upload-supabase": "^1.0.0",
+    "styled-components": "^6.0.0"
   },
   "author": {
     "name": "A Strapi developer"

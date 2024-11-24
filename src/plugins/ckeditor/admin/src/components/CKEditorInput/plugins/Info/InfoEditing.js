@@ -1,10 +1,9 @@
 import InsertInfoCommand from "./InfoCommand.js";
 
-const Plugin = window.CKEditor5.core.Plugin;
-const Widget = window.CKEditor5.widget.Widget;
-const toWidget = window.CKEditor5.widget.toWidget;
-const toWidgetEditable = window.CKEditor5.widget.toWidgetEditable;
-const enablePlaceholder = window.CKEditor5.engine.enablePlaceholder;
+const { Plugin } = window.CKEDITOR;
+const { Widget } = window.CKEDITOR;
+const { toWidget } = window.CKEDITOR;
+const { toWidgetEditable } = window.CKEDITOR;
 
 export default class InfoEditing extends Plugin {
   static get requires() {

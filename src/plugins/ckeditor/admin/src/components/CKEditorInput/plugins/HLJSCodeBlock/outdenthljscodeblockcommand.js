@@ -3,7 +3,7 @@ import {
   getIndentOutdentPositions,
   isModelSelectionInHLJSCodeBlock,
 } from "./utils";
-const Command = window.CKEditor5.core.Command;
+const {Command} = window.CKEDITOR;
 
 export default class OutdentHLJSCodeBlockCommand extends Command {
   constructor(editor) {

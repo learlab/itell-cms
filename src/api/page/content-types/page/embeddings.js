@@ -1,18 +1,18 @@
 "use strict";
 
 async function generatePageEmbeddings(ctx) {
-  const entry = await strapi.entityService.findOne("api::page.page", ctx.id, {
-    populate: "*",
+  const entry = await strapi.documents("api::page.page").findOne({
+    documentId: "__TODO__",
+    populate: "*"
   });
   var chapter = null;
   const chapter_id = entry.Chapter ? entry.Chapter.id : null;
   var this_module_slug = null;
   if (chapter_id) {
-    chapter = await strapi.entityService.findOne(
-      "api::chapter.chapter",
-      chapter_id,
-      { populate: "module" },
-    );
+    chapter = await strapi.documents("api::chapter.chapter").findOne({
+      documentId: "__TODO__",
+      populate: "module"
+    });
     this_module_slug = chapter.module ? chapter.module.slug : null;
   }
 
@@ -38,8 +38,9 @@ async function generatePageEmbeddings(ctx) {
 }
 
 const deleteAllEmbeddings = async (id) => {
-  const entry = await strapi.entityService.findOne("api::page.page", id, {
-    populate: "*",
+  const entry = await strapi.documents("api::page.page").findOne({
+    documentId: "__TODO__",
+    populate: "*"
   });
 
   const deletePayload = {

@@ -8,12 +8,12 @@ import {
   AccordionCollapseAllCommand,
 } from "./AccordionCommands";
 
-const Plugin = window.CKEditor5.core.Plugin;
-const Widget = window.CKEditor5.widget.Widget;
-const toWidget = window.CKEditor5.widget.toWidget;
-const toWidgetEditable = window.CKEditor5.widget.toWidgetEditable;
-const uid = window.CKEditor5.utils.uid;
-const enablePlaceholder = window.CKEditor5.engine.enablePlaceholder;
+const {Plugin} = window.CKEDITOR;
+const {Widget} = window.CKEDITOR;
+const {toWidget} = window.CKEDITOR;
+const {toWidgetEditable} = window.CKEDITOR;
+const {uid} = window.CKEDITOR;
+const {enablePlaceholder} = window.CKEDITOR;
 
 export default class AccordionEditing extends Plugin {
   static get requires() {

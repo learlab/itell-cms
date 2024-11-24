@@ -1,7 +1,7 @@
 import "./Callout.css";
 
-const Plugin = window.CKEditor5.core.Plugin;
-const ButtonView = window.CKEditor5.ui.ButtonView;
+const { Plugin } = window.CKEDITOR;
+const { ButtonView } = window.CKEDITOR;
 
 export default class CalloutUI extends Plugin {
   init() {

@@ -1,4 +1,4 @@
-const Plugin = window.CKEditor5.core.Plugin;
+const {Plugin} = window.CKEDITOR;
 
 const HLJSES = [
   "hljs-built_in",

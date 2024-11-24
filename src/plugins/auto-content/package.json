@@ -10,16 +10,15 @@
     "displayName": "Content Generator"
   },
   "dependencies": {
-    "@strapi/design-system": "^1.6.3",
-    "@strapi/helper-plugin": "^4.6.0",
-    "@strapi/icons": "^1.6.3",
+    "@strapi/icons": "^2.0.0-rc.11",
+    "@strapi/utils": "^5.1.1",
     "hast-util-is-element": "1.1.0",
     "hast-util-to-text": "2.0.1",
     "joplin-turndown": "^4.0.30",
     "joplin-turndown-plugin-gfm": "^1.0.12",
-    "prop-types": "^15.7.2",
+    "openai": "^4.72.0",
+    "prop-types": "^15.8.1",
     "rehype-parse": "7.0.1",
-    "strapi-utils": "^3.6.11",
     "unified": "9.2.2",
     "unist-util-remove": "2.1.0"
   },

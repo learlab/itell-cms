@@ -1,6 +1,6 @@
-const Plugin = window.CKEditor5.core.Plugin;
+const {Plugin} = window.CKEDITOR;
 
-export default class PlainText extends Plugin {
+export class PlainText extends Plugin {
   static get pluginName() {
     return "PlainText";
   }

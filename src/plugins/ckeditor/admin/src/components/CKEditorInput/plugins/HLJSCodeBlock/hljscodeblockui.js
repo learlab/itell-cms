@@ -4,11 +4,11 @@ import codeBlockIcon from "./codeblock.svg";
 import "./codeblock.css";
 import "highlight.js/styles/atom-one-dark.css";
 
-const Plugin = window.CKEditor5.core.Plugin;
-const Collection = window.CKEditor5.utils.Collection;
-const Model = window.CKEditor5.ui.Model;
-const SplitButtonView = window.CKEditor5.ui.SplitButtonView;
-const dropdownUtils = window.CKEditor5.ui;
+const {Plugin} = window.CKEDITOR;
+const {Collection} = window.CKEDITOR;
+const {Model} = window.CKEDITOR;
+const {SplitButtonView} = window.CKEDITOR;
+const {dropdownUtils} = window.CKEDITOR;
 
 export default class HLJSCodeBlockUI extends Plugin {
   init() {

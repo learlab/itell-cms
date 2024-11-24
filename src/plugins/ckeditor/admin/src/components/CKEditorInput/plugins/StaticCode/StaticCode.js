@@ -1,8 +1,8 @@
 import StaticCodeEditing from "./StaticCodeEditing.js";
 import StaticCodeUI from "./StaticCodeUI.js";
 
-const Plugin = window.CKEditor5.core.Plugin;
-export default class StaticCode extends Plugin {
+const {Plugin} = window.CKEDITOR;
+export class StaticCode extends Plugin {
   static get requires() {
     return [StaticCodeEditing, StaticCodeUI];
   }

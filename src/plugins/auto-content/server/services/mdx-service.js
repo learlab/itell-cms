@@ -261,11 +261,11 @@ turndownService.addRule("Math", {
     if (mathStr.startsWith("\\[")) {
       // element is block, use `$$`
       // Replace `\[` with `$$\n` and `\]` with `\n$$`
-      return mathStr.replace(/^\\\[/, "$$$$\n").replace(/\\\]$/, "\n$$$$")
+      return mathStr.replace(/^\\\[/, "$$$$\n").replace(/\\\]$/, "\n$$$$");
     } else if (mathStr.startsWith("\\(")) {
       // element is in-line, use `$`
       // Replace `\(` with ` $` (note the additional space) and `\)` with `$`
-      return mathStr.replace(/^\\\(/, " $").replace(/\\\)$/, "$")
+      return mathStr.replace(/^\\\(/, " $").replace(/\\\)$/, "$");
     } else {
       console.log(`Math Parsing failed for "${mathStr}"`)
     }

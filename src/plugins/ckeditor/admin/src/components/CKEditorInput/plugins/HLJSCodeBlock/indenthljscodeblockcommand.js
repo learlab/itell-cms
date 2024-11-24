@@ -3,7 +3,7 @@ import {
   isModelSelectionInHLJSCodeBlock,
 } from "./utils";
 
-const Command = window.CKEditor5.core.Command;
+const {Command} = window.CKEDITOR;
 
 export default class IndentHLJSCodeBlockCommand extends Command {
   constructor(editor) {

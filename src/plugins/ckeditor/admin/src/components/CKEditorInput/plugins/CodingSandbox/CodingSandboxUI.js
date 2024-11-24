@@ -1,15 +1,16 @@
 import "./CodingSandbox.css";
 import { CodingSandboxIcon } from "./CodingSandboxIcon";
 
-const Plugin = window.CKEditor5.core.Plugin;
-const ui = window.CKEditor5.ui;
-const utils = window.CKEditor5.utils;
+const {Plugin} = window.CKEDITOR;
+const {createDropdown} = window.CKEDITOR;
+const {addListToDropdown} = window.CKEDITOR;
+const {Collection} = window.CKEDITOR;
 
 export default class CodingSandboxUI extends Plugin {
   init() {
     const editor = this.editor;
     const t = editor.t;
-    const items = new utils.Collection();
+    const items = new Collection();
     items.add({
       type: "button",
       model: {
@@ -30,7 +31,7 @@ export default class CodingSandboxUI extends Plugin {
 
     // to be displayed in the toolbar.
     editor.ui.componentFactory.add("CodingSandbox", (locale) => {
-      const dropdownView = ui.createDropdown(locale);
+      const dropdownView = createDropdown(locale);
       const command = editor.commands.get("insertCodingSandbox");
 
       dropdownView.buttonView.set({
@@ -47,7 +48,7 @@ export default class CodingSandboxUI extends Plugin {
       dropdownView.class = "ck-code-block-dropdown";
       dropdownView.bind("isEnabled").to(command);
 
-      ui.addListToDropdown(dropdownView, items);
+      addListToDropdown(dropdownView, items);
 
       return dropdownView;
     });

@@ -7,14 +7,14 @@ import {
   AccordionOpenCollapseIcon,
 } from "./AccordionIcons";
 
-const Plugin = window.CKEditor5.core.Plugin;
+const {Plugin} = window.CKEDITOR;
 
-const ButtonView = window.CKEditor5.ui.ButtonView;
-const Model = window.CKEditor5.ui.Model;
-const addListToDropdown = window.CKEditor5.ui.addListToDropdown;
-const createDropdown = window.CKEditor5.ui.createDropdown;
-const Collection = window.CKEditor5.utils.Collection;
-const WidgetToolbarRepository = window.CKEditor5.widget.WidgetToolbarRepository;
+const {ButtonView} = window.CKEDITOR;
+const {Model} = window.CKEDITOR;
+const {addListToDropdown} = window.CKEDITOR;
+const {createDropdown} = window.CKEDITOR;
+const {Collection} = window.CKEDITOR;
+const {WidgetToolbarRepository} = window.CKEDITOR;
 
 /**
  * Defines the user interface for editing Accordion widgets.

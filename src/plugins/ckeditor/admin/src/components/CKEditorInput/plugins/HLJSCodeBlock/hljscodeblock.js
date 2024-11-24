@@ -2,9 +2,9 @@ import HLJSCodeBlockEditing from "./hljscodeblockediting";
 import HLJSCodeBlockUI from "./hljscodeblockui";
 import Syntax from "./syntax";
 
-const Plugin = window.CKEditor5.core.Plugin;
+const {Plugin} = window.CKEDITOR;
 
-export default class HLJSCodeBlock extends Plugin {
+export class HLJSCodeBlock extends Plugin {
   static get requires() {
     return [Syntax, HLJSCodeBlockEditing, HLJSCodeBlockUI];
   }

@@ -1,6 +1,6 @@
 import AccordionEditing from "./AccordionEditing";
 
-const Plugin = window.CKEditor5.core.Plugin;
+const {Plugin} = window.CKEDITOR;
 
 /**
  * Listens for events that affect a selected Accordion widget.

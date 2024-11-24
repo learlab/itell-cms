@@ -15,18 +15,21 @@ async function createAPIKey(ctx) {
   
   console.log(api_key, ctx.id);
 
-  const res = await strapi.entityService.update("api::api-key.api-key", ctx.id, {
+  const res = await strapi.documents("api::api-key.api-key").update({
+    documentId: "__TODO__",
+
     data: {
       ApiKey: api_key,
-    },
+    }
   });
 
   return res;
 }
 
 async function deleteAPIKey(id) {
-  const entry = await strapi.entityService.findOne("api::api-key.api-key", id, {
-    populate: "*",
+  const entry = await strapi.documents("api::api-key.api-key").findOne({
+    documentId: "__TODO__",
+    populate: "*"
   });
 
   const payload = {

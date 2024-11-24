@@ -1,3 +1,4 @@
 import { css } from "styled-components";
 
-export const style = css``;
+export const style = css`
+`;

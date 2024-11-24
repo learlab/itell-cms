@@ -1,7 +1,7 @@
 import { getNormalizedAndLocalizedLanguageDefinitions } from "./utils";
 
-const Command = window.CKEditor5.core.Command;
-const first = window.CKEditor5.utils.first;
+const {Command} = window.CKEDITOR;
+const {first} = window.CKEDITOR;
 
 export default class HLJSCodeBlockCommand extends Command {
   refresh() {

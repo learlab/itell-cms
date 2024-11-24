@@ -14,4 +14,4 @@ export function katexRender(
         ...katexRenderOptions
     });
 
-};
+}
