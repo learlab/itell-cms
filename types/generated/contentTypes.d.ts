@@ -450,6 +450,8 @@ export interface ApiExternalDashboardUriExternalDashboardUri
     draftAndPublish: true;
   };
   attributes: {
+    API_endpoint: Schema.Attribute.String;
+    API_key: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -464,7 +466,6 @@ export interface ApiExternalDashboardUriExternalDashboardUri
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Value: Schema.Attribute.String;
   };
 }
 
