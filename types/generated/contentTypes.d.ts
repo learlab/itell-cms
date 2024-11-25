@@ -524,6 +524,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
+    PageSummary: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.pageSummary'>;
     publishedAt: Schema.Attribute.DateTime;
     Quiz: Schema.Attribute.Relation<'oneToOne', 'api::quiz.quiz'>;
     ReferenceSummary: Schema.Attribute.Text;
@@ -597,6 +599,8 @@ export interface ApiTextText extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    VolumeSummary: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.volumeSummary'>;
   };
 }
 

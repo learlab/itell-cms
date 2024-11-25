@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-24T22:02:41.515Z"
+    "x-generation-date": "2024-11-25T20:20:27.153Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6152,6 +6152,9 @@
                                 }
                               }
                             },
+                            "VolumeSummary": {
+                              "type": "string"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -6338,6 +6341,9 @@
                       "type": "string"
                     }
                   }
+                },
+                "PageSummary": {
+                  "type": "string"
                 },
                 "createdAt": {
                   "type": "string",
@@ -7814,6 +7820,9 @@
                               }
                             }
                           },
+                          "VolumeSummary": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -7866,6 +7875,9 @@
                             }
                           }
                         }
+                      },
+                      "PageSummary": {
+                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",
@@ -8163,6 +8175,9 @@
                 ],
                 "example": "string or id"
               },
+              "PageSummary": {
+                "type": "string"
+              },
               "locale": {
                 "type": "string"
               },
@@ -8447,6 +8462,9 @@
                                     }
                                   }
                                 }
+                              },
+                              "VolumeSummary": {
+                                "type": "string"
                               },
                               "createdAt": {
                                 "type": "string",
@@ -8887,6 +8905,9 @@
                       }
                     }
                   },
+                  "PageSummary": {
+                    "type": "string"
+                  },
                   "createdAt": {
                     "type": "string",
                     "format": "date-time"
@@ -9040,6 +9061,9 @@
                 "type": "string"
               }
             }
+          },
+          "PageSummary": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -9730,6 +9754,9 @@
                               }
                             }
                           },
+                          "VolumeSummary": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -9916,6 +9943,9 @@
                     "type": "string"
                   }
                 }
+              },
+              "PageSummary": {
+                "type": "string"
               },
               "createdAt": {
                 "type": "string",
@@ -10122,6 +10152,9 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "VolumeSummary": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -10765,6 +10798,9 @@
                               }
                             }
                           },
+                          "VolumeSummary": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -10817,6 +10853,9 @@
                             }
                           }
                         }
+                      },
+                      "PageSummary": {
+                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",
@@ -10984,6 +11023,9 @@
                 }
               }
             }
+          },
+          "VolumeSummary": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",

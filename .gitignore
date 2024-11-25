@@ -8,3 +8,4 @@
 .DS_Store
 output
 compose-dev.yaml
+.vscode/settings.json

@@ -44,6 +44,10 @@
       "relation": "oneToMany",
       "target": "api::page.page",
       "mappedBy": "Volume"
+    },
+    "VolumeSummary": {
+      "type": "customField",
+      "customField": "plugin::auto-content.volumeSummary"
     }
   }
 }
