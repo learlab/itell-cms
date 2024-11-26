@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-24T22:02:41.515Z"
+    "x-generation-date": "2024-11-26T03:13:05.363Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6152,6 +6152,9 @@
                                 }
                               }
                             },
+                            "FreePages": {
+                              "type": "string"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -7814,6 +7817,9 @@
                               }
                             }
                           },
+                          "FreePages": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -8447,6 +8453,9 @@
                                     }
                                   }
                                 }
+                              },
+                              "FreePages": {
+                                "type": "string"
                               },
                               "createdAt": {
                                 "type": "string",
@@ -9730,6 +9739,9 @@
                               }
                             }
                           },
+                          "FreePages": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -10122,6 +10134,9 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "FreePages": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -10765,6 +10780,9 @@
                               }
                             }
                           },
+                          "FreePages": {
+                            "type": "string"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -10984,6 +11002,9 @@
                 }
               }
             }
+          },
+          "FreePages": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
