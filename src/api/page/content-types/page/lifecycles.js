@@ -1,14 +1,13 @@
+const { generateChunkFields } = require("./updateChunkFields");
 const { generatePageEmbeddings, deleteAllEmbeddings } = require("./embeddings");
 
 module.exports = {
+  // Publishing is always "creating" even if a previously published version exists
+  // Will also trigger when a new page is created in draft mode
   afterCreate: async (event) => {
     const { result } = event;
-    generatePageEmbeddings(result);
-  },
-
-  afterUpdate: async (event) => {
-    const { result } = event;
-    generatePageEmbeddings(result);
+    await generateChunkFields(result.Content);
+    await generatePageEmbeddings(result);
   },
 
   beforeDelete: async (event) => {
