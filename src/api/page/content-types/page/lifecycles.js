@@ -6,8 +6,11 @@ module.exports = {
   // Will also trigger when a new page is created in draft mode
   afterCreate: async (event) => {
     const { result } = event;
-    await generateChunkFields(result.Content);
-    await generatePageEmbeddings(result);
+    if (result.publishedAt) {
+      // Only on publish
+      result.Content = await generateChunkFields(result.Content);
+      await generatePageEmbeddings(result);
+    }
   },
 
   beforeDelete: async (event) => {

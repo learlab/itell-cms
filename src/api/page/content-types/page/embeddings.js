@@ -3,30 +3,13 @@
 const { errors } = require("@strapi/utils");
 const { ApplicationError } = errors;
 
-async function generatePageEmbeddings(ctx) {
+async function generatePageEmbeddings(pageData) {
   try {
-    // Get the page entry
+    // Get the page entry from the db so we can populate relations
     const entry = await strapi.db.query("api::page.page").findOne({
-      where: { documentId: ctx.documentId },
+      where: { documentId: pageData.documentId },
       populate: true,
     });
-
-    if (!entry) {
-      throw new Error(`Page not found for documentId: ${ctx.documentId}`);
-    }
-
-    // Get chapter information
-    let chapter = null;
-    let module = null;
-    const chapter_id = entry.Chapter?.documentId;
-
-    if (chapter_id) {
-      chapter = await strapi.db.query("api::chapter.chapter").findOne({
-        where: { documentId: chapter_id },
-        populate: true,
-      });
-      module = chapter?.module?.slug;
-    }
 
     if (!entry.Volume) {
       throw new Error(
@@ -34,18 +17,19 @@ async function generatePageEmbeddings(ctx) {
       );
     }
 
+    console.log("Page Data", pageData.Volume);
     // Prepare payload
-    const payload = entry.Content.map((item) => ({
-      text_slug: entry.Volume?.Slug,
-      module_slug: module,
-      chapter_slug: chapter?.Slug,
-      page_slug: entry.Slug,
+    const payload = pageData.Content.map((item) => ({
+      text_slug: entry.Volume.Slug,
+      module_slug: entry.Module?.slug,
+      chapter_slug: entry.Chapter?.Slug,
+      page_slug: pageData.Slug,
       chunk_slug: item.Slug,
       content: item.CleanText,
     }));
 
-    // Generate new embeddings sequentially to avoid transaction conflicts
     for (const item of payload) {
+      console.log("Payload", payload);
       await strapi.service("api::page.page").generateEmbedding(item);
     }
   } catch (error) {
@@ -74,6 +58,7 @@ async function deleteAllEmbeddings(id) {
 
     await strapi.service("api::page.page").deleteEmbeddings(deletePayload);
   } catch (error) {
+    console.log(error);
     throw new ApplicationError(
       `Error in deleteAllEmbeddings: ${error.message}`,
       { details: error },

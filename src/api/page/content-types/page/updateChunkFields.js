@@ -90,6 +90,7 @@ async function generateChunkFields(content) {
       data: chunkData,
     });
   }
+  return content;
 }
 
 module.exports = {
