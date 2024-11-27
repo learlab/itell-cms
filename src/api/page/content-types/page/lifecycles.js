@@ -7,7 +7,7 @@ module.exports = {
   afterCreate: async (event) => {
     const { result } = event;
     if (result.publishedAt) {
-      // Only on publish
+      // publishedAt will be null when a page is created in draft mode
       result.Content = await generateChunkFields(result.Content);
       await generatePageEmbeddings(result);
     }

@@ -17,7 +17,6 @@ async function generatePageEmbeddings(pageData) {
       );
     }
 
-    console.log("Page Data", pageData.Volume);
     // Prepare payload
     const payload = pageData.Content.map((item) => ({
       text_slug: entry.Volume.Slug,
@@ -61,7 +60,6 @@ async function deleteAllEmbeddings(id) {
     console.log(error);
     throw new ApplicationError(
       `Error in deleteAllEmbeddings: ${error.message}`,
-      { details: error },
     );
   }
 }

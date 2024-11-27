@@ -28,11 +28,13 @@ module.exports = ({ strapi }) => {
   const cleanText = async (html) => {
     if (!html) return null;
 
-    return await unified()
+    const text = await unified()
       .use(rehypeParse)
       .use(removeTables)
       .use(rehypeText)
       .process(html);
+    
+    return String(text);
   };
 
   return {
