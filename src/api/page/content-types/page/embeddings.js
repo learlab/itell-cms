@@ -28,7 +28,6 @@ async function generatePageEmbeddings(pageData) {
     }));
 
     for (const item of payload) {
-      console.log("Payload", payload);
       await strapi.service("api::page.page").generateEmbedding(item);
     }
   } catch (error) {
