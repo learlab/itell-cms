@@ -3,7 +3,7 @@ const fs = require("fs");
 let hasModules = true;
 let hasChapters = true;
 
-const URL = "https://strapi-blue.onrender.com/api/";
+const URL = "https://itell-strapi-um5h.onrender.com/api/";
 const pagesQuery = "?populate[Pages][populate][0]=Content";
 const chaptersQuery =
   "?populate[0]=Chapters&populate[1]=Chapters.Pages&populate[2]=Chapters.Pages.Content";
@@ -161,17 +161,17 @@ async function makeModules(textId) {
   const newTextData = await data.json();
   const moduleInformation = newTextData["data"]["Modules"];
   for (let i = 0; i < moduleInformation.length; ++i) {
-    makeDir("./output/module-" + (i + 1));
+    makeDir("./output/textbook/module-" + (i + 1));
 
     let chaptersData = moduleInformation[i]["Chapters"];
     let chapterPath;
     for (let j = 0; j < chaptersData.length; ++j) {
       if (chaptersData[j]["ChapterNumber"] == null) {
         chapterPath =
-          "./output/module-" + (i + 1) + "/chapter-" + (j + 1) + "/";
+          "./output/textbook/module-" + (i + 1) + "/chapter-" + (j + 1) + "/";
       } else {
         chapterPath =
-          "./output/module-" +
+          "./output/textbook/module-" +
           (i + 1) +
           "/chapter-" +
           chaptersData[j]["ChapterNumber"] +
@@ -192,10 +192,10 @@ async function makeChapters(textId) {
   let chapterPath;
   for (let i = 0; i < chapterList.length; ++i) {
     if (chapterList[i]["ChapterNumber"] == null) {
-      chapterPath = "./output/chapter-" + (i + 1) + "/";
+      chapterPath = "./output/textbook/chapter-" + (i + 1) + "/";
     } else {
       chapterPath =
-        "./output/chapter-" +
+        "./output/textbook/chapter-" +
         chapterList[i]["ChapterNumber"] +
         "/";
     }
@@ -223,6 +223,14 @@ async function run() {
     });
   }
 
+  if (!fs.existsSync("./output/textbook/")) {
+    fs.mkdir("./output/textbook/", (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+
   if (hasModules) {
     await makeModules(textId);
   } else if (hasChapters) {
@@ -233,8 +241,27 @@ async function run() {
     });
     let data = await res.json();
     const pages = data["data"]["Pages"];
-    await entryPages(pages, "output/");
+    await entryPages(pages, "output/textbook/");
   }
 }
 
+async function createGuide(){
+  if (!fs.existsSync("./output/guide/")) {
+    fs.mkdir("./output/guide/", (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+
+  const res = await fetch(`${URL}texts/ndmsjtkd9fc5wi3ivaudxrdx?populate[Pages][populate][0]=Content`, {
+    cache: "no-store",
+  });
+
+  let data = await res.json();
+  const pages = data["data"]["Pages"];
+  await entryPages(pages, "output/guide");
+}
+
 run();
+createGuide();

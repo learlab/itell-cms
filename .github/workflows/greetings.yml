@@ -38,7 +38,7 @@ jobs:
         run: apk update && apk add nodejs --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main --allow-untrusted
       - uses: actions/checkout@v2
       - name: Create output directory
-        run: mkdir -p output
+        run: mkdir -p output/textbook && mkdir -p output/guide
       - name: creates output
         run: node ./githubpublish.js ${{ inputs.textID }}
       - name: List contents of the output directory
