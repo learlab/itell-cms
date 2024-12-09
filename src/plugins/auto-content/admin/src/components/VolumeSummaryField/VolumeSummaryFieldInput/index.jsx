@@ -21,28 +21,7 @@ const Index = ({
    onChange,
  }) => {
   const { form } = useContentManagerContext();
-  const { initialValues, values } = form;
-
-  const [dynamicZone, index, fieldName] = name.split(".");
-  const [currentText, setCurrentText] = useState("");
-  const [currentVideo, setCurrentVideo] = useState({
-    url: "",
-    startTime: 0,
-    endTime: 0,
-  });
-  const [targetText, setTargetText] = useState("");
-
-  // check if content type is text or video
-  function checkContentType() {
-    let allCleanText = ""
-    console.log(form)
-    // for(let chunk of values.Content){
-    //     if(chunk.__component !== "page.plain-chunk"){
-    //         allCleanText += chunk.CleanText
-    //     }
-    // }
-    return allCleanText;
-  }
+  const { values } = form;
 
   // change text to show API is being called
   function showLoading() {
@@ -59,35 +38,30 @@ const Index = ({
   const createVolumeSummary = async () => {
     try {
       showLoading();
-      // create clean text to feed into QA generation
-      const cleanTextFeed = checkContentType();
+      const response = await fetch(`/auto-content/create-volume-summary`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${JSON.parse(window.sessionStorage.jwtToken)}`,
+        },
+        body: JSON.stringify({
+          title: values.Title,
+        }),
+      });
 
-    //   const response = await fetch(`/auto-content/create-volume-summary`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${JSON.parse(window.sessionStorage.jwtToken)}`,
-    //     },
-    //     body: JSON.stringify({
-    //       text: cleanTextFeed,
-    //     }),
-    //   });
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+      let parsedResponse = await response.json()
 
-    //   if (!response.ok) {
-    //     throw new Error(`Error! status: ${response.status}`);
-    //   }
-    //   let parsedResponse = await response.json()
-
-    //   if ("error" in parsedResponse) {
-    //     parsedResponse = `Error generating volume summary!: ${parsedResponse.error.message}`;
-    //   }
-    //   else if(parsedResponse.choices[0].message.content.trim().length === 0 && parsedResponse.choices[0].finish_reason === "length"){
-    //     parsedResponse = `Error generating volume summary: ran out of tokens. `;
-    //   } else {
-    //     parsedResponse =  parsedResponse.choices[0].message.content.trim();
-    //   }
-
-    let parsedResponse = "this is an example field"
+      if ("error" in parsedResponse) {
+        parsedResponse = `Error generating volume summary!: ${parsedResponse.error.message}`;
+      }
+      else if(parsedResponse.choices[0].message.content.trim().length === 0 && parsedResponse.choices[0].finish_reason === "length"){
+        parsedResponse = `Error generating volume summary: ran out of tokens. `;
+      } else {
+        parsedResponse =  parsedResponse.choices[0].message.content.trim();
+      }
 
       onChange({
         target: { name, value: parsedResponse, type: attribute.type },

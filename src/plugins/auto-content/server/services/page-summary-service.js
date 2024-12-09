@@ -4,12 +4,15 @@ const fetch = require("node-fetch");
 
 module.exports = ({ strapi }) => {
   const createPageSummary = async (text) => {
-    const ctx = strapi.requestContext.get();
     try {
       // prompt is based on formatting from parse-gpt-mc notebook
       const prompt = [{
             role: "user",
-            content: 'You will generate a summary from the provided text. The summary should be one paragraph of about 100 words in length.' + text
+            content: 'You will generate a summary from the provided text. The summary should be one paragraph of about 100 words in length.'
+        },
+        {
+          "role": "user",
+          "content": text
         }
       ];
       const response = await fetch(
