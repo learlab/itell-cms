@@ -12,19 +12,8 @@ module.exports = ({strapi}) => {
           Title: title,
         },
       });
-
-      let pages = entry[0].Pages
-      for(let page of pages){
-        const curPage = await strapi.entityService.findOne('api::page.page', page.id, {
-          populate: "*"
-        });
-
-        const content = curPage.Content
-        for(let chunk of content){
-          if(chunk.CleanText !== "not set" && chunk.CleanText !== null){
-            text += chunk.CleanText
-          }
-        }
+      for(let page of entry[0].Pages){
+        text +=`## ${page.Title} \n ${page.PageSummary}\n`
       }
     }
     catch (error) {
@@ -34,7 +23,7 @@ module.exports = ({strapi}) => {
       // prompt is based on formatting from parse-gpt-mc notebook
       const prompt = [{
         role: "user",
-        content: 'You will generate a summary from the provided text. The summary should be one paragraph of about 100 words in length.'
+        content: 'You will be provided with one summary for each page of a text. Using these summaries, please generate a new summary for the entire text. Your summary should be one paragraph of about 100 words.'
       },
         {
           "role": "user",

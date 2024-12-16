@@ -52,9 +52,6 @@ const Index = ({
     });
   }
 
-  // could use values.publishedAt === null to only allow content generation for unpublished content
-  // authors would have to unpublish their content to re-generate the content
-
   const createPageSummary = async () => {
     try {
       showLoading();
@@ -105,7 +102,7 @@ const Index = ({
       <Flex direction="column" alignItems="stretch" gap={1}>
         <Field.Label action={labelAction}>{name}</Field.Label>
         <Textarea
-          placeholder="This area will show the generated page summary."
+          placeholder='Write a one-paragraph summary of this page here, or press "Create Page Summary" to generate it.'
           name="content"
           value={value}
           onChange={(e) =>
