@@ -48,6 +48,8 @@
     "VolumeSummary": {
       "type": "customField",
       "customField": "plugin::auto-content.volumeSummary"
+    "FreePages": {
+      "type": "text"
     }
   }
 }

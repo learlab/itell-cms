@@ -1,55 +1,67 @@
+/* global strapi */
 "use strict";
+const { errors } = require("@strapi/utils");
+const { ApplicationError } = errors;
 
-async function generatePageEmbeddings(ctx) {
-  const entry = await strapi.documents("api::page.page").findOne({
-    documentId: "__TODO__",
-    populate: "*"
-  });
-  var chapter = null;
-  const chapter_id = entry.Chapter ? entry.Chapter.id : null;
-  var this_module_slug = null;
-  if (chapter_id) {
-    chapter = await strapi.documents("api::chapter.chapter").findOne({
-      documentId: "__TODO__",
-      populate: "module"
+async function generatePageEmbeddings(pageData) {
+  try {
+    // Get the page entry from the db so we can populate relations
+    const entry = await strapi.db.query("api::page.page").findOne({
+      where: { documentId: pageData.documentId },
+      populate: true,
     });
-    this_module_slug = chapter.module ? chapter.module.slug : null;
+
+    if (!entry.Volume) {
+      throw new Error(
+        `Unable to generate embeddings because Volume relation is not specified.`,
+      );
+    }
+
+    // Prepare payload
+    const payload = pageData.Content.map((item) => ({
+      text_slug: entry.Volume.Slug,
+      module_slug: entry.Module?.slug,
+      chapter_slug: entry.Chapter?.Slug,
+      page_slug: pageData.Slug,
+      chunk_slug: item.Slug,
+      content: item.CleanText,
+    }));
+
+    for (const item of payload) {
+      await strapi.service("api::page.page").generateEmbedding(item);
+    }
+  } catch (error) {
+    console.log(error);
+    throw new ApplicationError(
+      `Error in generatePageEmbeddings: ${error.message}`,
+    );
   }
-
-  const payload = entry.Content.map((item) => ({
-    text_slug: entry.Volume?.Slug,
-    module_slug: this_module_slug,
-    chapter_slug: chapter ? chapter.Slug : null,
-    page_slug: entry.Slug,
-    chunk_slug: item.Slug,
-    content: item.CleanText,
-  }));
-
-  payload.map((item) =>
-    strapi.service("api::page.page").generateEmbedding(item),
-  );
-
-  const deletePayload = {
-    page_slug: entry.Slug,
-    chunk_slugs: entry.Content.map((item) => item.Slug),
-  };
-
-  strapi.service("api::page.page").deleteEmbeddings(deletePayload);
 }
 
-const deleteAllEmbeddings = async (id) => {
-  const entry = await strapi.documents("api::page.page").findOne({
-    documentId: "__TODO__",
-    populate: "*"
-  });
+async function deleteAllEmbeddings(id) {
+  try {
+    const entry = await strapi.db.query("api::page.page").findOne({
+      where: { id: id },
+      populate: true,
+    });
 
-  const deletePayload = {
-    page_slug: entry.Slug,
-    chunk_slugs: [],
-  };
+    if (!entry) {
+      throw new Error(`Page not found for documentId: ${id}`);
+    }
 
-  strapi.service("api::page.page").deleteEmbeddings(deletePayload);
-};
+    const deletePayload = {
+      page_slug: entry.Slug,
+      chunk_slugs: [],
+    };
+
+    await strapi.service("api::page.page").deleteEmbeddings(deletePayload);
+  } catch (error) {
+    console.log(error);
+    throw new ApplicationError(
+      `Error in deleteAllEmbeddings: ${error.message}`,
+    );
+  }
+}
 
 module.exports = {
   generatePageEmbeddings,

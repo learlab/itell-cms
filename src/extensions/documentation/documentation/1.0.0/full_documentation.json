@@ -6155,6 +6155,9 @@
                             "VolumeSummary": {
                               "type": "string"
                             },
+                            "FreePages": {
+                              "type": "string"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -7821,6 +7824,9 @@
                             }
                           },
                           "VolumeSummary": {
+                              "type": "string"
+                            },
+                          "FreePages": {
                             "type": "string"
                           },
                           "createdAt": {
@@ -8464,6 +8470,9 @@
                                 }
                               },
                               "VolumeSummary": {
+                              "type": "string"
+                            },
+                              "FreePages": {
                                 "type": "string"
                               },
                               "createdAt": {
@@ -9755,6 +9764,9 @@
                             }
                           },
                           "VolumeSummary": {
+                              "type": "string"
+                            },
+                          "FreePages": {
                             "type": "string"
                           },
                           "createdAt": {
@@ -10154,6 +10166,9 @@
                 }
               },
               "VolumeSummary": {
+                              "type": "string"
+                            },
+              "FreePages": {
                 "type": "string"
               },
               "locale": {
@@ -10799,6 +10814,9 @@
                             }
                           },
                           "VolumeSummary": {
+                              "type": "string"
+                            },
+                          "FreePages": {
                             "type": "string"
                           },
                           "createdAt": {
@@ -11025,6 +11043,9 @@
             }
           },
           "VolumeSummary": {
+                              "type": "string"
+                            },
+          "FreePages": {
             "type": "string"
           },
           "createdAt": {

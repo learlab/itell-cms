@@ -378,7 +378,7 @@ export interface ApiApiKeyApiKey extends Struct.CollectionTypeSchema {
     singularName: 'api-key';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     ApiKey: Schema.Attribute.String & Schema.Attribute.DefaultTo<'placeholder'>;
@@ -587,6 +587,7 @@ export interface ApiTextText extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Description: Schema.Attribute.String;
+    FreePages: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::text.text'> &
       Schema.Attribute.Private;
