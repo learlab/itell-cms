@@ -47,5 +47,23 @@ module.exports = ({ strapi }) => {
         isResizable: true,
       },
     },
+    {
+      name: "volumeSummary",
+      plugin: "auto-content",
+      type: "text",
+      inputSize: {
+        default: 12,
+        isResizable: true,
+      },
+    },
+    {
+      name: "pageSummary",
+      plugin: "auto-content",
+      type: "text",
+      inputSize: {
+        default: 12,
+        isResizable: true,
+      },
+    },
   ]);
 };

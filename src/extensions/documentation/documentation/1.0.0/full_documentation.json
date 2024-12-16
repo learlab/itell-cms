@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-12-09T20:46:13.542Z"
+    "x-generation-date": "2024-12-16T20:36:14.424Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6152,6 +6152,9 @@
                                 }
                               }
                             },
+                            "VolumeSummary": {
+                              "type": "string"
+                            },
                             "FreePages": {
                               "type": "string"
                             },
@@ -6341,6 +6344,9 @@
                       "type": "string"
                     }
                   }
+                },
+                "PageSummary": {
+                  "type": "string"
                 },
                 "createdAt": {
                   "type": "string",
@@ -7817,6 +7823,9 @@
                               }
                             }
                           },
+                          "VolumeSummary": {
+                              "type": "string"
+                            },
                           "FreePages": {
                             "type": "string"
                           },
@@ -7872,6 +7881,9 @@
                             }
                           }
                         }
+                      },
+                      "PageSummary": {
+                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",
@@ -8169,6 +8181,9 @@
                 ],
                 "example": "string or id"
               },
+              "PageSummary": {
+                "type": "string"
+              },
               "locale": {
                 "type": "string"
               },
@@ -8454,6 +8469,9 @@
                                   }
                                 }
                               },
+                              "VolumeSummary": {
+                              "type": "string"
+                            },
                               "FreePages": {
                                 "type": "string"
                               },
@@ -8896,6 +8914,9 @@
                       }
                     }
                   },
+                  "PageSummary": {
+                    "type": "string"
+                  },
                   "createdAt": {
                     "type": "string",
                     "format": "date-time"
@@ -9049,6 +9070,9 @@
                 "type": "string"
               }
             }
+          },
+          "PageSummary": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -9739,6 +9763,9 @@
                               }
                             }
                           },
+                          "VolumeSummary": {
+                              "type": "string"
+                            },
                           "FreePages": {
                             "type": "string"
                           },
@@ -9928,6 +9955,9 @@
                     "type": "string"
                   }
                 }
+              },
+              "PageSummary": {
+                "type": "string"
               },
               "createdAt": {
                 "type": "string",
@@ -10135,6 +10165,9 @@
                   "example": "string or id"
                 }
               },
+              "VolumeSummary": {
+                              "type": "string"
+                            },
               "FreePages": {
                 "type": "string"
               },
@@ -10780,6 +10813,9 @@
                               }
                             }
                           },
+                          "VolumeSummary": {
+                              "type": "string"
+                            },
                           "FreePages": {
                             "type": "string"
                           },
@@ -10835,6 +10871,9 @@
                             }
                           }
                         }
+                      },
+                      "PageSummary": {
+                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",
@@ -11003,6 +11042,9 @@
               }
             }
           },
+          "VolumeSummary": {
+                              "type": "string"
+                            },
           "FreePages": {
             "type": "string"
           },

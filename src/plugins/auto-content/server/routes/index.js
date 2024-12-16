@@ -3,4 +3,6 @@ module.exports = {
   cleanText: require("./cleanText"),
   transcript: require("./transcript"),
   keyPhrase: require("./keyPhrase"),
+  pageSummary: require("./pageSummary"),
+  volumeSummary: require("./volumeSummary")
 };

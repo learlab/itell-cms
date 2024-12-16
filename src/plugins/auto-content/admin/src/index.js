@@ -7,6 +7,8 @@ import QuestionIcon from "./components/QuestionField/QuestionIcon";
 import ConstructedResponseIcon from "./components/ConstructedResponseField/ConstructedResponseIcon";
 import KeyPhraseGeneratorIcon from "./components/KeyPhraseGenerator/KeyPhraseGeneratorIcon";
 import SlugFieldIcon from "./components/SlugField/SlugFieldIcon";
+import PageSummaryFieldIcon from "./components/PageSummaryField/PageSummaryFieldIcon";
+import VolumeSummaryFieldIcon from "./components/VolumeSummaryField/VolumeSummaryFieldIcon";
 
 const name = pluginPkg.strapi.name;
 
@@ -146,6 +148,50 @@ export default {
         components: {
           Input: async () =>
             import("./components/KeyPhraseGenerator/KeyPhraseGeneratorInput"),
+        },
+        options: {
+          base: [],
+          advanced: [],
+        },
+      },
+      {
+        name: "pageSummary",
+        pluginId: "auto-content",
+        type: "text",
+        intlLabel: {
+          id: "pageSummary.pageSummary.label",
+          defaultMessage: "Page Summary",
+        },
+        intlDescription: {
+          id: "pageSummary.pageSummary.description",
+          defaultMessage: "Generate a page summary using AI",
+        },
+        icon: PageSummaryFieldIcon,
+        components: {
+          Input: async () =>
+            import("./components/PageSummaryField/PageSummaryFieldInput"),
+        },
+        options: {
+          base: [],
+          advanced: [],
+        },
+      },
+      {
+        name: "volumeSummary",
+        pluginId: "auto-content",
+        type: "text",
+        intlLabel: {
+          id: "volumeSummary.volumeSummary.label",
+          defaultMessage: "Volume Summary",
+        },
+        intlDescription: {
+          id: "volumeSummary.volumeSummary.description",
+          defaultMessage: "Generate a volume summary using AI",
+        },
+        icon: VolumeSummaryFieldIcon,
+        components: {
+          Input: async () =>
+            import("./components/VolumeSummaryField/VolumeSummaryFieldInput"),
         },
         options: {
           base: [],

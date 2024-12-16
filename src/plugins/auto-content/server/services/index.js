@@ -7,4 +7,6 @@ module.exports = {
   cleanTextService: require("./clean-text-service"),
   fetchTranscriptService: require("./fetch-transcript-service"),
   keyPhraseService: require("./keyphrase-service"),
+  pageSummaryService: require("./page-summary-service"),
+  volumeSummaryService: require("./volume-summary-service")
 };

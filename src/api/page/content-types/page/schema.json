@@ -53,6 +53,10 @@
       "relation": "manyToOne",
       "target": "api::text.text",
       "inversedBy": "Pages"
+    },
+    "PageSummary": {
+      "type": "customField",
+      "customField": "plugin::auto-content.pageSummary"
     }
   }
 }
