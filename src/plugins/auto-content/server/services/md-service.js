@@ -320,6 +320,20 @@ turndownService.addRule("LineBreaks", {
   },
 });
 
+turndownService.addRule("MarkdownLinkToHtml", {
+  filter: function (node) {
+    return (
+      node.nodeName === "A" &&
+      node.hasAttribute("href")
+    );
+  },
+  replacement: function (_content, node) {
+    const href = node.getAttribute("href");
+    const text = node.textContent.trim();
+    return `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+  },
+});
+
 module.exports = ({ strapi }) => {
   const md = async (html) => {
     if (!html) return null;
