@@ -49,6 +49,9 @@
     "Slug": {
       "type": "customField",
       "customField": "plugin::auto-content.slug"
+    },
+    "MD": {
+      "type": "text"
     }
   }
 }

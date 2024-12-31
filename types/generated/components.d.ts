@@ -84,6 +84,7 @@ export interface PageVideo extends Struct.ComponentSchema {
     Header: Schema.Attribute.String & Schema.Attribute.Required;
     KeyPhrase: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.keyPhrase'>;
+    MD: Schema.Attribute.Text;
     MDX: Schema.Attribute.Text;
     Question: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.generatedQuestion'>;

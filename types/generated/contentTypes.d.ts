@@ -524,6 +524,14 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
+    Order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     PageSummary: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.pageSummary'>;
     publishedAt: Schema.Attribute.DateTime;

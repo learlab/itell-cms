@@ -3,12 +3,17 @@ const fs = require("fs");
 let hasModules = true;
 let hasChapters = true;
 
-const URL = "https://strapi-blue.onrender.com/api/";
-const pagesQuery = "?populate[Pages][populate][0]=Content";
+const URL = "https://itell-strapi-um5h.onrender.com/api/";
+const pagesQuery = "?populate[Pages][populate][0]=Content&populate[Pages][populate][1]=Chapter";
 const chaptersQuery =
-  "?populate[0]=Chapters&populate[1]=Chapters.Pages&populate[2]=Chapters.Pages.Content";
+  "?populate[0]=Chapters.Pages.Quiz.Questions.Answers&populate[1]=Chapters.Pages.Content";
 const modulesQuery =
   "?populate[0]=Modules&populate[1]=Modules.Chapters.Pages&populate[2]=Modules.Chapters.Pages.Content";
+
+const headerFindingRegex = /(#{3,}[\w -]+)/g;
+
+const userGuideDocumentID="ndmsjtkd9fc5wi3ivaudxrdx"
+
 
 function getTextID() {
   if (process.argv.length === 2) {
@@ -42,169 +47,120 @@ function makeDir(path) {
   }
 }
 
-async function entryPages(pages, startingPath) {
-  for (let i = 0; i < pages.length; ++i) {
-    let pageData = pages[i];
-
-    let path = startingPath;
-    let stream;
-
-    if (hasChapters) {
-      if (i !== 0) {
-        path = startingPath + "section-" + i + ".mdx";
-        stream = fs.createWriteStream(path);
-        stream.write(
-          '---\ntitle: "' +
-            pageData["Title"] +
-            '"' +
-            "\npage_slug: " +
-            pageData["Slug"] +
-            "\nsummary: " +
-            pageData["HasSummary"] +
-            "\nquiz: " +
-            (pageData["Quiz"] !== null) +
-            "\nreference_summary: " +
-            pageData["ReferenceSummary"] +
-            "\n---\n",
-        );
-      } else {
-        path = startingPath + "index.mdx";
-        stream = fs.createWriteStream(path);
-        stream.write(
-          '---\ntitle: " ' +
-            pageData["Title"] +
-            '"' +
-            "\npage_slug: " +
-            pageData["Slug"] +
-            "\nsummary: " +
-            pageData["HasSummary"] +
-            "\nquiz: " +
-            (pageData["Quiz"] !== null) +
-            "\n---\n",
-        );
-      }
-    } else {
-      path = startingPath + "chapter-" + i + ".mdx";
-      stream = fs.createWriteStream(path);
-      stream.write(
-        '---\ntitle: "' +
-          pageData["Title"] +
-          '"' +
-          "\npage_slug: " +
-          pageData["Slug"] +
-          "\nsummary: " +
-          pageData["HasSummary"] +
-          "\nquiz: " +
-          (pageData["Quiz"] !== null) +
-          "\n---\n",
-      );
+async function parseChapters(textData){
+  let nextSlug = "null"
+  for(let chapterIndex in textData){
+    let chapter = textData[chapterIndex];
+    if(parseInt(chapterIndex) === textData.length - 1){
+      nextSlug = "null"
     }
-
-    for (let l = 0; l < pageData["Content"].length; ++l) {
-      let curChunk = pageData["Content"][l];
-      if (
-        curChunk["__component"] === "page.chunk" ||
-        curChunk["__component"] === "page.plain-chunk"
-      ) {
-        let chunkSlug = curChunk["Slug"];
-        if (curChunk["Slug"] != null) {
-          chunkSlug = chunkSlug.replaceAll('"', "");
-        } else {
-          chunkSlug = "";
-        }
-
-        let inputString = `<section className="content-chunk" aria-labelledby="${chunkSlug}" data-subsection-id="${chunkSlug}"`;
-        stream.write(inputString);
-        if (curChunk.ShowHeader) {
-          stream.write(` data-show-header="true">\n\n`);
-          if (curChunk.HeaderLevel === "H3") {
-            stream.write(`### ${curChunk.Header} \\{#${chunkSlug}}\n\n`);
-          } else if (curChunk.HeaderLevel === "H4") {
-            stream.write(`#### ${curChunk.Header} \\{#${chunkSlug}}\n\n`);
-          } else {
-            stream.write(`## ${curChunk.Header} \\{#${chunkSlug}}\n\n`);
-          }
-        } else {
-          stream.write(` data-show-header="false">\n\n`);
-          stream.write(
-            `<h2 className="sr-only" id="${chunkSlug}">${curChunk.Header}</h2>\n\n`,
-          );
-        }
-        if (curChunk.MDX != null) {
-          stream.write(
-            /*
-            Replaces:
-            1. 0 width space characters
-            2. <br> in old html embed components (legacy)
-            3. Adds pageSlugs to sandboxes
-            4. Adds pageSlugs to sandboxes (legacy)
-             */
-            curChunk.MDX.replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")
-              .replaceAll(/(<br\s*\/?>\s*)+/g, "\n\n")
-              .replaceAll("__temp_slug__", pageData["Slug"])
-              .replaceAll("test-page-no-chunks", pageData["Slug"]),
-          );
-        }
-        stream.write("\n\n</section>\n\n");
-      } else if (curChunk["__component"] === "page.video") {
-        // fill in later
-      }
+    else{
+      nextSlug = textData[parseInt(chapterIndex) + 1]["Pages"][0]["Slug"]
     }
-    stream.end();
-  }
-}
-
-async function makeModules(textId) {
-  const data = await fetch(`${URL}texts/${textId}${modulesQuery}`, {
-    cache: "no-store",
-  });
-  const newTextData = await data.json();
-  const moduleInformation = newTextData["data"]["Modules"];
-  for (let i = 0; i < moduleInformation.length; ++i) {
-    makeDir("./output/module-" + (i + 1));
-
-    let chaptersData = moduleInformation[i]["Chapters"];
-    let chapterPath;
-    for (let j = 0; j < chaptersData.length; ++j) {
-      if (chaptersData[j]["ChapterNumber"] == null) {
-        chapterPath =
-          "./output/module-" + (i + 1) + "/chapter-" + (j + 1) + "/";
-      } else {
-        chapterPath =
-          "./output/module-" +
-          (i + 1) +
-          "/chapter-" +
-          chaptersData[j]["ChapterNumber"] +
-          "/";
-      }
-      makeDir(chapterPath);
-      await entryPages(chaptersData[j]["Pages"], chapterPath);
+    chapter["Pages"] = chapter["Pages"].reverse()
+    for(let i in chapter["Pages"]){
+      let page = chapter["Pages"][i]
+      await writePage(page, `  title: ${chapter["Title"]}\n  slug: ${chapter["Slug"]}`,
+        parseInt(i) === chapter["Pages"].length-1? nextSlug : chapter["Pages"][parseInt(i) + 1]["Slug"], parseInt(i));
     }
   }
 }
 
-async function makeChapters(textId) {
-  const data = await fetch(`${URL}texts/${textId}${chaptersQuery}`, {
+async function writePage(pageData, parents, nextSlug, order){
+  let header = "---\n"
+  let stream = fs.createWriteStream(`./output/textbook/${pageData["Slug"]}.md`);
+  header += `assignments:${pageData["HasSummary"] ? "\n- summary" : "null"}\n`
+  header += "chunks:\n"
+  let cris = []
+  for(let chunk of pageData["Content"]){
+    let type
+    if(chunk["__component"] === "page.chunk"){
+      type = "regular"
+    }
+    else if(chunk["__component"] === "page.plain-chunk"){
+      type = "plain"
+    }
+    else{
+      type = "video"
+    }
+
+    header += `- title: ${chunk["Header"]}\n  slug: ${chunk["Slug"]}\n  type: ${type}\n`
+    let matches = chunk["MDX"].match(headerFindingRegex)
+    if(matches !== null){
+      header += "  headings:\n"
+      for(let heading of matches){
+        header += `  - level: ${heading.includes("####") ? "4" : "3"}\n    slug: ${heading.replaceAll("#", "").toLowerCase().trim().replaceAll(" ", "-")}\n    title:${heading.replaceAll("#", "")}\n`
+      }
+      if(chunk["Question"] !== null){
+        cris.push(`question: ${chunk["Question"]}\n  answer: ${chunk["ConstructedResponse"]}\n  slug: ${chunk["Slug"]}`)
+      }
+    }
+  }
+  if(cris.length === 0){
+    header += "cri: []\n"
+  }
+  else{
+    header += "cri: \n"
+    for(let cri of cris){
+      header += `- ${cri}\n`
+    }
+  }
+  header += `next_slug: ${nextSlug}\norder: ${order}\nparent:\n${parents}\n`
+  if(pageData["Quiz"] === null){
+    header += "quiz: null\n"
+  }
+  else{
+    header += "quiz: \n"
+    let questions = pageData["Quiz"]["Questions"]
+    for(let question of questions){
+      header += `- question: ${question["Question"]}\n  answers: \n`
+      for(let answer of question["Answers"]){
+        header += `  - answer: ${answer["Text"]}\n    correct: ${answer["IsCorrect"]}\n`
+      }
+    }
+  }
+  header += `slug: ${pageData["Slug"]}\ntitle: ${pageData["Title"]}\n`
+  header += "---\n\n"
+  stream.write(header)
+  let content = ""
+  for(let chunk of pageData["Content"]){
+
+    if(chunk["__component"]==="page.video"){
+      let matches = chunk["MDX"].match(headerFindingRegex)
+
+      if(matches !== null) {
+        for(let match of matches){
+          chunk["MDX"] = chunk["MDX"].replace(match, match + `{#${match.replaceAll("#", "").toLowerCase().trim().replaceAll(" ", "-")}}`)
+        }
+      }
+
+      content += `## ${chunk["Header"]} {${chunk["Slug"]} ${chunk["ShowHeader"] ? "" : ".sr-only"}}\n\n${chunk["MDX"].replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")}\n\n`
+    }
+    else{
+      let matches = chunk["MD"].match(headerFindingRegex)
+
+      if(matches !== null) {
+        for(let match of matches){
+          chunk["MD"] = chunk["MD"].replace(match, `${match} {#${match.replaceAll("#", "").toLowerCase().trim().replaceAll(" ", "-")}}`)
+        }
+      }
+      content += `## ${chunk["Header"]} {#${chunk["Slug"]} ${chunk["ShowHeader"] ? "" : ".sr-only"}}\n\n${chunk["MD"].replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")}\n\n`
+    }
+  }
+  stream.write(content)
+}
+async function createGuide(){
+  const guideRes = await fetch(`${URL}texts/${userGuideDocumentID}?populate[0]=Pages.Content`, {
     cache: "no-store",
   });
-  const newTextData = await data.json();
-  const chapterList = newTextData["data"]["Chapters"];
-  let chapterPath;
-  for (let i = 0; i < chapterList.length; ++i) {
-    if (chapterList[i]["ChapterNumber"] == null) {
-      chapterPath = "./output/chapter-" + (i + 1) + "/";
-    } else {
-      chapterPath =
-        "./output/chapter-" +
-        chapterList[i]["ChapterNumber"] +
-        "/";
-    }
-    makeDir(chapterPath);
-    let pages = chapterList[i]["Pages"];
+  let guideData = await guideRes.json();
+  let guidePage = guideData["data"]["Pages"][0]
+  let stream = fs.createWriteStream(`./output/guide/user-guide.md`);
 
-    if (pages) {
-      await entryPages(pages, chapterPath);
-    }
+  let header = "---\ncondition: stairs\n---\n\n"
+  stream.write(header)
+  for(let chunk of guidePage["Content"]){
+    stream.write(`## ${chunk["Header"]}\n${chunk["MD"].replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")}\n`)
   }
 }
 
@@ -215,26 +171,35 @@ async function run() {
   hasChapters = textData["Chapters"].length > 0;
   hasModules = textData["Modules"].length > 0;
 
-  if (!fs.existsSync("./output/")) {
-    fs.mkdir("./output/", (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
+  makeDir("./output/textbook/")
+  makeDir("./output/guide/")
 
-  if (hasModules) {
-    await makeModules(textId);
-  } else if (hasChapters) {
-    await makeChapters(textId);
-  } else {
+  /***
+   * THIS PART DOES NOT HAVE THE MODULES IN PLACE YET. I HAVE NO IDEA WHAT MODULES LOOK LIKE IN ITELL MD AS OF NOW.
+   * WILL ADD MODULE SUPPORT ONCE CLARIFICATION HAS BEEN RECEIVED
+   */
+
+  if(hasChapters){
+    const res = await fetch(`${URL}texts/${textId}${chaptersQuery}`, {
+      cache: "no-store",
+    });
+    let data = await res.json();
+    await parseChapters(data["data"]["Chapters"])
+  }
+  else{
     const res = await fetch(`${URL}texts/${textId}${pagesQuery}`, {
       cache: "no-store",
     });
     let data = await res.json();
     const pages = data["data"]["Pages"];
-    await entryPages(pages, "output/");
+    for(let i in pages){
+      let page = pages[i]
+      await writePage(page, "null", i === pages.length-1? "null" : pages[i + 1]["Slug"], i+1);
+    }
   }
+
+  // create user guide
+  await createGuide();
 }
 
 run();

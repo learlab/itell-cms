@@ -57,6 +57,11 @@
     "PageSummary": {
       "type": "customField",
       "customField": "plugin::auto-content.pageSummary"
+    },
+    "Order": {
+      "type": "integer",
+      "required": true,
+      "min": 0
     }
   }
 }
