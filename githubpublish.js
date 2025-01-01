@@ -61,12 +61,12 @@ async function parseChapters(textData){
     for(let i in chapter["Pages"]){
       let page = chapter["Pages"][i]
       await writePage(page, `  title: ${chapter["Title"]}\n  slug: ${chapter["Slug"]}`,
-        parseInt(i) === chapter["Pages"].length-1? nextSlug : chapter["Pages"][parseInt(i) + 1]["Slug"], parseInt(i));
+        parseInt(i) === chapter["Pages"].length-1? nextSlug : chapter["Pages"][parseInt(i) + 1]["Slug"]);
     }
   }
 }
 
-async function writePage(pageData, parents, nextSlug, order){
+async function writePage(pageData, parents, nextSlug){
   let header = "---\n"
   let stream = fs.createWriteStream(`./output/textbook/${pageData["Slug"]}.md`);
   header += `assignments:${pageData["HasSummary"] ? "\n- summary" : "null"}\n`
@@ -91,9 +91,9 @@ async function writePage(pageData, parents, nextSlug, order){
       for(let heading of matches){
         header += `  - level: ${heading.includes("####") ? "4" : "3"}\n    slug: ${heading.replaceAll("#", "").toLowerCase().trim().replaceAll(" ", "-")}\n    title:${heading.replaceAll("#", "")}\n`
       }
-      if(chunk["Question"] !== null){
-        cris.push(`question: ${chunk["Question"]}\n  answer: ${chunk["ConstructedResponse"]}\n  slug: ${chunk["Slug"]}`)
-      }
+    }
+    if(chunk["Question"] && chunk["Question"] !== null){
+      cris.push(`question: ${chunk["Question"].replaceAll("\t", "\\t")}\n  answer: ${chunk["ConstructedResponse"].replaceAll("\t", "\\t")}\n  slug: ${chunk["Slug"]}`)
     }
   }
   if(cris.length === 0){
@@ -105,17 +105,17 @@ async function writePage(pageData, parents, nextSlug, order){
       header += `- ${cri}\n`
     }
   }
-  header += `next_slug: ${nextSlug}\norder: ${order}\nparent:\n${parents}\n`
+  header += `next_slug: ${nextSlug}\norder: ${pageData["Order"]}\nparent:\n${parents}\n`
   if(pageData["Quiz"] === null){
     header += "quiz: null\n"
   }
   else{
-    header += "quiz: \n"
+    header += "quiz:\n"
     let questions = pageData["Quiz"]["Questions"]
     for(let question of questions){
-      header += `- question: ${question["Question"]}\n  answers: \n`
+      header += `- question: "${question["Question"]}"\n  answers:\n`
       for(let answer of question["Answers"]){
-        header += `  - answer: ${answer["Text"]}\n    correct: ${answer["IsCorrect"]}\n`
+        header += `  - answer: "${answer["Text"]}"\n    correct: ${answer["IsCorrect"]}\n`
       }
     }
   }
@@ -125,6 +125,9 @@ async function writePage(pageData, parents, nextSlug, order){
   let content = ""
   for(let chunk of pageData["Content"]){
 
+    /***
+     * This part uses the MDX for video chunks because right now they don't have MD field implemented for video chunks
+     */
     if(chunk["__component"]==="page.video"){
       let matches = chunk["MDX"].match(headerFindingRegex)
 
@@ -194,7 +197,7 @@ async function run() {
     const pages = data["data"]["Pages"];
     for(let i in pages){
       let page = pages[i]
-      await writePage(page, "null", i === pages.length-1? "null" : pages[i + 1]["Slug"], i+1);
+      await writePage(page, "null", i === pages.length-1? "null" : pages[i + 1]["Slug"]);
     }
   }
 
