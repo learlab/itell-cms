@@ -46,6 +46,8 @@ async function generateVideoChunkFields(chunkData) {
   chunkData.CleanText = transcript;
   chunkData.MDX = mdx;
 
+  chunkData.MD = mdx;
+
   return chunkData;
 }
 

@@ -93,7 +93,7 @@ async function writePage(pageData, parents, nextSlug){
       }
     }
     if(chunk["Question"] && chunk["Question"] !== null){
-      cris.push(`question: ${chunk["Question"].replaceAll("\t", "\\t")}\n  answer: ${chunk["ConstructedResponse"].replaceAll("\t", "\\t")}\n  slug: ${chunk["Slug"]}`)
+      cris.push(`question: ${chunk["Question"]}\n  answer: ${chunk["ConstructedResponse"]}\n  slug: ${chunk["Slug"]}`)
     }
   }
   if(cris.length === 0){
@@ -113,9 +113,9 @@ async function writePage(pageData, parents, nextSlug){
     header += "quiz:\n"
     let questions = pageData["Quiz"]["Questions"]
     for(let question of questions){
-      header += `- question: "${question["Question"]}"\n  answers:\n`
+      header += `- question: "${question["Question"].replaceAll("\t", "\\t")}"\n  answers:\n`
       for(let answer of question["Answers"]){
-        header += `  - answer: "${answer["Text"]}"\n    correct: ${answer["IsCorrect"]}\n`
+        header += `  - answer: "${answer["Text"].replaceAll("\t", "\\t")}"\n    correct: ${answer["IsCorrect"]}\n`
       }
     }
   }
@@ -147,7 +147,7 @@ async function writePage(pageData, parents, nextSlug){
           chunk["MD"] = chunk["MD"].replace(match, `${match} {#${match.replaceAll("#", "").toLowerCase().trim().replaceAll(" ", "-")}}`)
         }
       }
-      content += `## ${chunk["Header"]} {#${chunk["Slug"]} ${chunk["ShowHeader"] ? "" : ".sr-only"}}\n\n${chunk["MD"].replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")}\n\n`
+      content += `## ${chunk["Header"]} {#${chunk["Slug"]} ${chunk["ShowHeader"] ? "" : ".sr-only"}}\n\n${chunk["MD"].replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, " ")}\n\n`
     }
   }
   stream.write(content)
