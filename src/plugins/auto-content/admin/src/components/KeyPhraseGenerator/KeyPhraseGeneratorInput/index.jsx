@@ -105,7 +105,6 @@ const Index = ({
       showLoading();
       // create clean text to feed into QA generation
       const cleanTextFeed = await getTargetText();
-
       const response = await fetch(`/auto-content/extract-keyphrase`, {
         method: "POST",
         headers: {
@@ -155,11 +154,8 @@ const Index = ({
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
-      const generatedCleanText = await response.json().then((res) => {
-        return res["contents"];
-      });
 
-      return generatedCleanText;
+      return await response.text();
     } catch (err) {
       throw new Error(`Error generating clean text! status: ${err}`);
     }

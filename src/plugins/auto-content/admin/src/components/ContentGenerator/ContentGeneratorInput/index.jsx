@@ -199,11 +199,7 @@ const Index = ({
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
-      const generatedCleanText = await response.json().then((res) => {
-        return res["contents"];
-      });
-
-      return generatedCleanText;
+      return await response.text();
     } catch (err) {
       console.log(err);
     }
