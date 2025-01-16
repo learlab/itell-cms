@@ -89,7 +89,7 @@ async function generateChunkFields(content) {
     // Perform the update
     await strapi.db.query(chunkData.__component).update({
       where: { id: chunkData.id },
-      data: chunkData,
+      data: {CleanText: chunkData.CleanText, MDX: chunkData.MDX, MD: chunkData.MD, Slug: chunkData.Slug}
     });
   }
   return content;
