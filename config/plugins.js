@@ -3,8 +3,8 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       owner: "learlab", // The GitHub organisation or user
-      repo: "strapi", // The name of the repository
-      workflow_id: "74831135", // The workflow_id or filename
+      repo: "itell-rs", // The name of the repository
+      workflow_id: "fetch-volume.yml", // The workflow_id or filename
       token: env("GITHUB_TOKEN"), // The GitHub personal access token with access to trigger workflows and view build status
       branch: "main", // The branch the workflow should be triggered on
       text_json: env("TEXT_JSON"),

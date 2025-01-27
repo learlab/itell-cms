@@ -43,6 +43,7 @@ const HomePage = () => {
   const triggerPublish = async () => {
     setBusy(true);
     try {
+      console.log("try to publish")
       const res = await fetch(`/${pluginId}/publish`, {
         method: "POST",
         headers: {
@@ -50,18 +51,20 @@ const HomePage = () => {
           Authorization: `Bearer ${JSON.parse(window.sessionStorage.jwtToken)}`,
         },
         body: JSON.stringify({
-          text: text,
-          textID: textID,
-          token: token,
-          owner: owner,
-          repository: repository,
-          dir: dir,
+          config: JSON.stringify({
+            targets: [
+              {
+                branch: "main",
+                volume_id: textID,
+                path: dir
+              }
+            ]
+          }),
+          commit_message: "Update from itell-rs through Github Publish"
         }),
       });
     } catch (e) {
       handleError(e);
-    } finally {
-      handleClose();
     }
   };
 
@@ -187,21 +190,12 @@ const HomePage = () => {
               loading={!ready || busy}
               loadingMessage={t(busy ? "busy" : "notready")}
               buttonLabel={t("buttons.publish")}
-              onClick={handleOpen}
+              onClick={triggerPublish}
               texts={texts}
             />
           </div>
         )}
       </ContentLayout>
-      <PublishPrompt
-        isOpen={isOpen}
-        title={t("prompt.title")}
-        description={t("prompt.description")}
-        cancelLabel={t("buttons.cancel")}
-        publishLabel={t("buttons.publish")}
-        handleCancel={handleClose}
-        handlePublish={triggerPublish}
-      />
     </Box>
   );
 };
