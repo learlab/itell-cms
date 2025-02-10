@@ -90,9 +90,9 @@ turndownService.addRule("StaticCode", {
 */
 /* MDX Export
   <i-callout variant="info" title="info_title">
-  
+
   info_content
-  
+
   </i-callout>
 */
 turndownService.addRule("Info", {
@@ -117,7 +117,7 @@ turndownService.addRule("Info", {
   <i-callout variant="warning">
 
   warning_content_MD
-  
+
   </i-callout>
 */
 turndownService.addRule("Warning", {
@@ -140,9 +140,9 @@ turndownService.addRule("Warning", {
 */
 /* MDX Export
   <i-callout>
-  
+
   callout_content_MD
-  
+
   </i-callout>
 */
 turndownService.addRule("Callout", {
@@ -177,7 +177,7 @@ turndownService.addRule("Callout", {
 /* MDX Export
   <i-accordion value="first" class-name="prose dark:prose-invert">
     <i-accordion-item value="1" title="accordion_title">
-    
+
     accordion_content_MD
 
     </i-accordion-item>
@@ -322,6 +322,7 @@ turndownService.addRule("LineBreaks", {
 
 module.exports = ({ strapi }) => {
   const md = async (html) => {
+    html = html.replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")
     if (!html) return null;
     return td(html);
   };

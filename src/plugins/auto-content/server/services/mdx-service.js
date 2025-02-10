@@ -314,6 +314,7 @@ turndownService.addRule("LineBreaks", {
 
 module.exports = ({ strapi }) => {
   const mdx = async (html) => {
+    html = html.replaceAll(/[\u200B-\u200D\uFEFF\u00A0]/g, "")
     if (!html) return null;
     return td(html);
   };
