@@ -97,6 +97,17 @@ export interface PageVideo extends Struct.ComponentSchema {
   };
 }
 
+export interface QuizzesGeneratedMcq extends Struct.ComponentSchema {
+  collectionName: 'components_quizzes_generated_mcqs';
+  info: {
+    displayName: 'GeneratedMCQ';
+  };
+  attributes: {
+    GeneratedQuestion: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.mcqGenerator'>;
+  };
+}
+
 export interface QuizzesMultipleChoiceOption extends Struct.ComponentSchema {
   collectionName: 'components_quizzes_multiple_choice_options';
   info: {
@@ -131,6 +142,7 @@ declare module '@strapi/strapi' {
       'page.chunk': PageChunk;
       'page.plain-chunk': PagePlainChunk;
       'page.video': PageVideo;
+      'quizzes.generated-mcq': QuizzesGeneratedMcq;
       'quizzes.multiple-choice-option': QuizzesMultipleChoiceOption;
       'quizzes.multiple-choice-question': QuizzesMultipleChoiceQuestion;
     }

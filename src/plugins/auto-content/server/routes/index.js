@@ -4,5 +4,6 @@ module.exports = {
   transcript: require("./transcript"),
   keyPhrase: require("./keyPhrase"),
   pageSummary: require("./pageSummary"),
-  volumeSummary: require("./volumeSummary")
+  volumeSummary: require("./volumeSummary"),
+  mcqGenerator: require("./mcqGenerator")
 };
