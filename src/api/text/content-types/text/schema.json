@@ -51,6 +51,9 @@
     },
     "FreePages": {
       "type": "text"
+    },
+    "VolumeConfig": {
+      "type": "json"
     }
   }
 }
