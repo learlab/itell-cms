@@ -82,8 +82,6 @@ const Index = ({
     }
   };
 
-  // const saveButton = document.querySelector('button[type="button"]:has-text("Save")');
-
   return (
     <Field.Root
       name={name}
