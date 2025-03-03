@@ -64,10 +64,25 @@ const Index = ({
       onChange({
         target: { name, value: parsedResponse, type: attribute.type },
       });
+
+      setTimeout(() => {
+        document.querySelectorAll("button").forEach((button) => {
+          let span = button.querySelector("span");
+          if (span && span.textContent.trim() === "Save") {
+            button.removeAttribute("disabled"); // Enable the button
+            button.disabled = false;
+            button.click(); // Click it
+            console.log("Save button clicked");
+          }
+        });
+      }, 300);
+
     } catch (err) {
       throw new Error(`Error generating MCQ! status: ${err}`);
     }
   };
+
+  // const saveButton = document.querySelector('button[type="button"]:has-text("Save")');
 
   return (
     <Field.Root
