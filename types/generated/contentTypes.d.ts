@@ -558,16 +558,21 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    AssociatedChapter: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::chapter.chapter'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Identifier: Schema.Attribute.UID;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::quiz.quiz'> &
       Schema.Attribute.Private;
     PreviousPage: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
     Questions: Schema.Attribute.DynamicZone<
-      ['quizzes.multiple-choice-question']
+      ['quizzes.multiple-choice-question', 'quizzes.generated-mcq']
     >;
     QuizType: Schema.Attribute.Enumeration<['Open Book', 'Closed Book']> &
       Schema.Attribute.Required &
