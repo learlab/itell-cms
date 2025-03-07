@@ -613,6 +613,7 @@ export interface ApiTextText extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    VolumeConfig: Schema.Attribute.JSON;
     VolumeSummary: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.volumeSummary'>;
   };

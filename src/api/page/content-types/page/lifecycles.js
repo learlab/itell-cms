@@ -1,17 +1,20 @@
 const { generateChunkFields } = require("./updateChunkFields");
 const { generatePageEmbeddings, deleteAllEmbeddings } = require("./embeddings");
+const {validatePostActivities} = require("./validations");
 
 module.exports = {
   // Publishing is always "creating" even if a previously published version exists
   // Will also trigger when a new page is created in draft mode
   afterCreate: async (event) => {
     const { result } = event;
-      result.Content = await generateChunkFields(result.Content);
+    await validatePostActivities(result)
+    result.Content = await generateChunkFields(result.Content);
       await generatePageEmbeddings(result);
   },
 
   afterUpdate: async (event) => {
     const { result } = event;
+    await validatePostActivities(result)
     result.Content = await generateChunkFields(result.Content);
     await generatePageEmbeddings(result);
   },
