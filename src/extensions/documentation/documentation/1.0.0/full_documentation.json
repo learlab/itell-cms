@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-03-03T23:36:44.746Z"
+    "x-generation-date": "2025-03-18T19:11:24.873Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -5854,6 +5854,7 @@
                                 "FreePages": {
                                   "type": "string"
                                 },
+                                "VolumeConfig": {},
                                 "createdAt": {
                                   "type": "string",
                                   "format": "date-time"
@@ -6159,199 +6160,6 @@
                                 }
                               }
                             },
-                            "documentId": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "updatedBy": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "number"
-                            },
-                            "documentId": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "locale": {
-                          "type": "string"
-                        },
-                        "localizations": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "documentId": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "updatedBy": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "documentId": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "locale": {
-                      "type": "string"
-                    },
-                    "localizations": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "documentId": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "ReferenceSummary": {
-                  "type": "string"
-                },
-                "Chapter": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "documentId": {
-                      "type": "string"
-                    },
-                    "Pages": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "documentId": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "Title": {
-                      "type": "string"
-                    },
-                    "Module": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "documentId": {
-                          "type": "string"
-                        },
-                        "Title": {
-                          "type": "string"
-                        },
-                        "Slug": {
-                          "type": "string"
-                        },
-                        "Chapters": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "documentId": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        },
-                        "Volume": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "number"
-                            },
-                            "documentId": {
-                              "type": "string"
-                            },
-                            "Title": {
-                              "type": "string"
-                            },
-                            "Owner": {
-                              "type": "string"
-                            },
-                            "Description": {
-                              "type": "string"
-                            },
-                            "Slug": {
-                              "type": "string"
-                            },
-                            "Chapters": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "number"
-                                  },
-                                  "documentId": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            },
-                            "Modules": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "number"
-                                  },
-                                  "documentId": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            },
-                            "Pages": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "number"
-                                  },
-                                  "documentId": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            },
-                            "VolumeSummary": {
-                              "type": "string"
-                            },
-                            "FreePages": {
-                              "type": "string"
-                            },
-                            "VolumeConfig": {},
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -7116,13 +6924,6 @@
                               }
                             }
                           },
-                          "VolumeSummary": {
-                            "type": "string"
-                          },
-                          "FreePages": {
-                            "type": "string"
-                          },
-                          "VolumeConfig": {},
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -7691,92 +7492,6 @@
                                           },
                                           "documentId": {
                                             "type": "string"
-                                    }
-                                  }
-                                }
-                              },
-                              "VolumeSummary": {
-                                "type": "string"
-                              },
-                              "FreePages": {
-                                "type": "string"
-                              },
-                              "VolumeConfig": {},
-                              "createdAt": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "updatedAt": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "publishedAt": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "createdBy": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "number"
-                                  },
-                                  "documentId": {
-                                    "type": "string"
-                                  },
-                                  "firstname": {
-                                    "type": "string"
-                                  },
-                                  "lastname": {
-                                    "type": "string"
-                                  },
-                                  "username": {
-                                    "type": "string"
-                                  },
-                                  "email": {
-                                    "type": "string",
-                                    "format": "email"
-                                  },
-                                  "resetPasswordToken": {
-                                    "type": "string"
-                                  },
-                                  "registrationToken": {
-                                    "type": "string"
-                                  },
-                                  "isActive": {
-                                    "type": "boolean"
-                                  },
-                                  "roles": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "number"
-                                        },
-                                        "documentId": {
-                                          "type": "string"
-                                        },
-                                        "name": {
-                                          "type": "string"
-                                        },
-                                        "code": {
-                                          "type": "string"
-                                        },
-                                        "description": {
-                                          "type": "string"
-                                        },
-                                        "users": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "id": {
-                                                "type": "number"
-                                              },
-                                              "documentId": {
-                                                "type": "string"
-                                              }
-                                            }
                                           }
                                         }
                                       }
@@ -8174,6 +7889,7 @@
                           "FreePages": {
                             "type": "string"
                           },
+                          "VolumeConfig": {},
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -8828,6 +8544,7 @@
                               "FreePages": {
                                 "type": "string"
                               },
+                              "VolumeConfig": {},
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -9860,6 +9577,7 @@
                               "FreePages": {
                                 "type": "string"
                               },
+                              "VolumeConfig": {},
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -10165,13 +9883,6 @@
                               }
                             }
                           },
-                          "VolumeSummary": {
-                            "type": "string"
-                          },
-                          "FreePages": {
-                            "type": "string"
-                          },
-                          "VolumeConfig": {},
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
