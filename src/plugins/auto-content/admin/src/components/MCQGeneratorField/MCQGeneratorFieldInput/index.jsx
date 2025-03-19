@@ -61,8 +61,21 @@ const Index = ({
         parsedResponse =  parsedResponse.choices[0].message.content.trim();
       }
 
+      let responseObject = JSON.parse(parsedResponse);
+
+      let mdFormat = `- question: ${responseObject.question}
+  answers:
+  - answer: ${responseObject.correct_answer}
+    correct: true
+  - answer: "${responseObject.distractors[0]}
+    correct: false
+  - answer: "${responseObject.distractors[1]}
+    correct: false
+  - answer: "${responseObject.distractors[2]}
+    correct: false`;
+
       onChange({
-        target: { name, value: parsedResponse, type: attribute.type },
+        target: { name, value: mdFormat, type: attribute.type },
       });
 
       setTimeout(() => {

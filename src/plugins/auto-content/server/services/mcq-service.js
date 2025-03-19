@@ -1,9 +1,8 @@
 "use strict";
 
-import { zodResponseFormat } from "openai/helpers/zod";
-import { z } from "zod";
-
 const fetch = require("node-fetch");
+const z = require("zod")
+const { zodResponseFormat } = require("openai/helpers/zod");
 
 module.exports = ({strapi}) => {
   const createMCQ = async (Identifier) => {
@@ -58,24 +57,24 @@ module.exports = ({strapi}) => {
           role: "user",
           content: `
           You are a strategic reading coach that designs high-quality multiple-choice tests for adult learners. The questions you create provide valid and reliable information about students' reading comprehension.
-      
+
           # Question Types for Reading Comprehension
           ## Paraphrase Questions
           Ask students to restate explicitly presented information in different words. These assess textbase-level understanding without requiring connections between text parts or outside knowledge. They focus on single sentences or discrete ideas.
-      
+
           ## Inference Questions
-          ### Bridging Inference Questions: 
+          ### Bridging Inference Questions:
           Require connections between separate ideas in different parts of the text. More demanding and often depend on prior knowledge, especially for distant text connections.
           ### Elaborative Inference Questions:
           Ask students to combine prior knowledge with text information to form conclusions beyond what's explicitly stated. These assess deeper understanding.
-      
+
           ## Recall Questions
           Test memory for specific information presented in the text. Unlike paraphrase questions, these target precise retrieval of information, terms, or details from the text, primarily assessing text-based comprehension.
           Different question types measure different aspects of comprehension: text-based questions (recall, paraphrase) assess textbase representation, while inference questions better evaluate situation model and deeper understanding, particularly for readers with higher prior knowledge.
-      
+
           # Format
           Provide your response as a JSON object with the following structure:
-      
+
           {
             "question": "Your question here",
             "correct_answer": "Correct option text",
@@ -86,7 +85,7 @@ module.exports = ({strapi}) => {
             ],
             "explanation": "Explanation of why this is the correct answer"
           }
-          
+
           # Constraints
           - The question should be a single multiple choice question.
           - The question type should be paraphrase, inference, or recall.
@@ -94,18 +93,18 @@ module.exports = ({strapi}) => {
           - The question should not overlap with existing questions.
           - All options should be distinct, parallel in structure, and of similar length.
           - Distractors should be plausible, incorrect options.
-      
+
           # Distractor Guidelines
           - For paraphrase questions: include options with similar wording but incorrect meaning
           - For inference questions: include plausible but unsupported inferences
           - For recall questions: include include plausible but incorrect details
-      
+
           # Validation
           - Paraphrase questions must be answerable from a single explicit part of the text
           - Bridging inference questions must require connecting two or more text elements
           - Elaborative inference questions must require applying outside knowledge
           - Recall questions must test specific details without requiring rephrasing
-      
+
           # Inputs
           ## Text Title
           ${volume.Title}
@@ -117,7 +116,7 @@ module.exports = ({strapi}) => {
           ${pastQuestions}
           ## Question Type
           ${questionType ? questionType : ["paraphrase", "inference", "recall"][Math.floor(Math.random() * 3)]}
-      
+
           # Directive
           Provide a single multiple-choice question formatted as a JSON object that meets the above criteria.
           `,
