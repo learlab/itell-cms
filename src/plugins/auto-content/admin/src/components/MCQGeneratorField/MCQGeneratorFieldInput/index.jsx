@@ -67,11 +67,11 @@ const Index = ({
   answers:
   - answer: ${responseObject.correct_answer}
     correct: true
-  - answer: "${responseObject.distractors[0]}
+  - answer: ${responseObject.distractors[0]}
     correct: false
-  - answer: "${responseObject.distractors[1]}
+  - answer: ${responseObject.distractors[1]}
     correct: false
-  - answer: "${responseObject.distractors[2]}
+  - answer: ${responseObject.distractors[2]}
     correct: false`;
 
       onChange({
