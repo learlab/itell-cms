@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-03-28T18:28:47.180Z"
+    "x-generation-date": "2025-03-28T18:39:05.964Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -5560,9 +5560,6 @@
               "Slug": {
                 "type": "string"
               },
-              "ChapterNumber": {
-                "type": "integer"
-              },
               "Volume": {
                 "oneOf": [
                   {
@@ -6216,9 +6213,6 @@
                         "Slug": {
                           "type": "string"
                         },
-                        "ChapterNumber": {
-                          "type": "integer"
-                        },
                         "Volume": {
                           "type": "object",
                           "properties": {
@@ -6440,9 +6434,6 @@
           },
           "Slug": {
             "type": "string"
-          },
-          "ChapterNumber": {
-            "type": "integer"
           },
           "Volume": {
             "type": "object",
@@ -8020,9 +8011,6 @@
                 "Slug": {
                   "type": "string"
                 },
-                "ChapterNumber": {
-                  "type": "integer"
-                },
                 "Volume": {
                   "type": "object",
                   "properties": {
@@ -8905,9 +8893,6 @@
                       },
                       "Slug": {
                         "type": "string"
-                      },
-                      "ChapterNumber": {
-                        "type": "integer"
                       },
                       "Volume": {
                         "type": "object",
@@ -9939,9 +9924,6 @@
                       "Slug": {
                         "type": "string"
                       },
-                      "ChapterNumber": {
-                        "type": "integer"
-                      },
                       "Volume": {
                         "type": "object",
                         "properties": {
@@ -10259,7 +10241,9 @@
         "properties": {
           "data": {
             "required": [
-              "Title"
+              "Title",
+              "Description",
+              "FreePages"
             ],
             "type": "object",
             "properties": {
@@ -10383,7 +10367,9 @@
       "Text": {
         "type": "object",
         "required": [
-          "Title"
+          "Title",
+          "Description",
+          "FreePages"
         ],
         "properties": {
           "id": {
@@ -11120,9 +11106,6 @@
                 },
                 "Slug": {
                   "type": "string"
-                },
-                "ChapterNumber": {
-                  "type": "integer"
                 },
                 "Volume": {
                   "type": "object",

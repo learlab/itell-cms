@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const Index = ({
    name,
    attribute,
-   value = '',
+   value = 'This is a placeholder summary.',
    labelAction = null,
    label,
    disabled = false,

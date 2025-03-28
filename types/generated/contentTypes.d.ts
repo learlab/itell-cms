@@ -415,7 +415,6 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    ChapterNumber: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -599,8 +598,8 @@ export interface ApiTextText extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.String;
-    FreePages: Schema.Attribute.Text;
+    Description: Schema.Attribute.String & Schema.Attribute.Required;
+    FreePages: Schema.Attribute.Text & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::text.text'> &
       Schema.Attribute.Private;
