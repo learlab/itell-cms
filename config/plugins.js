@@ -45,17 +45,13 @@ module.exports = ({ env }) => ({
       contentTypes: [
         {
           uid: 'api::page.page',
-          targetField: 'slug',
+          targetField: 'id',
           draft: {
-            url: 'https://itell-preview.vercel.app/{slug}',
-            query: {
-              slug: '{slug}',
-              type: 'page'
-        }
-        },
+            url: 'https://itell-preview.vercel.app/?page={id}',
+          },
           published: {
-            url: 'https://itell-preview.vercel.app/',
-          }
+            url: 'https://itell-preview.vercel.app/?page={id}',
+          },
         }
       ]
     }
