@@ -536,7 +536,9 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     Quiz: Schema.Attribute.Relation<'oneToOne', 'api::quiz.quiz'>;
     ReferenceSummary: Schema.Attribute.Text;
-    Slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
+    Slug: Schema.Attribute.UID<'Title'> &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
