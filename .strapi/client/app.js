@@ -5,7 +5,6 @@
 import email from "@strapi/email/strapi-admin";
 import documentation from "@strapi/plugin-documentation/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
-import previewButton from "strapi-plugin-preview-button/strapi-admin";
 import githubPublish from "../../src/plugins/github-publish/strapi-admin";
 import autoContent from "../../src/plugins/auto-content/strapi-admin";
 import ckeditor from "../../src/plugins/ckeditor/strapi-admin";
@@ -20,7 +19,6 @@ renderAdmin(document.getElementById("strapi"), {
     email: email,
     documentation: documentation,
     "users-permissions": usersPermissions,
-    "preview-button": previewButton,
     "github-publish": githubPublish,
     "auto-content": autoContent,
     ckeditor: ckeditor,
