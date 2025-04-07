@@ -9,7 +9,6 @@ import KeyPhraseGeneratorIcon from "./components/KeyPhraseGenerator/KeyPhraseGen
 import SlugFieldIcon from "./components/SlugField/SlugFieldIcon";
 import PageSummaryFieldIcon from "./components/PageSummaryField/PageSummaryFieldIcon";
 import VolumeSummaryFieldIcon from "./components/VolumeSummaryField/VolumeSummaryFieldIcon";
-import MCQGeneratorFieldIcon from "./components/MCQGeneratorField/MCQGeneratorFieldIcon";
 
 const name = pluginPkg.strapi.name;
 
@@ -193,28 +192,6 @@ export default {
         components: {
           Input: async () =>
             import("./components/VolumeSummaryField/VolumeSummaryFieldInput"),
-        },
-        options: {
-          base: [],
-          advanced: [],
-        },
-      },
-      {
-        name: "mcqGenerator",
-        pluginId: "auto-content",
-        type: "text",
-        intlLabel: {
-          id: "mcqGenerator.mcqGenerator.label",
-          defaultMessage: "MCQ Generator",
-        },
-        intlDescription: {
-          id: "mcqGenerator.mcqGenerator.description",
-          defaultMessage: "Generate a multiple choice question using AI",
-        },
-        icon: MCQGeneratorFieldIcon,
-        components: {
-          Input: async () =>
-            import("./components/MCQGeneratorField/MCQGeneratorFieldInput"),
         },
         options: {
           base: [],

@@ -51,7 +51,15 @@ const HomePage = () => {
           Authorization: `Bearer ${JSON.parse(window.sessionStorage.jwtToken)}`,
         },
         body: JSON.stringify({
-          volume_ids: textID,
+          config: JSON.stringify({
+            targets: [
+              {
+                branch: "main",
+                volume_id: textID,
+                path: dir
+              }
+            ]
+          }),
           commit_message: "Update from itell-rs through Github Publish"
         }),
       });

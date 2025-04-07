@@ -21,8 +21,7 @@
     "Questions": {
       "type": "dynamiczone",
       "components": [
-        "quizzes.multiple-choice-question",
-        "quizzes.generated-mcq"
+        "quizzes.multiple-choice-question"
       ]
     },
     "QuizType": {
@@ -33,14 +32,6 @@
       ],
       "default": "Open Book",
       "required": true
-    },
-    "AssociatedChapter": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::chapter.chapter"
-    },
-    "Identifier": {
-      "type": "uid"
     }
   }
 }

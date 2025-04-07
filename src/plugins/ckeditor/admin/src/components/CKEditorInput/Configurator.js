@@ -146,6 +146,7 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       contentToolbar: [
         'tableColumn',
         'tableRow',
+        'mergeTableCells',
         '|',
         'toggleTableCaption'
       ]

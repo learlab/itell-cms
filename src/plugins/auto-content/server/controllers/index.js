@@ -6,6 +6,5 @@ module.exports = {
   transcriptGenerator: require("./fetch-transcript-controller"),
   keyPhraseGenerator: require("./keyphrase-extraction-controller"),
   pageSummaryField: require("./create-page-summary-controller"),
-  volumeSummaryField: require("./create-volume-summary-controller"),
-  mcqGeneratorField: require("./create-mcq-controller")
+  volumeSummaryField: require("./create-volume-summary-controller")
 };

@@ -21,7 +21,7 @@
     },
     "Description": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "Slug": {
       "type": "uid",
@@ -50,8 +50,7 @@
       "customField": "plugin::auto-content.volumeSummary"
     },
     "FreePages": {
-      "type": "text",
-      "required": true
+      "type": "text"
     },
     "VolumeConfig": {
       "type": "json"

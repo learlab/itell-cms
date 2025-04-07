@@ -415,6 +415,7 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    ChapterNumber: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -557,21 +558,16 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    AssociatedChapter: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::chapter.chapter'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Identifier: Schema.Attribute.UID;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::quiz.quiz'> &
       Schema.Attribute.Private;
     PreviousPage: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
     Questions: Schema.Attribute.DynamicZone<
-      ['quizzes.multiple-choice-question', 'quizzes.generated-mcq']
+      ['quizzes.multiple-choice-question']
     >;
     QuizType: Schema.Attribute.Enumeration<['Open Book', 'Closed Book']> &
       Schema.Attribute.Required &
@@ -598,8 +594,8 @@ export interface ApiTextText extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.String & Schema.Attribute.Required;
-    FreePages: Schema.Attribute.Text & Schema.Attribute.Required;
+    Description: Schema.Attribute.String;
+    FreePages: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::text.text'> &
       Schema.Attribute.Private;
