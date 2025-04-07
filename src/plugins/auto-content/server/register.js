@@ -65,5 +65,14 @@ module.exports = ({ strapi }) => {
         isResizable: true,
       },
     },
+    {
+      name: "mcqGenerator",
+      plugin: "auto-content",
+      type: "text",
+      inputSize: {
+        default: 12,
+        isResizable: true,
+      },
+    },
   ]);
 };

@@ -8,18 +8,18 @@ import PropTypes from 'prop-types';
 
 // Component for raw QA field
 const Index = ({
-   name,
-   attribute,
-   value = 'This is a placeholder summary.',
-   labelAction = null,
-   label,
-   disabled = false,
-   error = null,
-   required = true,
-   hint = '',
-   placeholder,
-   onChange,
- }) => {
+                 name,
+                 attribute,
+                 value = '',
+                 labelAction = null,
+                 label,
+                 disabled = false,
+                 error = null,
+                 required = true,
+                 hint = '',
+                 placeholder,
+                 onChange,
+               }) => {
   const { form } = useContentManagerContext();
   const { values } = form;
 
@@ -32,17 +32,18 @@ const Index = ({
     });
   }
 
-  const createVolumeSummary = async () => {
+  const createMCQ = async () => {
     try {
       showLoading();
-      const response = await fetch(`/auto-content/create-volume-summary`, {
+      console.log("Creating MCQ")
+      const response = await fetch(`/auto-content/create-mcq`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JSON.parse(window.sessionStorage.jwtToken)}`,
         },
         body: JSON.stringify({
-          title: values.Title,
+          identifier: values.Identifier,
         }),
       });
 
@@ -52,19 +53,45 @@ const Index = ({
       let parsedResponse = await response.json()
 
       if ("error" in parsedResponse) {
-        parsedResponse = `Error generating volume summary!: ${parsedResponse.error.message}`;
+        parsedResponse = `Error generating MCQ: ${parsedResponse.error.message}`;
       }
       else if(parsedResponse.choices[0].message.content.trim().length === 0 && parsedResponse.choices[0].finish_reason === "length"){
-        parsedResponse = `Error generating volume summary: ran out of tokens. `;
+        parsedResponse = `Error generating MCQ: ran out of tokens. `;
       } else {
         parsedResponse =  parsedResponse.choices[0].message.content.trim();
       }
 
+      let responseObject = JSON.parse(parsedResponse);
+
+      let mdFormat = `- question: ${responseObject.question}
+  answers:
+  - answer: ${responseObject.correct_answer}
+    correct: true
+  - answer: ${responseObject.distractors[0]}
+    correct: false
+  - answer: ${responseObject.distractors[1]}
+    correct: false
+  - answer: ${responseObject.distractors[2]}
+    correct: false`;
+
       onChange({
-        target: { name, value: parsedResponse, type: attribute.type },
+        target: { name, value: mdFormat, type: attribute.type },
       });
+
+      setTimeout(() => {
+        document.querySelectorAll("button").forEach((button) => {
+          let span = button.querySelector("span");
+          if (span && span.textContent.trim() === "Save") {
+            button.removeAttribute("disabled"); // Enable the button
+            button.disabled = false;
+            button.click(); // Click it
+            console.log("Save button clicked");
+          }
+        });
+      }, 300);
+
     } catch (err) {
-      throw new Error(`Error generating volume summary! status: ${err}`);
+      throw new Error(`Error generating MCQ! status: ${err}`);
     }
   };
 
@@ -79,7 +106,7 @@ const Index = ({
       <Flex direction="column" alignItems="stretch" gap={1}>
         <Field.Label action={labelAction}>{name}</Field.Label>
         <Textarea
-          placeholder='Write a one-paragraph summary of this volume here, or press "Create Volume Summary" to generate it.'
+          placeholder='Press the button to generate a MCQ question based on the chapter.'
           name="content"
           value={value}
           onChange={(e) =>
@@ -93,8 +120,8 @@ const Index = ({
         <Field.Error />
       </Flex>
       <Flex direction="column" alignItems="stretch" gap={1}>
-        <Button fullWidth onClick={() => createVolumeSummary()}>
-          Create Volume Summary
+        <Button fullWidth onClick={() => createMCQ()}>
+          Create MCQ Question
         </Button>
       </Flex>
     </Field.Root>

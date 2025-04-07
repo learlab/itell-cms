@@ -31,9 +31,6 @@
       "type": "uid",
       "targetField": "Title"
     },
-    "ChapterNumber": {
-      "type": "integer"
-    },
     "Volume": {
       "type": "relation",
       "relation": "manyToOne",
