@@ -27,8 +27,7 @@
     "Slug": {
       "type": "uid",
       "targetField": "Title",
-      "required": true,
-      "private": true
+      "required": true
     },
     "HasSummary": {
       "type": "boolean",
