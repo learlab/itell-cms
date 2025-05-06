@@ -304,9 +304,9 @@ turndownService.addRule("REPL", {
     const codeContent = codeBlock.textContent.trim();
 
     if (language === "python") {
-      return `<i-sandbox-py  page-slug="${pageSlug}" code={\`${codeContent}\`}>\n</i-sandbox-py>\n`;
+      return `<i-sandbox-py  page-slug="${pageSlug}" code='${codeContent}'>\n</i-sandbox-py>\n`;
     } else if (language === "javascript") {
-      return `<i-sandbox-js page-slug="${pageSlug}" code={\`${codeContent}\`}>\n</i-sandbox-js>\n`;
+      return `<i-sandbox-js page-slug="${pageSlug}" code='${codeContent}'>\n</i-sandbox-js>\n`;
     }
   },
 });
