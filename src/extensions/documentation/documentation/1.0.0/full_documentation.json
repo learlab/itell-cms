@@ -17,10 +17,7 @@
     "x-generation-date": "2025-04-05T23:33:47.213Z"
   },
   "x-strapi-config": {
-    "plugins": [
-      "upload",
-      "users-permissions"
-    ]
+    "plugins": ["upload", "users-permissions"]
   },
   "servers": [
     {
@@ -102,9 +99,7 @@
             }
           }
         },
-        "tags": [
-          "Api-key"
-        ],
+        "tags": ["Api-key"],
         "parameters": [
           {
             "name": "sort",
@@ -274,9 +269,7 @@
             }
           }
         },
-        "tags": [
-          "Api-key"
-        ],
+        "tags": ["Api-key"],
         "parameters": [],
         "operationId": "post/api-keys",
         "requestBody": {
@@ -355,9 +348,7 @@
             }
           }
         },
-        "tags": [
-          "Api-key"
-        ],
+        "tags": ["Api-key"],
         "parameters": [
           {
             "name": "id",
@@ -435,9 +426,7 @@
             }
           }
         },
-        "tags": [
-          "Api-key"
-        ],
+        "tags": ["Api-key"],
         "parameters": [
           {
             "name": "id",
@@ -526,9 +515,7 @@
             }
           }
         },
-        "tags": [
-          "Api-key"
-        ],
+        "tags": ["Api-key"],
         "parameters": [
           {
             "name": "id",
@@ -608,9 +595,7 @@
             }
           }
         },
-        "tags": [
-          "Chapter"
-        ],
+        "tags": ["Chapter"],
         "parameters": [
           {
             "name": "sort",
@@ -780,9 +765,7 @@
             }
           }
         },
-        "tags": [
-          "Chapter"
-        ],
+        "tags": ["Chapter"],
         "parameters": [],
         "operationId": "post/chapters",
         "requestBody": {
@@ -861,9 +844,7 @@
             }
           }
         },
-        "tags": [
-          "Chapter"
-        ],
+        "tags": ["Chapter"],
         "parameters": [
           {
             "name": "id",
@@ -941,9 +922,7 @@
             }
           }
         },
-        "tags": [
-          "Chapter"
-        ],
+        "tags": ["Chapter"],
         "parameters": [
           {
             "name": "id",
@@ -1032,9 +1011,7 @@
             }
           }
         },
-        "tags": [
-          "Chapter"
-        ],
+        "tags": ["Chapter"],
         "parameters": [
           {
             "name": "id",
@@ -1114,9 +1091,7 @@
             }
           }
         },
-        "tags": [
-          "External-dashboard-uri"
-        ],
+        "tags": ["External-dashboard-uri"],
         "parameters": [
           {
             "name": "sort",
@@ -1286,9 +1261,7 @@
             }
           }
         },
-        "tags": [
-          "External-dashboard-uri"
-        ],
+        "tags": ["External-dashboard-uri"],
         "parameters": [],
         "operationId": "post/external-dashboard-uris",
         "requestBody": {
@@ -1367,9 +1340,7 @@
             }
           }
         },
-        "tags": [
-          "External-dashboard-uri"
-        ],
+        "tags": ["External-dashboard-uri"],
         "parameters": [
           {
             "name": "id",
@@ -1447,9 +1418,7 @@
             }
           }
         },
-        "tags": [
-          "External-dashboard-uri"
-        ],
+        "tags": ["External-dashboard-uri"],
         "parameters": [
           {
             "name": "id",
@@ -1538,9 +1507,7 @@
             }
           }
         },
-        "tags": [
-          "External-dashboard-uri"
-        ],
+        "tags": ["External-dashboard-uri"],
         "parameters": [
           {
             "name": "id",
@@ -1620,9 +1587,7 @@
             }
           }
         },
-        "tags": [
-          "Module"
-        ],
+        "tags": ["Module"],
         "parameters": [
           {
             "name": "sort",
@@ -1792,9 +1757,7 @@
             }
           }
         },
-        "tags": [
-          "Module"
-        ],
+        "tags": ["Module"],
         "parameters": [],
         "operationId": "post/modules",
         "requestBody": {
@@ -1873,9 +1836,7 @@
             }
           }
         },
-        "tags": [
-          "Module"
-        ],
+        "tags": ["Module"],
         "parameters": [
           {
             "name": "id",
@@ -1953,9 +1914,7 @@
             }
           }
         },
-        "tags": [
-          "Module"
-        ],
+        "tags": ["Module"],
         "parameters": [
           {
             "name": "id",
@@ -2044,9 +2003,7 @@
             }
           }
         },
-        "tags": [
-          "Module"
-        ],
+        "tags": ["Module"],
         "parameters": [
           {
             "name": "id",
@@ -2126,9 +2083,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "sort",
@@ -2298,9 +2253,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [],
         "operationId": "post/pages",
         "requestBody": {
@@ -2379,9 +2332,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "id",
@@ -2459,9 +2410,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "id",
@@ -2550,9 +2499,7 @@
             }
           }
         },
-        "tags": [
-          "Page"
-        ],
+        "tags": ["Page"],
         "parameters": [
           {
             "name": "id",
@@ -2632,9 +2579,7 @@
             }
           }
         },
-        "tags": [
-          "Quiz"
-        ],
+        "tags": ["Quiz"],
         "parameters": [
           {
             "name": "sort",
@@ -2804,9 +2749,7 @@
             }
           }
         },
-        "tags": [
-          "Quiz"
-        ],
+        "tags": ["Quiz"],
         "parameters": [],
         "operationId": "post/quizzes",
         "requestBody": {
@@ -2885,9 +2828,7 @@
             }
           }
         },
-        "tags": [
-          "Quiz"
-        ],
+        "tags": ["Quiz"],
         "parameters": [
           {
             "name": "id",
@@ -2965,9 +2906,7 @@
             }
           }
         },
-        "tags": [
-          "Quiz"
-        ],
+        "tags": ["Quiz"],
         "parameters": [
           {
             "name": "id",
@@ -3056,9 +2995,7 @@
             }
           }
         },
-        "tags": [
-          "Quiz"
-        ],
+        "tags": ["Quiz"],
         "parameters": [
           {
             "name": "id",
@@ -3138,9 +3075,7 @@
             }
           }
         },
-        "tags": [
-          "Text"
-        ],
+        "tags": ["Text"],
         "parameters": [
           {
             "name": "sort",
@@ -3310,9 +3245,7 @@
             }
           }
         },
-        "tags": [
-          "Text"
-        ],
+        "tags": ["Text"],
         "parameters": [],
         "operationId": "post/texts",
         "requestBody": {
@@ -3391,9 +3324,7 @@
             }
           }
         },
-        "tags": [
-          "Text"
-        ],
+        "tags": ["Text"],
         "parameters": [
           {
             "name": "id",
@@ -3471,9 +3402,7 @@
             }
           }
         },
-        "tags": [
-          "Text"
-        ],
+        "tags": ["Text"],
         "parameters": [
           {
             "name": "id",
@@ -3562,9 +3491,7 @@
             }
           }
         },
-        "tags": [
-          "Text"
-        ],
+        "tags": ["Text"],
         "parameters": [
           {
             "name": "id",
@@ -3599,18 +3526,14 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "Upload files",
           "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "required": [
-                  "files"
-                ],
+                "required": ["files"],
                 "type": "object",
                 "properties": {
                   "path": {
@@ -3673,9 +3596,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "Upload files",
           "required": true,
@@ -3711,9 +3632,7 @@
     },
     "/upload/files": {
       "get": {
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "responses": {
           "200": {
             "description": "Get a list of files",
@@ -3745,9 +3664,7 @@
             }
           }
         ],
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "responses": {
           "200": {
             "description": "Get a specific file",
@@ -3774,9 +3691,7 @@
             }
           }
         ],
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "responses": {
           "200": {
             "description": "Delete a file",
@@ -3805,9 +3720,7 @@
             }
           }
         ],
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Login with a provider",
         "description": "Redirects to provider login before being redirect to /auth/{provider}/callback",
         "responses": {
@@ -3829,9 +3742,7 @@
     },
     "/auth/local": {
       "post": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Local login",
         "description": "Returns a jwt token and user info",
         "requestBody": {
@@ -3882,9 +3793,7 @@
     },
     "/auth/local/register": {
       "post": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Register a user",
         "description": "Returns a jwt token and user info",
         "requestBody": {
@@ -3939,9 +3848,7 @@
     },
     "/auth/{provider}/callback": {
       "get": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Default Callback from provider auth",
         "parameters": [
           {
@@ -3980,9 +3887,7 @@
     },
     "/auth/forgot-password": {
       "post": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Send rest password email",
         "requestBody": {
           "required": true,
@@ -4012,9 +3917,7 @@
                   "properties": {
                     "ok": {
                       "type": "string",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   }
                 }
@@ -4036,9 +3939,7 @@
     },
     "/auth/reset-password": {
       "post": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Rest user password",
         "requestBody": {
           "required": true,
@@ -4092,9 +3993,7 @@
     },
     "/auth/change-password": {
       "post": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Update user's own password",
         "requestBody": {
           "required": true,
@@ -4148,9 +4047,7 @@
     },
     "/auth/email-confirmation": {
       "get": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Confirm user email",
         "parameters": [
           {
@@ -4181,9 +4078,7 @@
     },
     "/auth/send-email-confirmation": {
       "post": {
-        "tags": [
-          "Users-Permissions - Auth"
-        ],
+        "tags": ["Users-Permissions - Auth"],
         "summary": "Send confirmation email",
         "requestBody": {
           "required": true,
@@ -4213,9 +4108,7 @@
                     },
                     "sent": {
                       "type": "string",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   }
                 }
@@ -4237,9 +4130,7 @@
     },
     "/users-permissions/permissions": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Get default generated permissions",
         "responses": {
           "200": {
@@ -4308,9 +4199,7 @@
     },
     "/users-permissions/roles": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "List roles",
         "responses": {
           "200": {
@@ -4369,9 +4258,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Create a role",
         "requestBody": {
           "$ref": "#/components/requestBodies/Users-Permissions-RoleRequest"
@@ -4386,9 +4273,7 @@
                   "properties": {
                     "ok": {
                       "type": "string",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   }
                 }
@@ -4410,9 +4295,7 @@
     },
     "/users-permissions/roles/{id}": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Get a role",
         "parameters": [
           {
@@ -4477,9 +4360,7 @@
     },
     "/users-permissions/roles/{role}": {
       "put": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Update a role",
         "parameters": [
           {
@@ -4505,9 +4386,7 @@
                   "properties": {
                     "ok": {
                       "type": "string",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   }
                 }
@@ -4527,9 +4406,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Delete a role",
         "parameters": [
           {
@@ -4552,9 +4429,7 @@
                   "properties": {
                     "ok": {
                       "type": "string",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   }
                 }
@@ -4576,9 +4451,7 @@
     },
     "/users": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Get list of users",
         "responses": {
           "200": {
@@ -4619,9 +4492,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Create a user",
         "requestBody": {
           "required": true,
@@ -4629,11 +4500,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "username",
-                  "email",
-                  "password"
-                ],
+                "required": ["username", "email", "password"],
                 "properties": {
                   "email": {
                     "type": "string"
@@ -4710,9 +4577,7 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Get a user",
         "parameters": [
           {
@@ -4759,9 +4624,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Update a user",
         "parameters": [
           {
@@ -4780,11 +4643,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "username",
-                  "email",
-                  "password"
-                ],
+                "required": ["username", "email", "password"],
                 "properties": {
                   "email": {
                     "type": "string"
@@ -4859,9 +4718,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Delete a user",
         "parameters": [
           {
@@ -4914,9 +4771,7 @@
     },
     "/users/me": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Get authenticated user info",
         "responses": {
           "200": {
@@ -4954,9 +4809,7 @@
     },
     "/users/count": {
       "get": {
-        "tags": [
-          "Users-Permissions - Users & Roles"
-        ],
+        "tags": ["Users-Permissions - Users & Roles"],
         "summary": "Get user count",
         "responses": {
           "200": {
@@ -4995,9 +4848,7 @@
     "schemas": {
       "Error": {
         "type": "object",
-        "required": [
-          "error"
-        ],
+        "required": ["error"],
         "properties": {
           "data": {
             "nullable": true,
@@ -5034,15 +4885,10 @@
       },
       "ApiKeyRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "Nickname",
-              "Role"
-            ],
+            "required": ["Nickname", "Role"],
             "type": "object",
             "properties": {
               "Nickname": {
@@ -5050,10 +4896,7 @@
               },
               "Role": {
                 "type": "string",
-                "enum": [
-                  "developer",
-                  "deployment"
-                ]
+                "enum": ["developer", "deployment"]
               },
               "ApiKey": {
                 "type": "string"
@@ -5116,10 +4959,7 @@
       },
       "ApiKey": {
         "type": "object",
-        "required": [
-          "Nickname",
-          "Role"
-        ],
+        "required": ["Nickname", "Role"],
         "properties": {
           "id": {
             "type": "number"
@@ -5132,10 +4972,7 @@
           },
           "Role": {
             "type": "string",
-            "enum": [
-              "developer",
-              "deployment"
-            ]
+            "enum": ["developer", "deployment"]
           },
           "ApiKey": {
             "type": "string"
@@ -5445,10 +5282,7 @@
                 },
                 "Role": {
                   "type": "string",
-                  "enum": [
-                    "developer",
-                    "deployment"
-                  ]
+                  "enum": ["developer", "deployment"]
                 },
                 "ApiKey": {
                   "type": "string"
@@ -5522,9 +5356,7 @@
       },
       "ChapterRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "type": "object",
@@ -5721,10 +5553,7 @@
                     },
                     "QuizType": {
                       "type": "string",
-                      "enum": [
-                        "Open Book",
-                        "Closed Book"
-                      ]
+                      "enum": ["Open Book", "Closed Book"]
                     },
                     "createdAt": {
                       "type": "string",
@@ -6509,9 +6338,7 @@
           },
           "__component": {
             "type": "string",
-            "enum": [
-              "page.video"
-            ]
+            "enum": ["page.video"]
           },
           "Header": {
             "type": "string"
@@ -6562,9 +6389,7 @@
           },
           "__component": {
             "type": "string",
-            "enum": [
-              "page.chunk"
-            ]
+            "enum": ["page.chunk"]
           },
           "QuestionAnswerResponse": {
             "type": "string"
@@ -6598,11 +6423,7 @@
           },
           "HeaderLevel": {
             "type": "string",
-            "enum": [
-              "H2",
-              "H3",
-              "H4"
-            ]
+            "enum": ["H2", "H3", "H4"]
           },
           "MD": {
             "type": "string"
@@ -6617,9 +6438,7 @@
           },
           "__component": {
             "type": "string",
-            "enum": [
-              "page.plain-chunk"
-            ]
+            "enum": ["page.plain-chunk"]
           },
           "CleanText": {
             "type": "string"
@@ -6641,11 +6460,7 @@
           },
           "HeaderLevel": {
             "type": "string",
-            "enum": [
-              "H2",
-              "H3",
-              "H4"
-            ]
+            "enum": ["H2", "H3", "H4"]
           },
           "MD": {
             "type": "string"
@@ -6674,9 +6489,7 @@
           },
           "__component": {
             "type": "string",
-            "enum": [
-              "quizzes.multiple-choice-question"
-            ]
+            "enum": ["quizzes.multiple-choice-question"]
           },
           "Question": {
             "type": "string"
@@ -6689,11 +6502,24 @@
           }
         }
       },
+      "QuizzesGeneratedMcqComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "__component": {
+            "type": "string",
+            "enum": ["quizzes.generated-mcq"]
+          },
+          "GeneratedQuestion": {
+            "type": "string"
+          }
+        }
+      },
       "ExternalDashboardUriRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "type": "object",
@@ -7159,9 +6985,7 @@
       },
       "ModuleRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "type": "object",
@@ -7361,10 +7185,7 @@
                           },
                           "QuizType": {
                             "type": "string",
-                            "enum": [
-                              "Open Book",
-                              "Closed Book"
-                            ]
+                            "enum": ["Open Book", "Closed Book"]
                           },
                           "createdAt": {
                             "type": "string",
@@ -8112,16 +7933,10 @@
       },
       "PageRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "Title",
-              "Slug",
-              "Order"
-            ],
+            "required": ["Title", "Slug", "Order"],
             "type": "object",
             "properties": {
               "Title": {
@@ -8257,11 +8072,7 @@
       },
       "Page": {
         "type": "object",
-        "required": [
-          "Title",
-          "Slug",
-          "Order"
-        ],
+        "required": ["Title", "Slug", "Order"],
         "properties": {
           "id": {
             "type": "number"
@@ -9008,10 +8819,7 @@
               },
               "QuizType": {
                 "type": "string",
-                "enum": [
-                  "Open Book",
-                  "Closed Book"
-                ]
+                "enum": ["Open Book", "Closed Book"]
               },
               "createdAt": {
                 "type": "string",
@@ -9163,14 +8971,10 @@
       },
       "QuizRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "QuizType"
-            ],
+            "required": ["QuizType"],
             "type": "object",
             "properties": {
               "PreviousPage": {
@@ -9202,10 +9006,7 @@
               },
               "QuizType": {
                 "type": "string",
-                "enum": [
-                  "Open Book",
-                  "Closed Book"
-                ]
+                "enum": ["Open Book", "Closed Book"]
               },
               "locale": {
                 "type": "string"
@@ -9265,9 +9066,7 @@
       },
       "Quiz": {
         "type": "object",
-        "required": [
-          "QuizType"
-        ],
+        "required": ["QuizType"],
         "properties": {
           "id": {
             "type": "number"
@@ -9355,10 +9154,7 @@
                   },
                   "QuizType": {
                     "type": "string",
-                    "enum": [
-                      "Open Book",
-                      "Closed Book"
-                    ]
+                    "enum": ["Open Book", "Closed Book"]
                   },
                   "createdAt": {
                     "type": "string",
@@ -10057,10 +9853,7 @@
           },
           "QuizType": {
             "type": "string",
-            "enum": [
-              "Open Book",
-              "Closed Book"
-            ]
+            "enum": ["Open Book", "Closed Book"]
           },
           "createdAt": {
             "type": "string",
@@ -10128,14 +9921,10 @@
       },
       "TextRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "Title"
-            ],
+            "required": ["Title", "Description", "FreePages"],
             "type": "object",
             "properties": {
               "Title": {
@@ -10257,9 +10046,7 @@
       },
       "Text": {
         "type": "object",
-        "required": [
-          "Title"
-        ],
+        "required": ["Title", "Description", "FreePages"],
         "properties": {
           "id": {
             "type": "number"
@@ -10372,10 +10159,7 @@
                           },
                           "QuizType": {
                             "type": "string",
-                            "enum": [
-                              "Open Book",
-                              "Closed Book"
-                            ]
+                            "enum": ["Open Book", "Closed Book"]
                           },
                           "createdAt": {
                             "type": "string",
