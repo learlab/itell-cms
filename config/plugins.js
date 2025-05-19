@@ -40,24 +40,28 @@ module.exports = ({ env }) => ({
     resolve: "./src/plugins/ckeditor"
   },
   'preview-button': {
+    enabled: true,
     config: {
       contentTypes: [
         {
           uid: 'api::page.page',
+          targetField: 'Slug',
           draft: {
-            url: 'https://itell-preview.vercel.app/',
+            url: 'https://itell-preview.vercel.app/{Slug}',
             query: {
-              page: '{id}',
-            },
+              Slug: '{Slug}',
+              type: 'page'
+            }
           },
           published: {
-            url: 'https://itell-preview.vercel.app/',
+            url: 'https://itell-preview.vercel.app/{Slug}',
             query: {
-              page: '{id}',
-            },
-          },
+              Slug: '{Slug}',
+              type: 'page'
+            }
+          }
         }
-      ],
-    },
+      ]
+    }
   }
 });

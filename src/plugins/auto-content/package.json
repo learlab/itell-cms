@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@strapi/icons": "^2.0.0-rc.11",
-    "@strapi/utils": "^5.1.1",
+    "@strapi/utils": "^5.11.2",
     "hast-util-is-element": "1.1.0",
     "hast-util-to-text": "2.0.1",
     "joplin-turndown": "^4.0.30",
