@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-05-19T09:17:17.626Z"
+    "x-generation-date": "2025-05-21T09:25:20.397Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6595,14 +6595,6 @@
           },
           "ShowHeader": {
             "type": "boolean"
-          },
-          "HeaderLevel": {
-            "type": "string",
-            "enum": [
-              "H2",
-              "H3",
-              "H4"
-            ]
           },
           "MD": {
             "type": "string"

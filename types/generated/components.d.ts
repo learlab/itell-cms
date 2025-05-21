@@ -11,9 +11,6 @@ export interface PageChunk extends Struct.ComponentSchema {
     ConstructedResponse: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.constructedResponse'>;
     Header: Schema.Attribute.String & Schema.Attribute.Required;
-    HeaderLevel: Schema.Attribute.Enumeration<['H2', 'H3', 'H4']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'H2'>;
     KeyPhrase: Schema.Attribute.Text &
       Schema.Attribute.CustomField<'plugin::auto-content.keyPhrase'>;
     MD: Schema.Attribute.Text;
