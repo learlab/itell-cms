@@ -48,17 +48,9 @@ module.exports = ({ env }) => ({
           targetField: 'Slug',
           draft: {
             url: 'https://itell-preview.vercel.app/{Slug}',
-            query: {
-              Slug: '{Slug}',
-              type: 'page'
-            }
           },
           published: {
             url: 'https://itell-preview.vercel.app/{Slug}',
-            query: {
-              Slug: '{Slug}',
-              type: 'page'
-            }
           }
         }
       ]
