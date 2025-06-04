@@ -36,16 +36,6 @@
       "default": true,
       "required": true
     },
-    "HeaderLevel": {
-      "type": "enumeration",
-      "enum": [
-        "H2",
-        "H3",
-        "H4"
-      ],
-      "required": true,
-      "default": "H2"
-    },
     "MD": {
       "type": "text"
     }

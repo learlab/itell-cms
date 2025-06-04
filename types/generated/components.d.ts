@@ -45,9 +45,6 @@ export interface PagePlainChunk extends Struct.ComponentSchema {
   attributes: {
     CleanText: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
     Header: Schema.Attribute.String & Schema.Attribute.Required;
-    HeaderLevel: Schema.Attribute.Enumeration<['H2', 'H3', 'H4']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'H2'>;
     MD: Schema.Attribute.Text;
     MDX: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'not set'>;
     ShowHeader: Schema.Attribute.Boolean &
