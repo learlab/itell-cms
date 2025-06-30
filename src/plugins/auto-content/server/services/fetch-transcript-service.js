@@ -9,7 +9,6 @@ module.exports = ({ strapi }) => {
     const start_num = parseInt(start);
     const end_num = parseInt(end);
 
-    try {
       const response = await fetch(
         `https://itell-api.learlab.vanderbilt.edu/generate/transcript`,
         {
@@ -25,13 +24,23 @@ module.exports = ({ strapi }) => {
           }),
         },
       );
-      const result = await response.json();
-      return result.transcript;
-    } catch (error) {
-      throw new ApplicationError("Failed to generate transcript", {
-        foo: "bar",
-      });
-    }
+      if(response.status === 500){
+        return("Error: Problem obtaining transcript. Contact LearLab for API update.")
+      }
+
+      else if(response.status === 422){
+        return("Error: Invalid input for the URL.")
+      }
+      else{
+        try{
+          const result = await response.json();
+          return result.transcript;
+        }
+        catch(e){
+          return(`Error: Couldn't parse API result. Contact for API update: ${e}`)
+        }
+      }
+
   };
 
   return {

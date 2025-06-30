@@ -1,3 +1,6 @@
+const { errors } = require("@strapi/utils");
+const { ApplicationError } = errors;
+
 module.exports = ({ strapi }) => {
   const fetchTranscriptService = strapi.plugins["auto-content"].service(
     "fetchTranscriptService",
@@ -7,17 +10,17 @@ module.exports = ({ strapi }) => {
     const url = ctx.request.body.url;
     const startTime = ctx.request.body.startTime;
     const endTime = ctx.request.body.endTime;
-
-    if (url) {
+    console.log("URL: " + url, typeof url)
+    if (url !== "undefined" && url !== "null" && url !== "") {
       try {
         return fetchTranscriptService.getTranscript(url, startTime, endTime);
       } catch (err) {
-        console.log(err);
-        ctx.throw(500, err);
+        console.log(err)
       }
     }
-
-    return ctx.throw(400, "URL is missing.");
+    else{
+      return "Error: Blank URL provided. Please input URL"
+    }
   };
 
   return {

@@ -142,6 +142,10 @@ const Index = ({
       // create clean text to feed into QA generation
       const cleanTextFeed = await getTargetText();
 
+      if(!cleanTextFeed){
+        return
+      }
+
       const response = await fetch(`/auto-content/generate-question`, {
         method: "POST",
         headers: {
@@ -221,23 +225,23 @@ const Index = ({
         },
         body: payload,
       });
-
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-
       let fetchedTranscript;
 
       try {
         fetchedTranscript = await response.text();
+
+        if(fetchedTranscript.includes("Error: ")){
+          alert(fetchedTranscript)
+        }
+        else{
+          return fetchedTranscript;
+        }
       } catch (error) {
-        console.error("Error fetching transcript:", error);
-        fetchedTranscript = "Error fetching transcript";
+        console.log(error)
       }
 
-      return fetchedTranscript;
     } catch (err) {
-      console.log(err);
+      console.log(error)
     }
   };
 
