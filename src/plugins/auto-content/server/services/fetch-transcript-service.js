@@ -1,15 +1,12 @@
 "use strict";
 
 const fetch = require("node-fetch");
-const { errors } = require("@strapi/utils");
-const { ApplicationError } = errors;
 
 module.exports = ({ strapi }) => {
-  const getTranscript = async (url, start, end) => {
+  const getTranscript = async (url, start, end, ctx) => {
     const start_num = parseInt(start);
     const end_num = parseInt(end);
 
-    try {
       const response = await fetch(
         `https://itell-api.learlab.vanderbilt.edu/generate/transcript`,
         {
@@ -25,13 +22,23 @@ module.exports = ({ strapi }) => {
           }),
         },
       );
-      const result = await response.json();
-      return result.transcript;
-    } catch (error) {
-      throw new ApplicationError("Failed to generate transcript", {
-        foo: "bar",
-      });
-    }
+      if(response.status === 500){
+        return ctx.badRequest('Problem obtaining transcript. Contact LearLab for API update.' );
+      }
+
+      else if(response.status === 422){
+        return ctx.badRequest('Invalid input for the URL.');
+      }
+      else{
+        try{
+          const result = await response.json();
+          return result.transcript;
+        }
+        catch(e){
+          return ctx.badRequest(`Couldn't parse API result. Contact LearLab for API update: ${e}`);
+        }
+      }
+
   };
 
   return {

@@ -105,6 +105,10 @@ const Index = ({
       showLoading();
       // create clean text to feed into QA generation
       const cleanTextFeed = await getTargetText();
+      if(!cleanTextFeed){
+        return
+      }
+
       const response = await fetch(`/auto-content/extract-keyphrase`, {
         method: "POST",
         headers: {
@@ -186,15 +190,19 @@ const Index = ({
 
       try {
         fetchedTranscript = await response.text();
+
+        if(fetchedTranscript.includes("Error: ")){
+          alert(fetchedTranscript)
+        }
+        else{
+          return fetchedTranscript;
+        }
       } catch (error) {
-        console.error("Error fetching transcript:", error);
-        fetchedTranscript = "Error fetching transcript";
-        throw new Error(`Error fetching transcript! status: ${error}`);
+        console.log(error)
       }
 
-      return fetchedTranscript;
     } catch (err) {
-      console.log(err);
+      console.log(error)
     }
   };
 
