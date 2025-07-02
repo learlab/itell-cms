@@ -1,11 +1,9 @@
 "use strict";
 
 const fetch = require("node-fetch");
-const { errors } = require("@strapi/utils");
-const { ApplicationError } = errors;
 
 module.exports = ({ strapi }) => {
-  const getTranscript = async (url, start, end) => {
+  const getTranscript = async (url, start, end, ctx) => {
     const start_num = parseInt(start);
     const end_num = parseInt(end);
 
@@ -25,11 +23,11 @@ module.exports = ({ strapi }) => {
         },
       );
       if(response.status === 500){
-        return("Error: Problem obtaining transcript. Contact LearLab for API update.")
+        return ctx.badRequest('Problem obtaining transcript. Contact LearLab for API update.' );
       }
 
       else if(response.status === 422){
-        return("Error: Invalid input for the URL.")
+        return ctx.badRequest('Invalid input for the URL.');
       }
       else{
         try{
@@ -37,7 +35,7 @@ module.exports = ({ strapi }) => {
           return result.transcript;
         }
         catch(e){
-          return(`Error: Couldn't parse API result. Contact for API update: ${e}`)
+          return ctx.badRequest(`Couldn't parse API result. Contact LearLab for API update: ${e}`);
         }
       }
 

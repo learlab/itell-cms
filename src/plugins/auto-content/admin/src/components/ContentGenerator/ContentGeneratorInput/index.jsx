@@ -211,11 +211,20 @@ const Index = ({
 
   const fetchTranscript = async () => {
     try {
-      const payload = JSON.stringify({
+      let payload = {
         url: `${debouncedVideoFieldValue["url"]}`,
         startTime: `${debouncedVideoFieldValue["startTime"]}`,
         endTime: `${debouncedVideoFieldValue["endTime"]}`,
-      });
+      };
+
+      console.log(payload.url, typeof payload.url)
+
+      if (payload.url === "undefined" || payload.url === "null" || payload.url === "") {
+        alert("Missing URL for video")
+        return ""
+      }
+
+      payload = JSON.stringify(payload)
       // fetch transcript service
       const response = await fetch(`/auto-content/fetch-transcript`, {
         method: "POST",
@@ -225,6 +234,12 @@ const Index = ({
         },
         body: payload,
       });
+
+      if(response.status === 400){
+        alert((await response.json()).error.message)
+        return ""
+      }
+
       let fetchedTranscript;
 
       try {

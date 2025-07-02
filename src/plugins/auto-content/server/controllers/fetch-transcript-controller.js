@@ -10,17 +10,7 @@ module.exports = ({ strapi }) => {
     const url = ctx.request.body.url;
     const startTime = ctx.request.body.startTime;
     const endTime = ctx.request.body.endTime;
-    console.log("URL: " + url, typeof url)
-    if (url !== "undefined" && url !== "null" && url !== "") {
-      try {
-        return fetchTranscriptService.getTranscript(url, startTime, endTime);
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    else{
-      return "Error: Blank URL provided. Please input URL"
-    }
+    return fetchTranscriptService.getTranscript(url, startTime, endTime, ctx);
   };
 
   return {
