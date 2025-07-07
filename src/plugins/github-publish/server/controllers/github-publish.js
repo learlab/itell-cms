@@ -14,6 +14,7 @@ module.exports = ({ strapi }) => ({
     };
 
     const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow_id}/runs?branch=${branch}`;
+
     const { data: inProgressData } = await axios.get(
       `${url}&status=in_progress`,
       {
@@ -25,6 +26,22 @@ module.exports = ({ strapi }) => ({
     });
     const busy = !!(inProgressData.total_count + queuedData.total_count);
 
+    let lastWeek = new Date();
+    lastWeek.setMinutes(lastWeek.getMinutes() - (1440 * 7));
+
+    let table_url = `https://api.github.com/repos/${owner}/${repo}/actions/runs?created=>${lastWeek.toISOString()}&branch=${branch}&event=workflow_dispatch`
+    console.log(table_url)
+
+    const response = await axios.get(table_url);
+
+    let runs = response['data']['workflow_runs'];
+
+
+    // const logHeaders = {
+    //   Authorization: `token ${token}`,
+    // };
+    // let logs = await (axios.get("https://api.github.com/repos/learlab/itell-rs/actions/jobs/44988551414/logs", {headers}))
+    // console.log(logs)
     ctx.send({ busy });
   },
 
@@ -54,6 +71,26 @@ module.exports = ({ strapi }) => ({
     try {
       const response = await axios.post(url, data, { headers });
       const success = response.status === 204;
+
+      const statusUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow_id}/runs?branch=${ref}`;
+
+      const { data: inProgressData } = await axios.get(
+        `${statusUrl}&status=in_progress`,
+        {
+          headers,
+        },
+      );
+
+      const { data: queued } = await axios.get(
+        `${statusUrl}&status=queued`,
+        {
+          headers,
+        },
+      );
+
+      console.log(inProgressData.total_count)
+      console.log(queued.total_count)
+
       ctx.send({ success });
     } catch (error) {
       // Log the full error response for debugging
@@ -61,7 +98,7 @@ module.exports = ({ strapi }) => ({
         "Error triggering GitHub workflow:",
         error.response?.data || error.message,
       );
-      ctx.throw(500, "Failed to trigger GitHub workflow");
+      ctx.throw(500, "Failed to trigger GitHub workflow " + error.message);
     }
   },
 

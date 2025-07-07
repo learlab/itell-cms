@@ -13,6 +13,8 @@ import pluginId from "../../pluginId";
 import {BaseHeaderLayout} from "../../components/HomePage/BaseHeaderLayout";
 import {ContentLayout} from "../../components/HomePage/ContentLayout";
 
+import {TableLayout} from "../../components/HomePage/TableLayout";
+
 const POLL_INTERVAL = 10000;
 const StyledAlert = styled(Alert)`
   button {
@@ -29,11 +31,7 @@ const HomePage = () => {
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   let [texts, setTexts] = useState([]);
-
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
 
   const handleError = (e = "Server error") => {
     console.error(e);
@@ -185,9 +183,17 @@ const HomePage = () => {
               onClick={triggerPublish}
               texts={texts}
             />
+            <BaseHeaderLayout
+              title={"Recent Runs"}
+              as="h2"
+            />
+            <TableLayout>
+
+            </TableLayout>
           </div>
         )}
       </ContentLayout>
+
     </Box>
   );
 };
