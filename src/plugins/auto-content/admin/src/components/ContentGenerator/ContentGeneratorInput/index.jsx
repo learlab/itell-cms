@@ -142,6 +142,10 @@ const Index = ({
       // create clean text to feed into QA generation
       const cleanTextFeed = await getTargetText();
 
+      if(!cleanTextFeed){
+        return
+      }
+
       const response = await fetch(`/auto-content/generate-question`, {
         method: "POST",
         headers: {
@@ -207,11 +211,20 @@ const Index = ({
 
   const fetchTranscript = async () => {
     try {
-      const payload = JSON.stringify({
+      let payload = {
         url: `${debouncedVideoFieldValue["url"]}`,
         startTime: `${debouncedVideoFieldValue["startTime"]}`,
         endTime: `${debouncedVideoFieldValue["endTime"]}`,
-      });
+      };
+
+      console.log(payload.url, typeof payload.url)
+
+      if (payload.url === "undefined" || payload.url === "null" || payload.url === "") {
+        alert("Missing URL for video")
+        return ""
+      }
+
+      payload = JSON.stringify(payload)
       // fetch transcript service
       const response = await fetch(`/auto-content/fetch-transcript`, {
         method: "POST",
@@ -222,22 +235,28 @@ const Index = ({
         body: payload,
       });
 
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
+      if(response.status === 400){
+        alert((await response.json()).error.message)
+        return ""
       }
 
       let fetchedTranscript;
 
       try {
         fetchedTranscript = await response.text();
+
+        if(fetchedTranscript.includes("Error: ")){
+          alert(fetchedTranscript)
+        }
+        else{
+          return fetchedTranscript;
+        }
       } catch (error) {
-        console.error("Error fetching transcript:", error);
-        fetchedTranscript = "Error fetching transcript";
+        console.log(error)
       }
 
-      return fetchedTranscript;
     } catch (err) {
-      console.log(err);
+      console.log(error)
     }
   };
 
