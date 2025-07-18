@@ -1,4 +1,5 @@
 module.exports = ({ env }) => {
+
   if (process.env.NODE_ENV == 'development') {
     const path = require('path');
 
@@ -28,13 +29,13 @@ module.exports = ({ env }) => {
         pool: {
           min: env.int("DATABASE_POOL_MIN"),
           max: env.int("DATABASE_POOL_MAX"),
-          acquireTimeoutMillis: 300000,
-          createTimeoutMillis: 300000,
-          destroyTimeoutMillis: 50000,
-          idleTimeoutMillis: 300000,
-          reapIntervalMillis: 10000,
-          createRetryIntervalMillis: 2000,
-          propagateCreateError: false,
+          acquireTimeoutMillis: env.int("ACQUIRE_TIMEOUT_MILLIS"),
+          createTimeoutMillis: env.int("CREATE_TIMEOUT_MILLIS"),
+          destroyTimeoutMillis: env.int("DESTROY_TIMEOUT_MILLIS"),
+          idleTimeoutMillis: env.int("IDLE_TIMEOUT_MILLIS"),
+          reapIntervalMillis: env.int("REAP_INTERVAL_MILLIS"),
+          createRetryIntervalMillis: env.int("CREATE_RETRY_INTERVAL_MILLIS"),
+          propagateCreateError: env.bool("PROPAGATE_CREATE_ERROR"),
         },
       },
     };
