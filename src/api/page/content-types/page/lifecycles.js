@@ -3,6 +3,7 @@ const {
   getPageSummaryAndText,
 } = require("./updateChunkFields");
 const { generatePageEmbeddings, deleteAllEmbeddings } = require("./embeddings");
+const { generateCloze } = require("./clozeService");
 const { validatePostActivities } = require("./validations");
 
 module.exports = {
@@ -19,7 +20,13 @@ module.exports = {
     const { summary, text } = getPageSummaryAndText(result);
     console.log("Cloze Test Generation - Page Summary:", summary);
     console.log("Cloze Test Generation - Page Text:", text);
-    // TODO: Pass summary and text to the cloze test generation endpoint
+    try {
+      const clozeResult = await generateCloze(summary, text);
+      console.log("Cloze API result:", clozeResult);
+      // TODO: Save clozeResult to your database if needed
+    } catch (err) {
+      console.error("Error generating cloze:", err);
+    }
   },
 
   afterUpdate: async (event) => {
@@ -31,7 +38,13 @@ module.exports = {
     const { summary, text } = getPageSummaryAndText(result);
     console.log("Cloze Test Generation - Page Summary:", summary);
     console.log("Cloze Test Generation - Page Text:", text);
-    // TODO: Pass summary and text to the cloze test generation endpoint
+    try {
+      const clozeResult = await generateCloze(summary, text);
+      console.log("Cloze API result:", clozeResult);
+      // TODO: Save clozeResult to your database if needed
+    } catch (err) {
+      console.error("Error generating cloze:", err);
+    }
   },
 
   beforeDelete: async (event) => {
