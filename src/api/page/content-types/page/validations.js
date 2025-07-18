@@ -10,11 +10,9 @@ async function validatePostActivities(pageData) {
         `Page cannot have multiple end of page activities. Remove quiz or summary.`,
       );
     }
+  } catch (e) {
+    throw new ApplicationError(`Error in validations: ${e.message}`);
   }
-  catch(e){
-    throw new ApplicationError(
-      `Error in validations: ${e.message}`,
-    );  }
 }
 
 module.exports = {

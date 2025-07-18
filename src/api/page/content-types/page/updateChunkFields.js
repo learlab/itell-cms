@@ -89,12 +89,37 @@ async function generateChunkFields(content) {
     // Perform the update
     await strapi.db.query(chunkData.__component).update({
       where: { id: chunkData.id },
-      data: {CleanText: chunkData.CleanText, MDX: chunkData.MDX, MD: chunkData.MD, Slug: chunkData.Slug}
+      data: {
+        CleanText: chunkData.CleanText,
+        MDX: chunkData.MDX,
+        MD: chunkData.MD,
+        Slug: chunkData.Slug,
+      },
     });
   }
   return content;
 }
 
+function getPageSummaryAndText(page) {
+  const summary = page.PageSummary;
+  let text = "";
+
+  if (Array.isArray(page.Content)) {
+    for (const item of page.Content) {
+      if (item.__component === "page.chunk" && item.Text) {
+        text += item.Text + "\n";
+      }
+      if (item.__component === "page.video" && item.CleanText) {
+        text += item.CleanText + "\n";
+      }
+      // Ignore page.plain-chunk
+    }
+  }
+
+  return { summary, text: text.trim() };
+}
+
 module.exports = {
   generateChunkFields,
+  getPageSummaryAndText,
 };
