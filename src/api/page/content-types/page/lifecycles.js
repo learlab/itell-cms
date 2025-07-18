@@ -6,6 +6,19 @@ const { generatePageEmbeddings, deleteAllEmbeddings } = require("./embeddings");
 const { generateCloze } = require("./clozeService");
 const { validatePostActivities } = require("./validations");
 
+async function handleClozeGeneration(result) {
+  const { summary, text } = getPageSummaryAndText(result);
+  // TODO: @rachel delete housekeeping comments before merge
+  console.log("Cloze Test Generation - Page Summary:", summary);
+  console.log("Cloze Test Generation - Page Text:", text);
+  try {
+    const clozeResult = await generateCloze(summary, text);
+    console.log("Cloze API result:", clozeResult);
+  } catch (err) {
+    console.error("Error generating cloze:", err);
+  }
+}
+
 module.exports = {
   // Publishing is always "creating" even if a previously published version exists
   // Will also trigger when a new page is created in draft mode
@@ -16,17 +29,7 @@ module.exports = {
     await validatePostActivities(result);
     result.Content = await generateChunkFields(result.Content);
     await generatePageEmbeddings(result);
-    // Extract summary and text for cloze test generation
-    const { summary, text } = getPageSummaryAndText(result);
-    console.log("Cloze Test Generation - Page Summary:", summary);
-    console.log("Cloze Test Generation - Page Text:", text);
-    try {
-      const clozeResult = await generateCloze(summary, text);
-      console.log("Cloze API result:", clozeResult);
-      // TODO: Save clozeResult to your database if needed
-    } catch (err) {
-      console.error("Error generating cloze:", err);
-    }
+    await handleClozeGeneration(result);
   },
 
   afterUpdate: async (event) => {
@@ -34,17 +37,7 @@ module.exports = {
     await validatePostActivities(result);
     result.Content = await generateChunkFields(result.Content);
     await generatePageEmbeddings(result);
-    // Extract summary and text for cloze test generation
-    const { summary, text } = getPageSummaryAndText(result);
-    console.log("Cloze Test Generation - Page Summary:", summary);
-    console.log("Cloze Test Generation - Page Text:", text);
-    try {
-      const clozeResult = await generateCloze(summary, text);
-      console.log("Cloze API result:", clozeResult);
-      // TODO: Save clozeResult to your database if needed
-    } catch (err) {
-      console.error("Error generating cloze:", err);
-    }
+    await handleClozeGeneration(result);
   },
 
   beforeDelete: async (event) => {
