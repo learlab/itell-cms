@@ -14,6 +14,13 @@ async function handleClozeGeneration(result) {
   try {
     const clozeResult = await generateCloze(summary, text);
     console.log("Cloze API result:", clozeResult);
+
+    // Save the cloze result to the database
+    await strapi.db.query("api::page.page").update({
+      where: { id: result.id },
+      data: { ClozeTest: clozeResult },
+    });
+    console.log("Cloze test saved to database");
   } catch (err) {
     console.error("Error generating cloze:", err);
   }
