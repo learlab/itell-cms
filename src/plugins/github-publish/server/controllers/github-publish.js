@@ -29,20 +29,39 @@ module.exports = ({ strapi }) => ({
     let lastWeek = new Date();
     lastWeek.setMinutes(lastWeek.getMinutes() - (1440 * 7));
 
-    let table_url = `https://api.github.com/repos/${owner}/${repo}/actions/runs?created=>${lastWeek.toISOString()}&branch=${branch}&event=workflow_dispatch`
-    console.log(table_url)
+    let table_url = `https://api.github.com/repos/${owner}/${repo}/actions/runs?created=>${lastWeek.toISOString()}&branch=${branch}`
 
     const response = await axios.get(table_url);
 
     let runs = response['data']['workflow_runs'];
 
+    let entries = []
 
-    // const logHeaders = {
-    //   Authorization: `token ${token}`,
-    // };
-    // let logs = await (axios.get("https://api.github.com/repos/learlab/itell-rs/actions/jobs/44988551414/logs", {headers}))
-    // console.log(logs)
-    ctx.send({ busy });
+    for(let run of runs){
+      let jobId = ""
+      try{
+        const jobs = await axios.get(run.jobs_url, {headers})
+        if(jobs.data.jobs.length > 0){
+          jobId = jobs.data.jobs[0].id
+        }
+      }
+      catch (e) {
+        console.log(e)
+      }
+
+      if(run.conclusion.trim() === "failure"){
+        run.conclusion = "failure (likely vector failure)"
+      }
+
+      entries.push({
+        id: run.id,
+        status: run.status,
+        conclusion: run.conclusion,
+        createdAt: run.created_at,
+        jobId: jobId
+      })
+    }
+    ctx.send({ busy, entries });
   },
 
   publish: async (ctx) => {

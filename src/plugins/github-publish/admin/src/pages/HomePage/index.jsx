@@ -41,7 +41,6 @@ const HomePage = () => {
   const triggerPublish = async () => {
     setBusy(true);
     try {
-      console.log("try to publish")
       const res = await fetch(`/${pluginId}/publish`, {
         method: "POST",
         headers: {
@@ -107,6 +106,10 @@ const HomePage = () => {
           handleError();
         }
 
+        if(res?.data.entries){
+          setEntries(res?.data.entries)
+        }
+
         timeout = setTimeout(checkBusy, POLL_INTERVAL);
       } catch (e) {
         handleError(e);
@@ -134,6 +137,8 @@ const HomePage = () => {
 
   let [dir, setDir] = useState("⬇️ Select a text ⬇️");
 
+  let [entries, setEntries] = useState([]);
+
   let handleTextChange = (e) => {
     const inputs = JSON.parse(e.target.value);
     setText(inputs.text);
@@ -142,7 +147,6 @@ const HomePage = () => {
     setTextID(inputs.textID);
     setRepository(inputs.repository);
     setDir(inputs.dir);
-    console.log(inputs.dir)
   };
 
   return (
@@ -184,10 +188,11 @@ const HomePage = () => {
               texts={texts}
             />
             <BaseHeaderLayout
-              title={"Recent Runs"}
-              as="h2"
+              title={"Runs in the Last Week"}
+              as="h3"
             />
-            <TableLayout>
+            <TableLayout
+            entries = {entries}>
 
             </TableLayout>
           </div>

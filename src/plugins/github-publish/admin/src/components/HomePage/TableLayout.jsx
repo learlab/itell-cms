@@ -1,8 +1,8 @@
 import {Table, Thead, Tbody, Tr, Td, Th, Box, Typography, Checkbox, VisuallyHidden, Avatar, Flex, IconButton} from '@strapi/design-system';
-import { Download } from '@strapi/icons';
+import { ArrowRight } from '@strapi/icons';
 
-const TableLayout = ({ children, entries }) => {
-  entries = []
+const TableLayout = ({ children, entries}) => {
+  // entries = []
   const ROW_COUNT = 10;
   const COL_COUNT = 5;
 
@@ -42,12 +42,15 @@ const TableLayout = ({ children, entries }) => {
                 <Typography textColor="neutral800">{entry.conclusion}</Typography>
               </Td>
               <Td>
-                <Typography textColor="neutral800">{entry.createdAt}</Typography>
+                <Typography textColor="neutral800">{new Date(entry.createdAt).toLocaleString() }</Typography>
               </Td>
               <Td>
                 <Flex>
-                  <IconButton onClick={() => console.log('download')} label="Download" borderWidth={0}>
-                    <Download />
+                  <IconButton label="Download" borderWidth={0}>
+                    <a href={`https://github.com/learlab/itell-rs/actions/runs/${entry.id}/job/${entry.jobId}`} target="_blank"
+                       rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'white' }}>
+                      <ArrowRight />
+                    </a>
                   </IconButton>
                 </Flex>
               </Td>
