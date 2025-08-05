@@ -59,7 +59,8 @@
       "customField": "plugin::auto-content.pageSummary"
     },
     "ClozeTest": {
-      "type": "json"
+      "type": "customField",
+      "customField": "plugin::auto-content.clozeTest"
     },
     "Order": {
       "type": "integer",
