@@ -8,6 +8,7 @@ import ConstructedResponseIcon from "./components/ConstructedResponseField/Const
 import KeyPhraseGeneratorIcon from "./components/KeyPhraseGenerator/KeyPhraseGeneratorIcon";
 import SlugFieldIcon from "./components/SlugField/SlugFieldIcon";
 import PageSummaryFieldIcon from "./components/PageSummaryField/PageSummaryFieldIcon";
+import ClozeTestFieldIcon from "./components/ClozeTestField/ClozeTestFieldIcon";
 import VolumeSummaryFieldIcon from "./components/VolumeSummaryField/VolumeSummaryFieldIcon";
 
 const name = pluginPkg.strapi.name;
