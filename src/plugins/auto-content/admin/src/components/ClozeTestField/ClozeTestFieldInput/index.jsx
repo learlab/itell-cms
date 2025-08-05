@@ -137,8 +137,7 @@ const Index = ({
               target: { name, value: value, type: attribute.type },
             });
           }}
-          disabled={disabled}
-          style={{ minHeight: "300px" }}
+          disabled={true}
         />
         <Field.Hint />
         <Field.Error />
