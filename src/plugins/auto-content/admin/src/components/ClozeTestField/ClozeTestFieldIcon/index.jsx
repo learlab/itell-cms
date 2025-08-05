@@ -15,7 +15,7 @@ const IconBox = styled(Flex)`
   }
 `;
 
-const PageSummaryFieldIcon = () => {
+const ClozeTestFieldIcon = () => {
   return (
     <IconBox
       justifyContent="center"
@@ -30,4 +30,4 @@ const PageSummaryFieldIcon = () => {
   );
 };
 
-export default PageSummaryFieldIcon;
+export default ClozeTestFieldIcon;

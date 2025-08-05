@@ -1,4 +1,5 @@
-import { Button, Field, Flex, Textarea } from "@strapi/design-system";
+import { Button, Field, Flex } from "@strapi/design-system";
+import { JSONInput } from "@strapi/design-system";
 import { unstable_useContentManagerContext as useContentManagerContext } from "@strapi/strapi/admin";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
@@ -23,7 +24,7 @@ const Index = ({
 
   // Get page summary and text for cloze generation
   function getPageSummaryAndText() {
-    const summary = values.PageSummary || "";
+    const summary = values.PageSummary;
     let text = "";
 
     if (Array.isArray(values.Content)) {
@@ -107,6 +108,18 @@ const Index = ({
     }
   };
 
+  // Parse JSON for display
+  const displayValue = (() => {
+    try {
+      if (!value) return "";
+      // Parse and re-stringify with proper formatting
+      const parsed = JSON.parse(value);
+      return JSON.stringify(parsed, null, 2);
+    } catch {
+      return value;
+    }
+  })();
+
   return (
     <Field.Root
       name={name}
@@ -117,15 +130,15 @@ const Index = ({
     >
       <Flex direction="column" alignItems="stretch" gap={1}>
         <Field.Label action={labelAction}>{name}</Field.Label>
-        <Textarea
-          placeholder='Press "Create Cloze Test" to generate a cloze test for this page.'
-          name="content"
-          value={value}
-          onChange={(e) =>
+        <JSONInput
+          value={displayValue}
+          onChange={(value) => {
             onChange({
-              target: { name, value: e.target.value, type: attribute.type },
-            })
-          }
+              target: { name, value: value, type: attribute.type },
+            });
+          }}
+          disabled={disabled}
+          style={{ minHeight: "300px" }}
         />
         <Field.Hint />
         <Field.Error />
