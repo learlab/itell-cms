@@ -7,9 +7,10 @@ module.exports = ({ strapi }) => {
 
     if (summary && text && summary.length > 0 && text.length > 0) {
       try {
-        return clozeTestService.createClozeTest(summary, text);
+        const result = await clozeTestService.createClozeTest(summary, text);
+        return result;
       } catch (err) {
-        console.log(err);
+        console.log("Error in controller:", err);
         ctx.throw(500, err);
       }
     }
