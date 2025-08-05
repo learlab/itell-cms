@@ -1,42 +1,15 @@
-const {
-  generateChunkFields,
-  getPageSummaryAndText,
-} = require("./updateChunkFields");
+const { generateChunkFields } = require("./updateChunkFields");
 const { generatePageEmbeddings, deleteAllEmbeddings } = require("./embeddings");
-const { generateCloze } = require("./clozeService");
 const { validatePostActivities } = require("./validations");
-
-async function handleClozeGeneration(result) {
-  const { summary, text } = getPageSummaryAndText(result);
-  // TODO: @rachel delete housekeeping comments before merge
-  console.log("Cloze Test Generation - Page Summary:", summary);
-  console.log("Cloze Test Generation - Page Text:", text);
-  try {
-    const clozeResult = await generateCloze(summary, text);
-    console.log("Cloze API result:", clozeResult);
-
-    // Save the cloze result to the database
-    await strapi.db.query("api::page.page").update({
-      where: { id: result.id },
-      data: { ClozeTest: clozeResult },
-    });
-    console.log("Cloze test saved to database");
-  } catch (err) {
-    console.error("Error generating cloze:", err);
-  }
-}
 
 module.exports = {
   // Publishing is always "creating" even if a previously published version exists
   // Will also trigger when a new page is created in draft mode
   afterCreate: async (event) => {
-    console.log("=== afterCreate lifecycle triggered ===");
     const { result } = event;
-    console.log("Lifecycle result object:", result);
     await validatePostActivities(result);
     result.Content = await generateChunkFields(result.Content);
     await generatePageEmbeddings(result);
-    await handleClozeGeneration(result);
   },
 
   afterUpdate: async (event) => {
@@ -44,7 +17,6 @@ module.exports = {
     await validatePostActivities(result);
     result.Content = await generateChunkFields(result.Content);
     await generatePageEmbeddings(result);
-    await handleClozeGeneration(result);
   },
 
   beforeDelete: async (event) => {

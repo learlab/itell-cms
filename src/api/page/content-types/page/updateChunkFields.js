@@ -100,26 +100,6 @@ async function generateChunkFields(content) {
   return content;
 }
 
-function getPageSummaryAndText(page) {
-  const summary = page.PageSummary;
-  let text = "";
-
-  if (Array.isArray(page.Content)) {
-    for (const item of page.Content) {
-      if (item.__component === "page.chunk" && item.Text) {
-        text += item.Text + "\n";
-      }
-      if (item.__component === "page.video" && item.CleanText) {
-        text += item.CleanText + "\n";
-      }
-      // Ignore page.plain-chunk
-    }
-  }
-
-  return { summary, text: text.trim() };
-}
-
 module.exports = {
   generateChunkFields,
-  getPageSummaryAndText,
 };
