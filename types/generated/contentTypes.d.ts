@@ -514,7 +514,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Chapter: Schema.Attribute.Relation<'manyToOne', 'api::chapter.chapter'>;
-    ClozeTest: Schema.Attribute.JSON;
+    ClozeTest: Schema.Attribute.Text &
+      Schema.Attribute.CustomField<'plugin::auto-content.clozeTest'>;
     Content: Schema.Attribute.DynamicZone<
       ['page.video', 'page.chunk', 'page.plain-chunk']
     >;
