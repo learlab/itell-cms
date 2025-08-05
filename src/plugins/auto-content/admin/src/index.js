@@ -177,6 +177,28 @@ export default {
         },
       },
       {
+        name: "clozeTest",
+        pluginId: "auto-content",
+        type: "text",
+        intlLabel: {
+          id: "clozeTest.clozeTest.label",
+          defaultMessage: "Cloze Test",
+        },
+        intlDescription: {
+          id: "clozeTest.clozeTest.description",
+          defaultMessage: "Generate a cloze test using AI",
+        },
+        icon: ClozeTestFieldIcon,
+        components: {
+          Input: async () =>
+            import("./components/ClozeTestField/ClozeTestFieldInput"),
+        },
+        options: {
+          base: [],
+          advanced: [],
+        },
+      },
+      {
         name: "volumeSummary",
         pluginId: "auto-content",
         type: "text",
