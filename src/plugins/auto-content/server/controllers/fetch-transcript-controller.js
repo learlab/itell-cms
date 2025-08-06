@@ -1,6 +1,4 @@
 const { errors } = require("@strapi/utils");
-const { ApplicationError } = errors;
-
 module.exports = ({ strapi }) => {
   const fetchTranscriptService = strapi.plugins["auto-content"].service(
     "fetchTranscriptService",
