@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 async function generateCloze(summary, pageText) {
-  const apiUrl = "https://itell-api.learlab.vanderbilt.edu/generate/cloze";
+  const apiUrl = `${process.env.ITELL_API_URL}/generate/cloze`;
   const apiKey = process.env.ITELL_API_KEY;
 
   const response = await fetch(apiUrl, {
