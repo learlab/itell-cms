@@ -22,12 +22,24 @@ module.exports = ({ strapi }) => {
 
       if (!response.ok) {
         const error = await response.text();
+        strapi.log.error(`Cloze API error: ${error}`);
         throw new Error(`Cloze API error: ${error}`);
       }
 
-      return response.json();
+      if (response.status === 500) {
+        return {
+          error: "500 Internal Server Error. Contact LearLab for API update",
+        };
+      }
+
+      const json = await response.json();
+
+      return json;
     } catch (error) {
-      console.log("Service error:", error);
+      strapi.log.error(
+        "Service error at /services/cloze-test-service.js at createClozeTest:",
+        error,
+      );
       throw error;
     }
   };
