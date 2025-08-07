@@ -2,25 +2,20 @@ import { Button, Field, Flex } from "@strapi/design-system";
 import { JSONInput } from "@strapi/design-system";
 import { unstable_useContentManagerContext as useContentManagerContext } from "@strapi/strapi/admin";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React from "react";
 
 const Index = ({
   name,
   attribute,
   value = "",
   labelAction = null,
-  label,
-  disabled = false,
   error = null,
   required = true,
   hint = "",
-  placeholder,
   onChange,
 }) => {
   const { form } = useContentManagerContext();
   const { values } = form;
-
-  const [dynamicZone, index, fieldName] = name.split(".");
 
   // Get page summary and text for cloze generation
   function getPageSummaryAndText() {
