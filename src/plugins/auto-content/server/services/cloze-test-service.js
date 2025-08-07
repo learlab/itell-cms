@@ -26,6 +26,8 @@ module.exports = ({ strapi }) => {
         throw new Error(`Cloze API error: ${error}`);
       }
 
+      // This will be returned to the frontend (admin UI).
+      // Since JSON cloze field is read only, this should be more helpful than a general error in the website
       if (response.status === 500) {
         return {
           error: "500 Internal Server Error. Contact LearLab for API update",
