@@ -1,7 +1,5 @@
 /* global strapi */
 "use strict";
-const { errors } = require("@strapi/utils");
-const { ApplicationError } = errors;
 
 async function validatePostActivities(pageData) {
   try {
