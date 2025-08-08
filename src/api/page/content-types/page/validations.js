@@ -11,7 +11,7 @@ async function validatePostActivities(pageData) {
       );
     }
   } catch (e) {
-    throw new ApplicationError(`Error in validations: ${e.message}`);
+    alert(`Error in validations: ${e.message}`);
   }
 }
 
