@@ -30,7 +30,7 @@ const validatePostActivities = async (ctx) => {
   } catch (e) {
     ctx.badRequest("Error in validations: " + e.message);
   };
-  }
+}
 
 
 

@@ -12,10 +12,11 @@ async function validatePostActivities(pageData) {
     }
     return "Page data validation successful.";
   }
-  catch(e){
+  catch (e) {
     throw new Error(
       `Error in validations: ${e.message}`,
-    );  }
+    );
+  }
 }
 
 module.exports = {
