@@ -12,9 +12,9 @@ async function validatePostActivities(pageData) {
     }
     return "Page data validation successful.";
   }
-  catch (e) {
+  catch (error) {
     throw new Error(
-      `Error in validations: ${e.message}`,
+      `Error in validations: ${error.message}`,
     );
   }
 }

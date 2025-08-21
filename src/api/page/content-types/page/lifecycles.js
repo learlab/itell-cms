@@ -1,15 +1,15 @@
 const { generateChunkFields } = require("./updateChunkFields");
 const { generatePageEmbeddings, deleteAllEmbeddings } = require("./embeddings");
-const {validatePostActivities} = require("./validations");
+const { validatePostActivities } = require("./validations");
 
 module.exports = {
   // Publishing is always "creating" even if a previously published version exists
   // Will also trigger when a new page is created in draft mode
   afterCreate: async (event) => {
-    try{
+    try {
       const { result } = event;
-    await validatePostActivities(result)
-    result.Content = await generateChunkFields(result.Content);
+      await validatePostActivities(result)
+      result.Content = await generateChunkFields(result.Content);
       await generatePageEmbeddings(result);
     } catch (error) {
       strapi.log.error('Error in afterCreate lifecycle', error);
@@ -17,7 +17,7 @@ module.exports = {
   },
 
   afterUpdate: async (event) => {
-    try{
+    try {
       const { result } = event;
       await validatePostActivities(result)
       result.Content = await generateChunkFields(result.Content);
@@ -28,7 +28,7 @@ module.exports = {
   },
 
   beforeDelete: async (event) => {
-    try{
+    try {
       const { params } = event;
       await deleteAllEmbeddings(params.where.id);
     } catch (error) {
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   beforeDeleteMany: async (event) => {
-    try{
+    try {
       const { params } = event;
       for (let id of params.where["$and"][0].id["$in"]) {
         await deleteAllEmbeddings(id);
