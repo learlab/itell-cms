@@ -18,6 +18,7 @@ module.exports = ({ strapi }) => {
           summary,
           page: text,
         }),
+        signal: AbortSignal.timeout(60 * 1000),
       });
 
       if (!response.ok) {
