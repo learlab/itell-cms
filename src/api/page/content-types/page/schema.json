@@ -58,6 +58,10 @@
       "type": "customField",
       "customField": "plugin::auto-content.pageSummary"
     },
+    "ClozeTest": {
+      "type": "customField",
+      "customField": "plugin::auto-content.clozeTest"
+    },
     "Order": {
       "type": "integer",
       "required": true,
