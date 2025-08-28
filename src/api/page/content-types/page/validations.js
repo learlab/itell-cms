@@ -8,8 +8,12 @@ async function validatePostActivities(pageData) {
         `Page cannot have multiple end of page activities. Remove quiz or summary.`,
       );
     }
-  } catch (e) {
-    alert(`Error in validations: ${e.message}`);
+    return "Page data validation successful.";
+  }
+  catch (error) {
+    throw new Error(
+      `Error in validations: ${error.message}`,
+    );
   }
 }
 
