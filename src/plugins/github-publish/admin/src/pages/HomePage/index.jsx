@@ -13,6 +13,8 @@ import pluginId from "../../pluginId";
 import {BaseHeaderLayout} from "../../components/HomePage/BaseHeaderLayout";
 import {ContentLayout} from "../../components/HomePage/ContentLayout";
 
+import {TableLayout} from "../../components/HomePage/TableLayout";
+
 const POLL_INTERVAL = 10000;
 const StyledAlert = styled(Alert)`
   button {
@@ -29,11 +31,7 @@ const HomePage = () => {
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   let [texts, setTexts] = useState([]);
-
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
 
   const handleError = (e = "Server error") => {
     console.error(e);
@@ -43,7 +41,6 @@ const HomePage = () => {
   const triggerPublish = async () => {
     setBusy(true);
     try {
-      console.log("try to publish")
       const res = await fetch(`/${pluginId}/publish`, {
         method: "POST",
         headers: {
@@ -109,6 +106,10 @@ const HomePage = () => {
           handleError();
         }
 
+        if(res?.data.entries){
+          setEntries(res?.data.entries)
+        }
+
         timeout = setTimeout(checkBusy, POLL_INTERVAL);
       } catch (e) {
         handleError(e);
@@ -136,6 +137,8 @@ const HomePage = () => {
 
   let [dir, setDir] = useState("⬇️ Select a text ⬇️");
 
+  let [entries, setEntries] = useState([]);
+
   let handleTextChange = (e) => {
     const inputs = JSON.parse(e.target.value);
     setText(inputs.text);
@@ -144,7 +147,6 @@ const HomePage = () => {
     setTextID(inputs.textID);
     setRepository(inputs.repository);
     setDir(inputs.dir);
-    console.log(inputs.dir)
   };
 
   return (
@@ -185,9 +187,18 @@ const HomePage = () => {
               onClick={triggerPublish}
               texts={texts}
             />
+            <BaseHeaderLayout
+              title={"Runs in the Last Week"}
+              as="h3"
+            />
+            <TableLayout
+            entries = {entries}>
+
+            </TableLayout>
           </div>
         )}
       </ContentLayout>
+
     </Box>
   );
 };

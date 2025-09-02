@@ -14,6 +14,7 @@ module.exports = ({ strapi }) => ({
     };
 
     const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow_id}/runs?branch=${branch}`;
+
     const { data: inProgressData } = await axios.get(
       `${url}&status=in_progress`,
       {
@@ -25,7 +26,42 @@ module.exports = ({ strapi }) => ({
     });
     const busy = !!(inProgressData.total_count + queuedData.total_count);
 
-    ctx.send({ busy });
+    let lastWeek = new Date();
+    lastWeek.setMinutes(lastWeek.getMinutes() - (1440 * 7));
+
+    let table_url = `https://api.github.com/repos/${owner}/${repo}/actions/runs?created=>${lastWeek.toISOString()}&branch=${branch}`
+
+    const response = await axios.get(table_url);
+
+    let runs = response['data']['workflow_runs'];
+
+    let entries = []
+
+    for(let run of runs){
+      let jobId = ""
+      try{
+        const jobs = await axios.get(run.jobs_url, {headers})
+        if(jobs.data.jobs.length > 0){
+          jobId = jobs.data.jobs[0].id
+        }
+      }
+      catch (e) {
+        console.log(e)
+      }
+
+      if(run.conclusion.trim() === "failure"){
+        run.conclusion = "failure (likely vector failure)"
+      }
+
+      entries.push({
+        id: run.id,
+        status: run.status,
+        conclusion: run.conclusion,
+        createdAt: run.created_at,
+        jobId: jobId
+      })
+    }
+    ctx.send({ busy, entries });
   },
 
   publish: async (ctx) => {
@@ -54,6 +90,26 @@ module.exports = ({ strapi }) => ({
     try {
       const response = await axios.post(url, data, { headers });
       const success = response.status === 204;
+
+      const statusUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflow_id}/runs?branch=${ref}`;
+
+      const { data: inProgressData } = await axios.get(
+        `${statusUrl}&status=in_progress`,
+        {
+          headers,
+        },
+      );
+
+      const { data: queued } = await axios.get(
+        `${statusUrl}&status=queued`,
+        {
+          headers,
+        },
+      );
+
+      console.log(inProgressData.total_count)
+      console.log(queued.total_count)
+
       ctx.send({ success });
     } catch (error) {
       // Log the full error response for debugging
@@ -61,7 +117,7 @@ module.exports = ({ strapi }) => ({
         "Error triggering GitHub workflow:",
         error.response?.data || error.message,
       );
-      ctx.throw(500, "Failed to trigger GitHub workflow");
+      ctx.throw(500, "Failed to trigger GitHub workflow " + error.message);
     }
   },
 
