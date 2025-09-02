@@ -99,9 +99,7 @@ export interface QuizzesMultipleChoiceOption extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    IsCorrect: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
+    IsCorrect: Schema.Attribute.Boolean & Schema.Attribute.Required;
     Text: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }

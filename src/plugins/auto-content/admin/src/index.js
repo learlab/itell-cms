@@ -8,6 +8,7 @@ import ConstructedResponseIcon from "./components/ConstructedResponseField/Const
 import KeyPhraseGeneratorIcon from "./components/KeyPhraseGenerator/KeyPhraseGeneratorIcon";
 import SlugFieldIcon from "./components/SlugField/SlugFieldIcon";
 import PageSummaryFieldIcon from "./components/PageSummaryField/PageSummaryFieldIcon";
+import ClozeTestFieldIcon from "./components/ClozeTestField/ClozeTestFieldIcon";
 import VolumeSummaryFieldIcon from "./components/VolumeSummaryField/VolumeSummaryFieldIcon";
 
 const name = pluginPkg.strapi.name;
@@ -170,6 +171,28 @@ export default {
         components: {
           Input: async () =>
             import("./components/PageSummaryField/PageSummaryFieldInput"),
+        },
+        options: {
+          base: [],
+          advanced: [],
+        },
+      },
+      {
+        name: "clozeTest",
+        pluginId: "auto-content",
+        type: "text",
+        intlLabel: {
+          id: "clozeTest.clozeTest.label",
+          defaultMessage: "Cloze Test",
+        },
+        intlDescription: {
+          id: "clozeTest.clozeTest.description",
+          defaultMessage: "Generate a cloze test using AI",
+        },
+        icon: ClozeTestFieldIcon,
+        components: {
+          Input: async () =>
+            import("./components/ClozeTestField/ClozeTestFieldInput"),
         },
         options: {
           base: [],

@@ -13,7 +13,7 @@
     },
     "IsCorrect": {
       "type": "boolean",
-      "default": false,
+      "default": null,
       "required": true
     }
   }

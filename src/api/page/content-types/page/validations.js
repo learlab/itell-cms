@@ -1,7 +1,5 @@
 /* global strapi */
 "use strict";
-const { errors } = require("@strapi/utils");
-const { ApplicationError } = errors;
 
 async function validatePostActivities(pageData) {
   try {
@@ -10,11 +8,13 @@ async function validatePostActivities(pageData) {
         `Page cannot have multiple end of page activities. Remove quiz or summary.`,
       );
     }
+    return "Page data validation successful.";
   }
-  catch(e){
-    throw new ApplicationError(
-      `Error in validations: ${e.message}`,
-    );  }
+  catch (error) {
+    throw new Error(
+      `Error in validations: ${error.message}`,
+    );
+  }
 }
 
 module.exports = {

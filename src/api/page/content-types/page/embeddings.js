@@ -1,7 +1,7 @@
 /* global strapi */
 "use strict";
 const { errors } = require("@strapi/utils");
-const { ApplicationError } = errors;
+
 
 async function generatePageEmbeddings(pageData) {
   try {
@@ -32,9 +32,7 @@ async function generatePageEmbeddings(pageData) {
     }
   } catch (error) {
     console.log(error);
-    throw new ApplicationError(
-      `Error in generatePageEmbeddings: ${error.message}`,
-    );
+    throw new Error(`Error in generatePageEmbeddings: ${error.message}`);
   }
 }
 
@@ -57,9 +55,7 @@ async function deleteAllEmbeddings(id) {
     await strapi.service("api::page.page").deleteEmbeddings(deletePayload);
   } catch (error) {
     console.log(error);
-    throw new ApplicationError(
-      `Error in deleteAllEmbeddings: ${error.message}`,
-    );
+    throw new Error(`Error in deleteAllEmbeddings: ${error.message}`);
   }
 }
 
